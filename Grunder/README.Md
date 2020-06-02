@@ -1,6 +1,6 @@
 # Grundläggande statistik
 
-1. Beskrivande statistik
+1.0 Beskrivande statistik
 
 1.1 Observationer och variabler
 
