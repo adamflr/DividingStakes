@@ -2,12 +2,12 @@
 
 1. Beskrivande statistik
 
-1. Observationer och variabler
+  1. Observationer och variabler
 
-2. Klassifikationer av variabler
+  2. Klassifikationer av variabler
 
-3. Lägesmått
+  3. Lägesmått
 
-4. Spridningsmått
+  4. Spridningsmått
 
-5. Visualiseringar av data
+  5. Visualiseringar av data
