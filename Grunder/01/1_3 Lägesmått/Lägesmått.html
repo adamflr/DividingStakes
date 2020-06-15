@@ -515,34 +515,103 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <h1 class="title">1.3 Lägesmått</h1>
 </section>
 
-<section id="r-markdown" class="slide level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</p>
-</section>
-<section id="slide-with-bullets" class="slide level2">
-<h2>Slide with Bullets</h2>
-<ul>
-<li>Bullet 1</li>
-<li>Bullet 2</li>
-<li>Bullet 3</li>
-</ul>
-</section>
-<section id="slide-with-r-code-and-output" class="slide level2">
-<h2>Slide with R Code and Output</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">summary</span>(cars)</a></code></pre></div>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</section>
-<section id="slide-with-plot" class="slide level2">
-<h2>Slide with Plot</h2>
-<p><img src="Lägesmått_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" /></p>
-</section>
+<section><section id="section" class="title-slide slide level1"><h1></h1><h2>
+Lägesmått
+</h2>
+<h4>
+Medelvärde, median, mode
+</h4></section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>Illustration</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>Vektornotation</p>
+<p><span class="math display">\[\mathbf x = (x_1, x_2, ..., x_n)\]</span></p>
+<p>Exempel</p>
+<p><span class="math display">\[\mathbf x = (12,43,12)\]</span></p>
+</section></section>
+<section><section id="section-3" class="title-slide slide level1"><h1></h1><h2>
+Medelvärde
+</h2>
+<p>(Det aritmetiska medelvärdet)</p></section><section id="section-4" class="slide level2">
+<h2></h2>
+<div class="formula">
+<p><span class="math display">\[\bar x = \frac{summa}{antal} = \frac{\sum\limits_{\tiny{i = 1}}^{\tiny{n}} x_i}{n}\]</span></p>
+</div>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>Exempel och illustration</p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>Extremvärden</p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<p><strong>R</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">dat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">112</span>, <span class="dv">145</span>, <span class="dv">131</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">mean</span>(dat)</a></code></pre></div>
+<pre><code>## [1] 129.3333</code></pre>
+</section></section>
+<section><section id="section-8" class="title-slide slide level1"><h1></h1><h2>
+Median
+</h2></section><section id="section-9" class="slide level2">
+<h2></h2>
+<p><strong>Medianen</strong> är ett värde sådant att</p>
+<ol type="1">
+<li><p>minst hälften av observationerna är mindre än medianen, och</p></li>
+<li><p>minst hälften av observationerna är större än medianen</p></li>
+</ol>
+<p><br></p>
+<p>Om observationerna ordnas från minsta till största värde, är medianen i mitten av serien</p>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<p>Udda antal värden</p>
+<p>Illustration</p>
+</section><section id="section-11" class="slide level2">
+<h2></h2>
+<p>Jämt antal värden</p>
+<p>Illustration</p>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>Medianens ordningstal</p>
+<div class="formula">
+<p><span class="math display">\[\frac{n + 1}{2}\]</span></p>
+</div>
+</section></section>
+<section><section id="section-13" class="title-slide slide level1"><h1></h1><h2>
+Mode (typvärde)
+</h2></section><section id="section-14" class="slide level2">
+<h2></h2>
+<p><strong>Mode</strong> är det vanligaste värdet i datamängden</p>
+<p>Illustration</p>
+</section><section id="section-15" class="slide level2">
+<h2></h2>
+<p>Behöver ej ha ett unikt mode</p>
+<p>Illustration</p>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
+<p>Främst användbart om få utfall</p>
+<p>Illustration</p>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<p>Tillämpligt oavsett datatyp</p>
+</section></section>
+<section><section id="section-18" class="title-slide slide level1"><h1></h1><h2>
+Val av lägesmått
+</h2></section><section id="section-19" class="slide level2">
+<h2></h2>
+<p>Symmetrisk fördelning med unik topp</p>
+</section><section id="section-20" class="slide level2">
+<h2></h2>
+<p>Sneda fördelningar</p>
+</section><section id="section-21" class="slide level2">
+<h2></h2>
+<p>Kopplingar till variabeltyper</p>
+</section><section id="section-22" class="slide level2">
+<h2></h2>
+<div style="height:750px;width:100%;background:#000;border-radius:30px;">
+
+</div>
+</section></section>
     </div>
   </div>
 
@@ -554,8 +623,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
-        // Display the page number of the current slide
-        slideNumber: true,
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
         // Push each slide change to the browser history
         history: true,
         // Vertical centering of slides
@@ -567,8 +638,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: '100%',
-        height: '100%',
+        width: '80%',
+        height: '80%',
         // Bounds for smallest/largest possible scale to apply to content
         minScale: 1,
         maxScale: 1,

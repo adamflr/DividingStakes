@@ -6,36 +6,144 @@ output:
     self_contained: false
     transition: fade
     reveal_options:
-      width: "100%"
-      height: "100%"
+      width: "80%"
+      height: "80%"
       minScale: 1
       maxScale: 1
-      slideNumber: true
+      controls: false
+      progress: false
 editor_options: 
   chunk_output_type: console
 ---
 
-## R Markdown
+# 
 
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+<h2>Lägesmått</h2>
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+<h4>Medelvärde, median, mode</h4>
 
-## Slide with Bullets
+##
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+Illustration
 
-## Slide with R Code and Output
+##
+
+Vektornotation
+
+$$\mathbf x = (x_1, x_2, ..., x_n)$$
+
+Exempel
+
+$$\mathbf x = (12,43,12)$$
+
+#
+
+<h2>Medelvärde</h2>
+
+(Det aritmetiska medelvärdet)
+
+##
+
+<div class="formula">
+$$\bar x = \frac{summa}{antal} = \frac{\sum\limits_{\tiny{i = 1}}^{\tiny{n}} x_i}{n}$$
+</div>
+
+##
+
+Exempel och illustration
+
+##
+
+Extremvärden
+
+##
+
+**R**
 
 ```{r}
-summary(cars)
+dat <- c(112, 145, 131)
+mean(dat)
 ```
 
-## Slide with Plot
+#
 
-```{r, echo=FALSE}
-plot(cars)
-```
+<h2>Median</h2>
 
+##
+
+**Medianen** är ett värde sådant att 
+
+(1) minst hälften av observationerna är mindre än medianen, och 
+
+(2) minst hälften av observationerna är större än medianen
+
+<br>
+
+Om observationerna ordnas från minsta till största värde, är medianen i mitten av serien
+
+##
+
+Udda antal värden
+
+Illustration
+
+## 
+
+Jämt antal värden
+
+Illustration
+
+##
+
+Medianens ordningstal
+
+<div class="formula">
+$$\frac{n + 1}{2}$$
+</div>
+
+#
+
+<h2>Mode (typvärde)</h2>
+
+##
+
+**Mode** är det vanligaste värdet i datamängden
+
+Illustration
+
+##
+
+Behöver ej ha ett unikt mode
+
+Illustration
+
+##
+
+Främst användbart om få utfall
+
+Illustration
+
+##
+
+Tillämpligt oavsett datatyp
+
+#
+
+<h2>Val av lägesmått</h2>
+
+##
+
+Symmetrisk fördelning med unik topp
+
+##
+
+Sneda fördelningar
+
+##
+
+Kopplingar till variabeltyper
+
+##
+
+<div style="height:750px;width:100%;background:#000;border-radius:30px;">
+</div>
