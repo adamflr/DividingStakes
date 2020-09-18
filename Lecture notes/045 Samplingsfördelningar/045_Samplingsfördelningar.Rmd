@@ -1,0 +1,613 @@
+---
+title: "BI1363: Föreläsning 4.5<br>Samplingsfördelningar<br>Oktober 2020<br>Adam Flöhr, BT, SLU"
+output: 
+  revealjs::revealjs_presentation:
+    css: style1.css
+    self_contained: false
+    transition: fade
+    reveal_options:
+      width: "100%"
+      height: "100%"
+      minScale: 1
+      maxScale: 1
+      slideNumber: false
+      controls: false
+      progress: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, error = F)
+```
+
+```{r, echo = F}
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(extrafont)
+library(patchwork)
+
+theme_set(theme_bw() + theme(plot.background = element_rect(fill = "#ffffe6", color = "#ffffe6"),
+                             legend.box.background = element_rect(color = "black")))
+```
+
+##
+
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Samplingsfördelningar
+</p>
+
+<p style="text-align:center;">
+Motsvarar *Biometri*, kap 5
+</p>
+</div>
+
+## I korthet
+
+<div class="fragment fade-in">
+Vid en statistisk undersökning drar vi ett *stickprov* ur en *population*
+</div>
+
+<div class="fragment fade-in">
+Från stickprovet skattas *punktskattningar*, t.ex medelvärde, varians och andelar
+</div>
+
+<div class="fragment fade-in">
+Punktskattningen är en observation av en slumpvariabel och dess fördelning kallas en *samplingsfördelning*
+</div>
+
+<div class="fragment fade-in">
+Samplingsfördelningen beror på egenskaper hos populationen och skattningen
+
+>- Om variabeln i populationen är normalfördelad med känd varians är det skattade medelvärdet normalfördelat
+>- Om variabeln i populationen är normalfördelad med skattad varians är det skattade medelvärdet t-fördelat
+>- Om ett stickprov är *stort* är medelvärdet approximativt normalfördelat
+>- Om variabeln i populationen är binär är en skalning av den skattade proportionen binomialfördelad
+</div>
+
+# Population och stickprov
+
+<div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+```{r, echo = F, fig.height=6, fig.width = 4}
+dat <- data.frame(t = seq(0, 2*pi, length.out = 1000)) %>% 
+  mutate(x = cos(t), y = sin(t))
+dat_arrow <- data.frame(c = rep(1:3, each = 2),
+                        x1 = c(-1 + 0.1, 0, 1 - 0.1),
+                        x2 = c(-2/3 + 0.1, 0, 2/3 - 0.1),
+                        y1 = c(0,-1 + 0.1, 0),
+                        y2 = c(-2,2/3 - 2 - 0.1, -2))
+
+ggplot(dat) +
+  geom_polygon(aes(x, y), fill = "#fcc2ff", col = "black") +
+  geom_polygon(aes(x / 1.5, y / 1.5 - 2), fill = "#bffcc6", col = "black") +
+  geom_segment(aes(x1, y1, xend = x2, yend = y2), data = dat_arrow, 
+               arrow = arrow(length = unit(0.30,"cm"), type = "closed")) +
+  annotate("text", 0, 0, label = "Population", size = 8, family = "Garamond") +
+  annotate("text", 0, -2, label = "Stickprov", size = 8, family = "Garamond") +
+  theme_nothing() +
+  theme(panel.background = element_rect(fill = "#ffffe6", color = NA),
+        plot.background = element_rect(fill = "#ffffe6", color = NA)) +
+  ylim(-3,1)
+```
+</div>
+
+<div style="width:50%;">
+I en statistisk undersökning vill vi veta något om en egenskap (en *variabel*) i en *population*
+
+<div class="fragment fade-in">
+Ofta omöjligt att observera hela populationen, <span class="fragment fade-in"> så vi drar ett stickprov om $n$ observationer </span>
+</div>
+
+<div class="fragment fade-in">
+Variabelvärdet hos en slumpmässigt utvald individ är en slumpvariabel med samma fördelning som variabeln i populationen
+</div>
+</div>
+
+## Punktskattningar från stickprovet
+
+<div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+```{r, echo = F, fig.height=6, fig.width = 4}
+dat <- data.frame(t = seq(0, 2*pi, length.out = 1000)) %>% 
+  mutate(x = cos(t), y = sin(t))
+dat_arrow <- data.frame(c = rep(1:3, each = 2),
+                        x1 = c(-1 + 0.1, 0, 1 - 0.1),
+                        x2 = c(-2/3 + 0.1, 0, 2/3 - 0.1),
+                        y1 = c(0,-1 + 0.1, 0),
+                        y2 = c(-2,2/3 - 2 - 0.1, -2))
+
+ggplot(dat) +
+  geom_polygon(aes(x, y), fill = "#fcc2ff", col = "black") +
+  geom_polygon(aes(x / 1.5, y / 1.5 - 2), fill = "#bffcc6", col = "black") +
+  geom_segment(aes(x1, y1, xend = x2, yend = y2), data = dat_arrow, 
+               arrow = arrow(length = unit(0.30,"cm"), type = "closed")) +
+  annotate("text", 0, 0, label = expression("Population ("*mu*", "*sigma*")"), 
+           size = 8, family = "Garamond") +
+  annotate("text", 0, -2, label = expression("Stickprov ("*bar(x)*", "*s*")"), 
+           size = 8, family = "Garamond") +
+  theme_nothing() +
+  theme(panel.background = element_rect(fill = "#ffffe6", color = NA),
+        plot.background = element_rect(fill = "#ffffe6", color = NA)) +
+  ylim(-3,1)
+```
+</div>
+
+<div style="width:50%;">
+Stickprovet kan användas till att *punktskatta* egenskaper som medelvärde och varians i populationen
+
+<div class="fragment fade-in">
+Egenskaper i populationen betecknas med grekiska bokstäver ($\mu$ och $\sigma$) och skattningarna betecknas med romerska bokstäver ($\bar x$ och $s$)
+</div>
+
+<div class="fragment fade-in">
+Valet av punktskattning beror på variabeln vi undersöker
+</div>
+
+<div class="fragment fade-in">
+Om populationsvariabeln är normalfördelad är vi intresserade av skattade värden för medelvärde och varians (stickprovsmedelvärde och stickprovsvarians)
+</div>
+
+<div class="fragment fade-in">
+Om populationsvariabeln är binär är vi intresserade av andelen positiva utfall i stickprovet
+</div>
+</div>
+
+## Samplingsfördelningar
+
+En punktskattning är *en* observation av en slumpvariabel
+
+Om vi drar ett nytt slumpmässigt stickprov kommer vi få andra punktskattningar
+
+<div class="fragment fade-in">
+Punktskattningens fördelning kallas för en *samplingsfördelning*
+</div>
+
+<div class="fragment fade-in">
+Samplingsfördelningen gör det möjligt att dra slutsatser kring populationens egenskaper (genom *hypotestest*) och att ringa in populationens egenskaper med en viss sannolikhet (genom *konfidensintervall*)
+</div>
+
+# Normalfördelad variabel, känd standardavvikelse
+
+Om en variabel är normalfördelad med medelvärde $\mu$ och varians $\sigma^2$, är ett medelvärde av $n$ observationer av den variabeln normalfördelat med medelvärde $\mu$ och varians $\sigma^2 / n$
+
+<div class="fragment fade-in">
+$$X \sim N(\mu, \sigma^2) \qquad \bar X \sim N(\mu, \sigma^2 / n)$$
+</div>
+
+<div class="fragment fade-in">
+```{r, echo = F, fig.height=3, fig.width=16, fig.align='center'}
+dat_n <- expand.grid(x = seq(-5 , 5, 0.01), n = c(1, 2, 4, 10))
+dat_n$y <- dnorm(dat_n$x, sd = 1 / sqrt(dat_n$n))
+dat_n$n <- factor(dat_n$n, levels = c(1,2,4,10), ordered = T)
+
+ggplot(dat_n, aes(x, y, col = n)) +
+  geom_line(size = 2) +
+  facet_wrap(~ n, ncol = 4) +
+  coord_cartesian(xlim=c(-4,4))
+```
+</div>
+
+<div class="fragment fade-in">
+Medelvärdet $\bar x$ blir en mer och mer precis skattning av populationsmedelvärdet $\mu$ när $n$ ökar
+</div>
+
+<div class="fragment fade-in">
+När vi standardiserar ett *medelvärde* använder vi standardavvikelsen $\sigma/ \sqrt n$
+</div>
+
+<div class="fragment fade-in">
+För ett medelvärde gäller alltså att $\frac{\bar X - \mu}{\sigma / \sqrt n} \sim N(0,1)$
+</div>
+
+
+## Sannolikhetsberäkning på normalfördelad variabel
+
+En abborres vikt antas normalfördelad med $\mu = 350$ och $s = 40$
+
+<div style="float:right; width:50%;">
+```{r, echo = F, fig.height=3, fig.width=6, fig.align='center'}
+tibble(x = seq(230,470,0.1), y = dnorm(x, 350, 40)) %>% 
+  ggplot(aes(x, y)) +
+  geom_line() +
+  geom_hline(yintercept = 0) +
+  geom_ribbon(aes(ymax = y, ymin = 0), data = . %>% filter(x < 364), fill = "salmon1", col = "black") +
+  scale_x_continuous(breaks = c(300,350,364,400)) +
+  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())
+```
+</div>
+
+<div style="width:50%;">
+Säg att vi vill veta sannolikheten att en slumpmässigt fångad abbore väger under 364 gram
+
+<div class="fragment fade-in">
+Standardisera och slå i tabell
+
+$$P(X < 364) = P(Z < \frac{364 - 350}{40} = 0.35)$$
+
+Tabell 4 ger sannolikheten 0.6368
+</div>
+</div>
+
+## Sannolikhetsberäkning på medelvärde
+
+En abborres vikt antas normalfördelad med $\mu = 350$ och $s = 40$
+
+<div style="float:right; width:50%;">
+```{r, echo = F, fig.height=3, fig.width=6, fig.align='center'}
+tibble(x = seq(230,470,0.1), y = dnorm(x, 350, 40/5)) %>% 
+  ggplot(aes(x, y)) +
+  geom_line() +
+  geom_hline(yintercept = 0) +
+  geom_ribbon(aes(ymax = y, ymin = 0), data = . %>% filter(x < 364), fill = "salmon1", col = "black") +
+  scale_x_continuous(breaks = c(300,350,364,400)) +
+  theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())
+```
+</div>
+
+<div style="width:50%;">
+Säg att vi vill veta sannolikheten att medelvärdet av 25 abborrar är under 364 gram
+
+<div class="fragment fade-in">
+Beräkna standardavvikelsen, standardisera, slå i tabell
+</div>
+
+<div class="fragment fade-in">
+Då $X$ är har en standardavvikelse på $40$ och $\bar X$ är medelvärdet av $25$ observationer, har $\bar X$ en standardavvikelse på $40 / \sqrt {25}$
+</div>
+
+<div class="fragment fade-in">
+Notera att standardiseringsformeln blir $z = \frac{x - \mu}{s/\sqrt n}$
+</div>
+
+<div class="fragment fade-in">
+$$P(\bar X < 364) = P(Z < \frac{364 - 350}{40/ \sqrt{25}} = \frac{14}{40/5} = 1.75)$$
+
+Tabell 4 ger sannolikheten 0.9599
+</div>
+</div>
+
+# Normalfördelad variabel, skattad standardavvikelse
+
+<div class="fragment fade-in">
+Vi såg tidigare att ett medelvärde av $n$ observationer från en normalfördelning är fördelat enligt $N(\mu, \sigma^2/n)$
+
+Standardisering gav att $\frac{\bar X - \mu}{\sigma / \sqrt n}$ är $N(0,1)$
+</div>
+
+<div class="fragment fade-in">
+Vid en statistisk undersökning är standardavvikelsen nästan alltid okänd och skattas från datan ($s$)
+
+Eftersom $s$ beror på stickprovet är det en slumpvariabel
+</div>
+
+<div class="fragment fade-in">
+En naturlig tanke är att medelvärdet följer $N(\mu, s^2 / n)$ och att den standardiserade variabeln $\frac{\bar X - \mu}{s / \sqrt n}$ är $N(0,1)$, men det visar sig inte stämma
+</div>
+
+## Samplingsfördelning vid skattad $s$
+
+Resultatet av att använda en skattad standardavvikelse vid standardisering är att man inte längre får en normalfördelning
+
+Den fördelning man får istället betecknas $t$ (en *t-fördelning*)
+
+<div class="fragment fade-in" style="float:right; width:50%;">
+```{r, echo = F, fig.height=4, fig.align='center'}
+dat_t <- expand.grid(x = seq(-6,6,0.01),
+                df = c(1,2,5,10, Inf)) %>% 
+  mutate(y = dt(x, df),
+         df = as.ordered(df))
+ggplot(dat_t, aes(x, y, col = df, group = df)) +
+  geom_line(size = 2, alpha = 0.75) +
+  coord_cartesian(xlim = c(-4,4))
+```
+
+```{r, echo = F, fig.height=2, fig.align='center'}
+ggplot(dat_t, aes(x, y, col = df, group = df)) +
+  geom_line(size = 2) +
+  facet_wrap(~ df, ncol = 5) +
+  theme(legend.position = "none") +
+  coord_cartesian(xlim = c(-4,4))
+```
+</div>
+
+<div class="fragment fade-in">
+En t-fördelning liknar en standardiserad normalfördelning men är flackare
+</div>
+
+<div class="fragment fade-in">
+t-fördelningen har en ingående parameter, antalet *frihetsgrader*
+</div>
+
+<div class="fragment fade-in">
+Fördelningen går mot en standardiserad normalfördelning när antalet frihetsgrader ökar
+</div>
+
+## Frihetsgrader
+
+*Frihetsgrader* är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning
+
+<div class="fragment fade-in">
+När vi skattar $s$ använder vi serien $x_i - \bar x$
+
+$$s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2$$
+</div>
+
+<div class="fragment fade-in">
+Den serien har egenskapen att den alltid summerar till noll (en begränsning)
+</div>
+
+<div class="fragment fade-in">
+Vid skattningen av $s$ använder vi alltså en serie som innehåller *mindre* information än våra $n$ observationer
+</div>
+
+<div class="fragment fade-in">
+Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av $s$ har vi $n - 1$ frihetsgrader
+</div>
+
+<div class="fragment fade-in">
+Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med $n - 1$ frihetsgrader
+
+$$\frac{\bar X - \mu}{s / \sqrt n} \sim t(n-1)$$
+</div>
+
+## Standardisering av medelvärde
+
+**Med känd standardavvikelse**
+
+$$\frac{\bar X - \mu}{\sigma / \sqrt n} \sim N(0,1)$$
+
+**Med skattad standardavvikelse**
+
+$$\frac{\bar X - \mu}{s / \sqrt n} \sim t(n-1)$$
+
+# Centrala gränsvärdesatsen
+
+Så om den ursprungliga variabeln är normalfördelad kommer det skattade medelvärdet följa en normalfördelning, <span class="fragment fade-in"> men vad gäller om den ursprungliga variabeln inte är normalfördelad? </span>
+
+<div class="fragment fade-in">
+Enligt *centrala gränsvärdesatsen* går summor av likadana slumpvariabler mot en normalfördelning när antalet termer ökar
+</div>
+
+<div class="fragment fade-in">
+Summan av två tärningskast är t.ex mer lik en normalfördelning är fördelningen för ett enskilt kast
+
+```{r, echo = F, fig.height=4, fig.align='center'}
+a <- rep(1/6, 6)
+convolveN <- function(x, n){
+  y <- x
+  if(n > 1){
+    for(i in 1:(n - 1)){
+      y <- convolve(y, x, type = "open")
+    }
+  }
+  y
+}
+
+dat <- data.frame()
+for(i in c(1, 2, 5, 10)){
+  dt <- data.frame(n = i, p = convolveN(a, i))
+  dt$x <- 1:length(dt$p) + i - 1
+  dat <- bind_rows(dat, dt)
+}
+
+dat <- dat %>% 
+  mutate(m = n,
+         n = paste0("Antal kast: ", n),
+         n = factor(n, levels = unique(n)))
+
+ggplot(dat %>% filter(m < 3), aes(x, p)) + 
+  geom_bar(stat = "identity", width = 0.5) +
+  facet_wrap(~ n, scale = "free")
+```
+</div>
+
+##
+
+Summor av ytterligare kast kommer blir ännu mer lik en normalfördelning
+
+```{r, echo = F, fig.align='center', fig.width=16, fig.height = 4}
+ggplot(dat, aes(x, p)) + 
+  geom_bar(stat = "identity", width = 0.5) +
+  facet_wrap(~ n, scale = "free", ncol = 4)
+```
+
+<div class="fragment fade-in">
+Eftersom medelvärdet är en summa delat med en konstant $n$, kommer medelvärdet vara normalfördelat
+</div>
+
+# Binära variabler
+
+<div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+```{r, echo = F, fig.height=6, fig.width = 4}
+dat <- data.frame(t = seq(0, 2*pi, length.out = 1000)) %>% 
+  mutate(x = cos(t), y = sin(t))
+dat_arrow <- data.frame(c = rep(1:3, each = 2),
+                        x1 = c(-1 + 0.1, 0, 1 - 0.1),
+                        x2 = c(-2/3 + 0.1, 0, 2/3 - 0.1),
+                        y1 = c(0,-1 + 0.1, 0),
+                        y2 = c(-2,2/3 - 2 - 0.1, -2))
+
+ggplot(dat) +
+  geom_polygon(aes(x, y), fill = "#fcc2ff", col = "black") +
+  geom_polygon(aes(x / 1.5, y / 1.5 - 2), fill = "#bffcc6", col = "black") +
+  geom_segment(aes(x1, y1, xend = x2, yend = y2), data = dat_arrow, 
+               arrow = arrow(length = unit(0.30,"cm"), type = "closed")) +
+  annotate("text", 0, 0, label = expression("Population (p)"), 
+           size = 8, family = "Garamond") +
+  annotate("text", 0, -2, label = expression("Stickprov ("*hat(p)*")"), 
+           size = 8, family = "Garamond") +
+  theme_nothing() +
+  theme(panel.background = element_rect(fill = "#ffffe6", color = NA),
+        plot.background = element_rect(fill = "#ffffe6", color = NA)) +
+  ylim(-3,1)
+```
+</div>
+
+<div style="width:50%;">
+Förekomsten av egenskapen hos en individ är en binär variabel
+
+Vi vill veta hur vanlig en viss egenskap är i en population
+
+<div class="fragment fade-in">
+Drar ett stickprov av storlek $n$ och tittar på antalet i stickprovet som har egenskapen (*positiva utfall*)
+</div>
+
+<div class="fragment fade-in">
+Antalet positiva utfall är en slumpvariabel $X$ som är binomialfördelad med antalet $n$ och sannolikheten $p$
+
+$$X \sim Bin(n, p)$$
+</div>
+</div>
+
+## Punktskattning av en proportion
+
+Proportionen i populationen betecknas $p$
+
+Den naturliga skattningen av $p$ vid ett stickprov av storleken n är
+
+$$\hat p = \frac{\text{Antal positiva utfall}}{n}$$
+
+<div class="fragment fade-in">
+**Samplingsfördelning för $\hat p$**
+
+Eftersom *antalet positiva utfall* är binomialfördelat ges samplingsfördelningen för $\hat p$ av en binomialfördelning skalad med n
+</div>
+
+<div class="fragment fade-in">
+<div style="float:right; width:50%;">
+```{r, echo = F, fig.height=4, fig.width=8}
+g_bin1 <- tibble(x = 0:10, y = dbinom(x, 10, 0.4)) %>% 
+  ggplot(aes(x, y)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_x_continuous(breaks = 0:10) +
+  ylab("Sannolikhet") +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())
+
+g_bin2 <- tibble(p = 0:10, y = dbinom(p, 10, 0.4)) %>% 
+  ggplot(aes(p, y)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_x_continuous(breaks = 0:10, label = 0:10 / 10) +
+  ylab("Sannolikhet") + xlab(expression(hat(p))) +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank())
+
+g_bin1 + g_bin2
+```
+</div>
+</div>
+
+<div style="font-size:0.75em;">
+<br><br>
+<div class="fragment fade-in">
+Vi drar tio observationer ur en population där 40 procent har antikroppar mot en viss sjukdom
+</div>
+
+<div class="fragment fade-in">
+Antalet positiva följer en binomalfördelning med $n=10$ och $p = 0.4$
+</div>
+
+<div class="fragment fade-in">
+Fördelningen för vår skattning av proportionen är en skalning av den binomialfördelningen
+</div>
+</div>
+
+## Normalapproximation av binomialfördelning
+
+Centrala gränsvärdesatsen ger att summor av slumpvariabler är ungefärligt normalfördelade
+
+<div class="fragment fade-in">
+Eftersom binomialen är en summa av binära variabler kan binomialfördelning approximeras av en normalfördelning, om $n$ är *stort* och $p$ *nära* $0.5$
+</div>
+
+<div class="fragment fade-in">
+Boken *Biometri* ger tumregeln att $np$ och $n(1-p)$ bägge ska vara större än 10
+</div>
+
+<div class="fragment fade-in">
+En binomialfördelning med parametrar $n$ och $p$ approximeras av en normalfördelning med medelvärde $np$ och varians $np(1-p)$
+</div>
+
+<div class="fragment fade-in">
+```{r, echo = F, fig.align='center', fig.height=4}
+dat_n <- tibble(x = seq(0, 100, 0.1), y = dnorm(x, 40, sqrt(24)))
+g_app1 <- ggplot(tibble(x = 0:100, y = dbinom(x, 100, 0.4)), aes(x, y)) +
+  geom_line(aes(x, y), data = dat_n, col = "red", size = 1) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_x_continuous(breaks = seq(0,100,10)) +
+  ylab("Sannolikhet") +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  ggtitle("Normalapproximation av Bin(100, 0.4)")
+
+dat_n <- tibble(x = seq(0, 100, 0.01), y = dnorm(x, 1, sqrt(100*0.01*0.99)))
+g_app2 <- ggplot(tibble(x = 0:100, y = dbinom(x, 100, 0.01)), aes(x, y)) +
+  geom_line(aes(x, y), data = dat_n, col = "red", size = 1) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_x_continuous(breaks = seq(0,100,10)) +
+  ylab("Sannolikhet") +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  coord_cartesian(xlim = c(0, 20)) +
+  ggtitle("Normalapproximation av Bin(100, 0.01)")
+
+g_app1 + g_app2
+```
+</div>
+
+
+## Sannolikhetsberäkning vid normalapproximation
+
+<div class="fragment fade-in" data-fragment-index="2" style = "float:right; width = 50%;">
+```{r, echo = F}
+g_app3 <- ggplot(tibble(x = 0:2000, y = dbinom(x, 2000, 0.03)), aes(x, y, fill = x <= 65)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  ylab("Sannolikhet") +
+  geom_hline(yintercept = 0) +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  ggtitle("Bin(2000, 0.03)") +
+  theme(legend.position = "none") +
+  coord_cartesian(xlim=c(0,100)) +
+  scale_x_continuous(breaks = c(65, seq(0,100,25)))
+
+g_app4 <- ggplot(tibble(x = seq(0, 200, 0.1), y = dnorm(x, 60, sqrt(58.2))),
+                 aes(x, y)) +
+  geom_ribbon(aes(ymax = y, ymin = 0), fill = "#f8766d") +
+  geom_ribbon(aes(ymax = y, ymin = 0), data = . %>% filter(x < 65), fill = "#00bfc4") +
+  geom_line() +
+  geom_hline(yintercept = 0) +
+  ylab("Sannolikhet") +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  ggtitle("N(60, 58.2)") +
+  theme(legend.position = "none") +
+  coord_cartesian(xlim=c(0,100)) +
+  scale_x_continuous(breaks = c(65, seq(0,100,25)))
+
+g_app3 / g_app4
+```
+</div>
+
+Slumpvariabeln $X$ följer en binomialfördelning med $n = 2000$ och $p = 0.03$
+
+Vad är sannolikheten att $X$ är mindre eller lika med 65?
+
+<div class="fragment fade-in" data-fragment-index="1">
+Normalapproximationen har medelvärde $np = 2000 \cdot 0.03 = 60$ och varians $np(1-p) = 2000 \cdot 0.03 \cdot 0.97 = 58.2$
+</div>
+
+<div class="fragment fade-in">
+Sannolikhetsberäkningen ges av
+
+$$P(X < 65) \approx P(Z < \frac{65 - 60}{\sqrt{58.2}} = 0.66) = 0.7454$$
+</div>
+
+<div class="fragment fade-in">
+**Kontinuitetskorrektion**
+
+Approximationen kan förbättras något genom en kontinuitetskorrektion där man istället för att räkna på 65 räknar på 65.5
+</div>
+
+#
+
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Slut
+</p>
+</div>

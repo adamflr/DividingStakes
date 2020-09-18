@@ -1,0 +1,6 @@
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 05` t-test\05_t_test_02.html 01_t_test.pdf
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 055` t-test` två` prov\05_t_test_tva_01.html 02_t_test_två.pdf
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 06` Proportionstester\06_prop_test.html 03_Proportionstester.pdf
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 07` Chi-två-test\07_chi_tva__test.html 04_Chi_två_test.pdf
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 08` Variansanalys\08-Variansanalys.html 05_Variansanalys.pdf
+C:\windows\system32\node_modules\.bin\decktape.cmd --size "1920x1080" 09` Regression` och` korrelation\09_Regression.html 06_Regression_och_korrelation.pdf

@@ -1,0 +1,864 @@
+---
+title: "BI1363: Föreläsning 5<br>t-test för ett och två stickprov<br>Oktober 2020<br>Adam Flöhr, BT, SLU"
+output: 
+  revealjs::revealjs_presentation:
+    css: style1.css
+    self_contained: false
+    transition: fade
+    reveal_options:
+      width: "100%"
+      height: "100%"
+      minScale: 1
+      maxScale: 1
+      slideNumber: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, error = F)
+```
+
+```{r, echo = F}
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(extrafont)
+library(patchwork)
+
+theme_set(theme_bw() + theme(plot.background = element_rect(fill = "#ffffe6", color = "#ffffe6"),
+                             legend.box.background = element_rect(color = "black")))
+```
+
+# Var är vi och vart ska vi?
+
+## Förra veckan
+
+>- Stickprov - medelvärde, standardavvikelse, histogram
+>- Sannolikheter - beräkningar i träddiagram
+>- Slumpvariabler - sannolikhetsfördelningar
+>- Binomial-, poisson- och normalfördelning
+>- Transformationer av slumpvariabler
+>- Medelvärdets fördelning
+>- Konfidensintervall för ett stickprov
+
+## Denna och nästa vecka
+
+En sammanhållande ide: hypotestest
+
+>- Idag: t-test för kontinuerliga variabler, upp till två grupper
+>- Onsdag: z-test för proportioner
+>- Fredag: $\chi^2$-test för kategoridata (nominala variabler)
+
+>- Måndag: Anova för kontinuerliga variabler, bortom två grupper
+>- Onsdag: regression och korrelation - samband mellan två kontinuerliga variabler
+
+## Dagens föreläsning
+
+Hypotestest för medelvärdet av ett stickprov
+
+Hypotestest för skillnad i medelvärde för två stickprov
+
+- Matchade stickprov
+- Oberoende stickprov
+
+# Introduktion till hypotestest
+
+## Slantsinglingsexemplet
+
+Vi tror att ett mynt har 50 procents chans att landa kronan upp
+
+Singlar 100 gånger
+
+<div class="fragment fade-in">
+Vad säger det om vår hypotes om
+</div>
+
+<div class="fragment fade-in">
+... man får krona 50 gånger?
+</div>
+
+<div class="fragment fade-in">
+... man får krona 100 gånger?
+</div>
+
+<div class="fragment fade-in">
+... man får krona 65 gånger?
+</div>
+
+## Sökes
+
+En metod som tar
+
+>- en teoretisk hypotes
+>- observerat utfall
+>- skattad (eller antagen) slumpmässig variation
+>- stickprovsstorlek
+
+<p class="fragment fade-in">och ger ett mått på hur väl hypotesen stämmer</p>
+
+## Finnes
+
+*p-värdet*
+
+Sannolikheten för observerat utfall (eller något mer extremt) under antagandet att hypotesen stämmer
+
+<div class="fragment fade-in">
+Ett lågt p-värde pekar på att hypotesen **inte** stämmer
+</div>
+
+## Hypotestest
+
+Formell gång för att ställa observation mot hypotes
+
+>1. Hypoteser
+>2. Testfunktion
+>3. Testvärde
+>4. Beräkning av p-värde (eller uppskattning av p-värde)
+>5. Slutsats
+
+<div class="fragment fade-in" style="position:absolute;width:8%;height:10%;right:30%;top:150px;font-size:0.3em;">
+<img src='https://upload.wikimedia.org/wikipedia/commons/a/aa/Youngronaldfisher2.JPG'>
+Ronald Fisher
+(1890-1962)
+
+<img src='http://www-history.mcs.st-and.ac.uk/BigPictures/Neyman_3.jpeg'>
+Jerzy Neyman
+(1894-1981)
+</div>
+
+<p class="fragment fade-in"> HTTPS </p>
+
+## t-test
+
+Ett t-test (för ett stickprov) testar om en variabels medelvärde är skild från något hypotesvärde
+
+<div class="fragment fade-in">
+Medelvärde och varians skattas från ett stickprov
+</div>
+
+<div class="fragment fade-in">
+Flödesdiagrammet ger ledning kring val av test
+</div>
+
+# Inledande exempel
+
+## Numeriskt exempel
+
+<div style="position:absolute;left:0%;width:55%">
+Man har identifierat en genotyp av pärlhyacint och vill veta om dess höjd vid blomning är skild från 30 cm
+
+Man sätter femton exemplar och får $\bar x = 36$ och $s = 12$ $(s^2 = 144)$
+</div>
+
+<div style="position:absolute;left:60%;width:40%;">
+<img src="https://www.odla.nu/sites/odla.nu/files/styles/slide_content/public/muscari_armenicum_saffier-0.jpg">
+</div>
+
+## Hypoteser
+
+<div style="position:absolute;left:0%;width:75%">
+Nollhypotes och alternativhypotes
+
+$H_0: \mu = 30$
+
+$H_1: \mu \neq 30$
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+<div style="color:#000000;">
+Hypoteser
+</div>
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testfunktion
+
+<div style="position:absolute;left:0%;width:75%">
+t-testets testfunktion ges av att standardisera mot nollhypotesens värde
+
+$t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}$
+
+<div class="fragment fade-in">
+Om nollhypotesen stämmer ska $t$ komma från en $t$-fördelning med $n-1$ frihetsgrader
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+<div style="color:#000000;">
+Testfunktion
+</div>
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testvärde
+
+<div style="position:absolute;left:0%;width:75%">
+Sätter in värden i testfunktionen
+
+$t = \frac{36 - 30}{\sqrt{144/15}} = 1.936$
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+<div style="color:#000000;">
+Testvärde
+</div>
+
+p-värde
+
+Svar
+</div>
+
+## p-värde
+
+<div style="position:absolute;left:0%;width:75%">
+p-värdet beräknas som ytan bortom $t$ i en t-fördelning med $n-1=14$ frihetsgrader
+
+<div style="float:right;">
+```{r, echo = F, fig.height=3.5, fig.width = 4}
+x_bar <- 36
+s <- 12
+n <- 15
+mu_0 <- 30
+
+t_obs_pos <- abs(round((x_bar - mu_0) / (s / sqrt(n)), 2))
+t_obs <- round((x_bar - mu_0) / (s / sqrt(n)), 2)
+t_obs_2 <- (x_bar - mu_0) / (s / sqrt(n))
+
+dat <- tibble(t = seq(-5,5,0.01), y = dt(t, n - 1))
+ggplot(dat, aes(t, y)) + 
+  geom_ribbon(aes(ymax = y, ymin = 0), data = dat %>% filter(t >= t_obs_pos), fill = "brown1") +
+  geom_ribbon(aes(ymax = y, ymin = 0), data = dat %>% filter(t <= -t_obs_pos), fill = "brown1") +
+  geom_line() +
+  geom_hline(yintercept = 0) +
+  ylab("f(t)") +
+  labs(title = "t-fördelning, 14 fg") +
+  theme(panel.grid = element_blank())
+```
+</div>
+
+<div class="fragment fade-in">
+Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## p-värde, beräkning
+
+<div style="position:absolute;left:0%;width:75%">
+Man kan beräkna p-värdet i valfritt datorprogram och få $p = `r round(2*pt(-abs(t_obs_2), 14), 4)`$
+
+Eller titta i tabell 5, rad 14. Eftersom $t$ ligger mellan $1.761$ och $2.145$ måste det motsvara ett tvåsidigt p-värde mellan $10$ och $5$ procent
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## Svar
+
+<div style="position:absolute;left:0%;width:75%">
+Vid slutsatsen ställs p-värdet mot en *signifikansnivå*
+
+Signifikansnivån ($\alpha$) är en förbestämd nivå från vilken man förkastar eller inte förkastar nollhypotesen
+
+<div class="fragment fade-in">
+Oftast används $5$, $1$ eller $0.1$ procent som $\alpha$
+</div>
+
+<div class="fragment fade-in">
+I exemplet *Vi kan ej påvisa någon säkerställd skillnad från höjden $30$ cm*
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+<div style="color:#000000;">
+Svar
+</div>
+</div>
+
+## Stjärnsystemet för signifikans
+
+|Symbol |Nivå   |
+|-------|-------|
+|n.s    |Ej sig |
+|*      |5%     |
+|**     |1%     |
+|***    |0.1%   |
+
+## Illustration {data-transition="slide-in fade-out"}
+
+```{r, echo = F, fig.height = 3, warning = F, fig.align = 'center'}
+set.seed(97)
+a <- scale(rnorm(15))
+b <- 36 + 12 * a
+
+dat <- data.frame(b)
+g1 <- ggplot(dat, aes(b, -0.1)) +
+  geom_point() +
+  annotate("point", 30, -0.2, col = "red") +
+  annotate("point", 36, -0.2, col = "blue") +
+  annotate("text", 30, -0.2, label = expression(mu[0]), vjust = 1.5) +
+  annotate("text", 36, -0.2, label = expression(bar(x)), vjust = 1.5) +
+  xlab("x") +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+        panel.grid = element_blank()) +
+  coord_cartesian(ylim = c(-0.3,0.5), xlim = c(0,80)) +
+  scale_x_continuous(breaks = c(seq(0, 100, 20), 30, 36))
+g1
+```
+
+p-värdet beror på avståndet mellan $\mu$ och $\bar x$, men också på spridningen i variabeln
+
+## Illustration {data-transition="fade-in fade-out"}
+
+```{r, echo = F, fig.height = 3, warning = F, fig.align = 'center'}
+dat_t <- tibble(t = seq(-10,10,0.01), y = dt(t, 14)) %>% 
+  mutate(t = 30 + 12 / sqrt(15) * t)
+
+g2 <- g1 + 
+  geom_line(aes(t, y), data = dat_t) +
+  geom_hline(yintercept = 0)
+g2
+```
+
+Under nollhypotesen kommer $\frac{\bar x - \mu}{\sqrt{s^2/n}}$ från en t-fördelning med $n-1$ frihetsgrader
+
+## Illustration {data-transition="fade-in slide-out"}
+
+```{r, echo = F, fig.height = 3, warning = F, fig.align = 'center'}
+g2 + 
+  geom_ribbon(aes(t, ymax = y, ymin = 0), col = "black", fill = "brown4", 
+              data = dat_t %>% filter(t > 36)) +
+  geom_ribbon(aes(t, ymax = y, ymin = 0), col = "black", fill = "brown4", 
+              data = dat_t %>% filter(t < 24))
+
+```
+
+Det tvåsidiga p-värdet är arean i svansen bortom $\bar x$, gånger två
+
+# Hypotestest för två stickprov
+
+## Matchat och oberoende
+
+Vill jämföra två behandlingar
+
+<div class="fragment fade-in">
+Två designval
+
+**Matchade stickprov** - varje observation i behandling 1 är parad med *en* observation i behandling 2
+</div>
+
+<div class="fragment fade-in">
+**Oberoende stickprov** - observationerna är inte kopplade till varandra
+</div>
+
+## Exempel
+
+<div style="font-size:0.75em;">
+>1. Jämför två jordars effekt på biomassa i sallad. 10 replikat av varje, slumpmässigt utplacerade på ett bord i växthuset
+>2. Planterar två ärtgenotyper på tio fält runtom i Skåne. Varje fält delat i två med en genotyp på respektive del
+>3. Jämför två foders effekt på tillväxt hos gris. Tio slumpmässigt utvalda grisar för respektive foder
+>4. Två havresorter testas genom årlig avkastning över en tioårsperiod
+>5. Likt tre, men nu tio syskonpar där den ena får ett foder och den andra ett annat
+>6. Tio individer var av två arter samlas in från vilt tillstånd. Plantorna placeras i växthus och testas för reaktion under värmerelaterad stress
+>7. Tio igelkottars blodtryck mäts före och efter intag av betablockerare
+
+<div class="fragment fade-in">
+2, 4, 5, 7 är matchade. Övriga oberoende
+</div>
+</div>
+
+# Två matchade stickprov
+
+## Återför till ett prov
+
+Vid två matchade stickprov kan man ta differensen och genomföra ett t-test för ett stickprov
+
+<div class="fragment fade-in" style="font-size:0.75em;">
+(21 November 2014)
+
+För att testa om en ny behandling ger samma planthöjd planterar man på tio platser två plantor - en som får ny behandling, en som får standardbehandling. För varje plats räknar man skillnaden i planthöjd mellan den nya metoden och standardmetoden. Resultat: ett medelvärde på 0.808 och en standardavvikelse på 0.945.
+
+a\. Avgör med ett test om den nya behandlingen ger **högre** plantor än standardmetoden. En fullständig lösning ska innehålla förutsättningar för analysen, hypoteser, testfunktion och slutsats.
+</div>
+
+## Hypoteser
+
+<div style="position:absolute;left:0%;width:75%">
+Nollhypotes och alternativhypotes
+
+$H_0: \mu = 0 \text{ (d.v.s ingen skillnad)}$
+
+$H_1: \mu > 0 \text{ (ensidig mothypotes)}$
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+<div style="color:#000000;">
+Hypoteser
+</div>
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testfunktion
+
+<div style="position:absolute;left:0%;width:75%">
+Vanligt t-test, så samma testfunktion som innan
+
+$t = \frac{\bar x - \mu_0}{s/\sqrt{n}}$
+
+<div class="fragment fade-in">
+Om nollhypotesen stämmer ska $t$ komma från en $t$-fördelning med $n-1$ frihetsgrader
+
+Notera att $n$ är antalet matchade par
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+<div style="color:#000000;">
+Testfunktion
+</div>
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testvärde
+
+<div style="position:absolute;left:0%;width:75%">
+Sätter in värden i testfunktionen
+
+$t = \frac{0.808 - 0}{0.945/\sqrt{10}} = 2.704$
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+<div style="color:#000000;">
+Testvärde
+</div>
+
+p-värde
+
+Svar
+</div>
+
+## p-värde
+
+<div style="position:absolute;left:0%;width:75%">
+p-värdet beräknas som ytan bortom $t$ i en t-fördelning med $n-1=9$ frihetsgrader
+
+<div style="float:right;">
+```{r, echo = F, fig.height=3.5,fig.width=4}
+x_bar <- 0.808
+s <- 0.945
+n <- 10
+mu_0 <- 0
+
+t_obs_pos <- abs(round((x_bar - mu_0) / (s / sqrt(n)), 2))
+t_obs <- round((x_bar - mu_0) / (s / sqrt(n)), 2)
+t_obs_2 <- (x_bar - mu_0) / (s / sqrt(n))
+
+dat <- tibble(t = seq(-5,5,0.01), y = dt(t, n - 1))
+ggplot(dat, aes(t, y)) + 
+  geom_ribbon(aes(ymax = y, ymin = 0), data = dat %>% filter(t >= t_obs_pos), fill = "brown1") +
+  geom_line() +
+  geom_hline(yintercept = 0) +
+  ylab("f(t)") +
+  labs(title = "t-fördelning, 9 fg") +
+  theme(panel.grid = element_blank())
+```
+</div>
+
+Eftersom alternativhypotesen är ensidig medtas enbart den ena svansen
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## p-värde, beräkning
+
+<div style="position:absolute;left:0%;width:75%">
+Man kan beräkna p-värdet i valfritt datorprogram och få $p = `r round(2*pt(-abs(t_obs_2), 14), 4)`$
+
+Eller titta i tabell 5, rad 9. Eftersom $t$ ligger mellan $2.262$ och $2.821$ måste det motsvara ett ensidigt p-värde mellan $2.5$ och $1$ procent
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## Svar
+
+<div style="position:absolute;left:0%;width:75%">
+p-värdet är mindre än $5$ procent men större än $1$ procent
+
+Vi *förkastar* på $5$-procentsnivån
+
+<div class="fragment fade-in">
+*Det är statistiskt säkerställt på $5$-procentsnivån att det nya metoden ger högre plantor*
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+<div style="color:#000000;">
+Svar
+</div>
+</div>
+
+## Konfidensintervall
+
+Konfidensintervall för matchade stickprov är samma som vid ett stickprov på differensen
+
+$$\bar x \pm t_{1-0.05/2, n-1} \frac{s}{\sqrt{n}}$$
+<div class="fragment fade-in">
+$$= 0.808 \pm 2.262 \frac{0.945}{\sqrt{10}} = 0.808 \pm 0.676$$
+
+eller $[0.132,1.484]$
+</div>
+
+<div class="fragment fade-in">
+Konfidensintervall är (nästan) alltid tvåsidiga
+</div>
+
+# Två oberoende stickprov
+
+## En ny situation
+
+Vid två oberoende stickprov blir testfunktionen annorlunda
+
+<div class="fragment fade-in">
+Samma princip: beräknar p-värdet som sannolikheten för observerad skillnad givet nollhypotesen
+
+Samma steg: HTTPS
+</div>
+
+## Exempel
+
+(Från tentamen 31 oktober 2014)
+
+Nio friska träd och nio sjuka träd. Omkrets i dm
+
+||Medel|s|
+|-|-|-|
+|Frisk|7.139|3.929|
+|Infekterat|10.083|2.716|
+
+b\. Testa för skillnad i omkrets. Använd signifikansnivån $1$ procent.
+
+## Hypoteser
+
+<div style="position:absolute;left:0%;width:75%">
+Nollhypotes och alternativhypotes
+
+$H_0: \mu_1 = \mu_2 \text{ d.v.s ingen skillnad}$
+
+$H_1: \mu_1 \neq \mu_2$
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+<div style="color:#000000;">
+Hypoteser
+</div>
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testfunktion
+
+<div style="position:absolute;left:0%;width:75%">
+Se flödesdiagrammet
+
+$t = \frac{(\bar x_1 - \bar x_2) - (\mu_1 - \mu_2)}{\sqrt{s^2 (\frac{1}{n_1} + \frac{1}{n_2})}}$
+
+där $s^2 = \frac{(n_1 - 1)s^2_1 + (n_2 - 1)s^2_2}{n_1 + n_2 - 2}$
+
+<div class="fragment fade-in">
+Om nollhypotesen stämmer ska $t$ komma från en $t$-fördelning med $n_1 + n_2 - 2$ frihetsgrader
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+<div style="color:#000000;">
+Testfunktion
+</div>
+
+Testvärde
+
+p-värde
+
+Svar
+</div>
+
+## Testvärde
+
+<div style="position:absolute;left:0%;width:75%">
+Sätter in värden i testfunktionen
+
+$s^2 = \frac{8 \cdot 3.929^2 + 8 \cdot 2.716^2}{9+9-2} = 11.4069$
+
+<div class="fragment fade-in">
+Väldigt vanligt fel att missa kvadraterna
+
+$s^2$ ska ligga mellan $s_1^2$ och $s_2^2$
+
+$t = \frac{7.139 - 10.083 - 0}{\sqrt{11.4069(\frac{1}{9} + \frac{1}{9})}} = - 1.8491$
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+<div style="color:#000000;">
+Testvärde
+</div>
+
+p-värde
+
+Svar
+</div>
+
+## p-värde
+
+<div style="position:absolute;left:0%;width:75%">
+p-värdet beräknas som ytan bortom $t$ i en t-fördelning med $n_1 + n_2 - 2 = 16$ frihetsgrader
+
+Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## p-värde, beräkning
+
+<div style="position:absolute;left:0%;width:75%">
+Man kan beräkna p-värdet i valfritt datorprogram och få $p = `r round(2*pt(-abs((7.139-10.083)/sqrt(11.40685*(2/9))), 16), 4)`$
+
+Eller titta i tabell 5, rad 9. Eftersom $|t|=1.8941$ är mindre än $t_{(0.995,16)} = 2.921$ måste det motsvara ett tvåsidigt p-värde större än $1$ procent
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+<div style="color:#000000;">
+p-värde
+</div>
+
+Svar
+</div>
+
+## Svar
+
+<div style="position:absolute;left:0%;width:75%">
+p-värdet är större än $1$ procent
+
+<div class="fragment fade-in">
+Vi förkastar ej på $1$-procentsnivån
+</div>
+
+<div class="fragment fade-in">
+*Vi kan ej påvisa någon säkerställd skillnad i diameter mellan friska och infekterade träd*
+</div>
+</div>
+
+<div style="position:absolute;left:80%;width:20%;font-size:0.65em;color:#bbbbbb">
+Hypoteser
+
+Testfunktion
+
+Testvärde
+
+p-värde
+
+<div style="color:#000000;">
+Svar
+</div>
+</div>
+
+## Konfidensintervall
+
+Vid två oberoende stickprov ges ett $95$-procentigt konfidensintervall av
+
+$(\bar x_1 - \bar x_2) \pm t_{(1 - 0.05/2, n_1+n_2-2)}\sqrt{s^2 (\frac{1}{n_1} + \frac{1}{n_2})}$
+
+<div class="fragment fade-in">
+Från exempel
+
+$(10.083 - 7.139) \pm 2.120 \sqrt{11.4069 (\frac{1}{9} + \frac{1}{9})}$
+
+$\qquad =2.944 \pm 3.3753$
+
+eller $[-0.4313, 6.3193]$
+</div>
+
+# Avslutande punkter
+
+## KI och HT
+
+Ett konfidensintervall täcker de värden som **inte** förkastas om de används som nollhypotes i motsvarande hypotestest
+
+Om nollan ligger i ett $95$-procentigt konfidensintervall (*intervallet täcker nollan*) så kommer man inte förkasta nollhypotesen att medelvärdet är noll på signifikansnivån $5$ procent
+
+## Antaganden
+
+t-testerna för ett stickprov eller matchade stickprov bygger på 
+
+- normalfördelning
+- oberoende observationer inom stickprovet
+
+<div class="fragment fade-in">
+t-testet för oberoende stickprov bygger dessutom på 
+
+- oberoende observationer mellan stickprov
+- lika varians
+</div>
+
+## Typ I-fel och Typ II-fel
+
+För ett påstående finns två möjliga verkligheter (sant/falskt) och två möjliga slutsater (stämmer/stämmer inte)
+
+||Hypotes sann|Hypotes falsk|
+|-|-|-|
+|Tror sann|Korrekt|Typ II-fel|
+|Tror falsk|Typ I-fel|Korrekt|
+
+<div class="fragment fade-in">
+Sannolikheten för ett Typ I-fel är lika med signifikansnivån $\alpha$
+</div>
+
+## Terminologi
+
+Förkastad nollhypotes - *signifikant resultat*
+
+<div class="fragment fade-in">
+Med tillräckligt mycket data kan även små skillnader bli signifikanta
+</div>
+
+<div class="fragment fade-in">
+Engelskans *sign* - ett tecken, en indikation
+</div>
+
+<div class="fragment fade-in">
+Inte nödvändigtvis *viktigt*
+</div>
+
+<div class="fragment fade-in">
+Vanligt att feltolka p-värdet som sannolikheten att nollhypotesen är sann
+</div>
