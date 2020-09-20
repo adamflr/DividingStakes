@@ -50,7 +50,11 @@ Motsvarar *Biometri*, kap 6
 Slumpmässig variation är en grundläggande utmaning för all kunskapsinhämtning
 
 <div class="fragment fade-in">
-I en statistisk undersökning vill vi uttala oss om egenskaper i en **population** med observationer i ett **stickprov**
+I en statistisk undersökning vill vi använda **punktskattningar** från ett **stickprov** för att uttala oss om egenskaper i en **population**
+</div>
+
+<div class="fragment fade-in">
+Skattningar är beroende av slumpen och vi behöver därför metoder som hanterar slumpmässig variation
 </div>
 
 <div class="fragment fade-in">
@@ -58,7 +62,7 @@ I en statistisk undersökning vill vi uttala oss om egenskaper i en **population
 </div>
 
 <div class="fragment fade-in">
-**Hypotestest** är en metod för att dra *statistiskt säkerställda* slutsatser om populationens egenskaper
+**Hypotestest** gör det möjligt att dra *statistiskt säkerställda* slutsatser om populationens egenskaper
 </div>
 
 <div class="fragment fade-in">
@@ -167,9 +171,9 @@ Det sanna populationsmedelvärdet ligger med 95 procents konfidens i det angivna
 
 ## Konfidensintervall med känd standardavvikelse
 
-Om man har en känd populationsstandardavvikelse $\sigma$ baseras konfidensintervallet på normalfördelningen
+Om man har en normalfördelad populationsvariabel och känd populationsstandardavvikelse $\sigma$ baseras konfidensintervallet på normalfördelningen
 
-```{r, echo = F, fig.align='center', fig.width=16, fig.height=3}
+```{r, echo = F, fig.align='center', fig.width=16, fig.height=2.8}
 dat <- expand.grid(p = c(0.95, 0.975, 0.995, 0.9995), x = seq(-4,4,0.01))
 dat <- dat %>% 
   arrange(p, x) %>% 
@@ -222,9 +226,11 @@ I datan ovan är det skattade medelvärdet $\bar x = 36$, den givna standardavvi
 <div class="fragment fade-in">
 Ett 95-procentigt konfidensintervall ges av
 
-$$\bar x \pm z_{(1- 0.05/2)}\frac{\sigma}{\sqrt n} = 36 \pm 1.96 \frac{12}{\sqrt 15} = 36 \pm 6.07$$
+$$\bar x \pm z_{(1 - 0.05/2)}\frac{\sigma}{\sqrt n} = 36 \pm 1.96 \frac{12}{\sqrt 15} = 36 \pm 6.07$$
+</div>
 
-vilket vi kan beräkna till $(29.93, 42.07)$
+<div class="fragment fade-in">
+Intervallet också kan uttryckas $(29.93, 42.07)$
 </div>
 
 <div class="fragment fade-in">
@@ -795,7 +801,7 @@ Under nollhypotesen följer $t$ en t-fördelning med $n - 1$ frihetsgrader
 </div>
 
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
 **P-värde**
 
 <div style="float:right;">
@@ -819,7 +825,7 @@ P-värdet ges av arean bortom $|t|$ i testfördelningen
 Vid handräkning uppskattas p-värdet genom att ställa $|t|$ mot ett tabellvärde
 </div>
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
 **Svar**
 
 P-värdet ställs mot en förbestämd *signifikansnivå* (ofta 5 procent)

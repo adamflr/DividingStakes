@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>BI1363 HT 2020 t-test för ett stickprov Oktober 2020 Adam Flöhr, BT, SLU</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="05_t_test_02_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="05_t_test_02_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style1.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">BI1363 HT 2020<br>t-test för ett stickprov<br>Oktober 2020<br>Adam Flöhr, BT, SLU</h1>
+</section>
+
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+t-test för ett stickprov
+</p>
+<p style="text-align:center;">
+Motsvarar <em>Biometri</em>, kap 6
+</p>
+</div>
+</section>
+<section><section id="i-korthet" class="title-slide slide level1"><h1>I korthet</h1><p>Slumpmässig variation är en grundläggande utmaning för all kunskapsinhämtning</p>
+<div class="fragment fade-in">
+<p>I en statistisk undersökning vill vi använda <strong>punktskattningar</strong> från ett <strong>stickprov</strong> för att uttala oss om egenskaper i en <strong>population</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Skattningar är beroende av slumpen och vi behöver därför metoder som hanterar slumpmässig variation</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Konfidensintervall</strong> gör det möjligt att ringa in populationens egenskaper med en förbestämd säkerhet</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypotestest</strong> gör det möjligt att dra <em>statistiskt säkerställda</em> slutsatser om populationens egenskaper</p>
+</div>
+<div class="fragment fade-in">
+<p>För kontinuerlig data används ofta ett <strong>t-test</strong></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>t-test för ett stickprov</strong> testar om medelvärdet i en variabel är skilt från ett hypotesvärde</p>
+</div></section><section id="population-och-stickprov" class="slide level2">
+<h2>Population och stickprov</h2>
+<div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-2-1.png" width="384" /></p>
+</div>
+<div style="width:50%;">
+<p>I en statistisk undersökning vill vi veta något om en egenskap (en <em>variabel</em>) i en <em>population</em></p>
+<div class="fragment fade-in">
+<p>Ofta omöjligt att observera hela populationen, <span class="fragment fade-in"> så vi drar ett stickprov om <span class="math inline">\(n\)</span> observationer </span></p>
+</div>
+<div class="fragment fade-in">
+<p>Stickprovet kan användas till att <em>punktskatta</em> egenskaper som medelvärde och varians i populationen</p>
+</div>
+<div class="fragment fade-in">
+<p>Egenskaper i populationen betecknas med grekiska bokstäver (<span class="math inline">\(\mu\)</span> och <span class="math inline">\(\sigma\)</span>) och skattningarna betecknas med romerska bokstäver (<span class="math inline">\(\bar x\)</span> och <span class="math inline">\(s\)</span>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Valet av punktskattning beror på variabeln vi undersöker</p>
+</div>
+<div class="fragment fade-in">
+<p>Om populationsvariabeln är normalfördelad är vi intresserade av skattade värden för medelvärde och varians (stickprovsmedelvärde och stickprovsvarians)</p>
+</div>
+</div>
+</section></section>
+<section><section id="punktskattningar-är-utfall-av-slumpvariabler" class="title-slide slide level1"><h1>Punktskattningar är utfall av slumpvariabler</h1><p>Eftersom observationerna i stickprovet är slumpmässiga kommer även punktskattningarna bero på slumpen</p>
+<div class="fragment fade-in">
+<p>Vi kan använda punktskattningar för att ringa in populationsmedelvärdet <span class="math inline">\(\mu\)</span> med ett <em>konfidensintervall</em></p>
+</div>
+<div class="fragment fade-in">
+<p>Ett konfidensintervall täcker <span class="math inline">\(\mu\)</span> med en bestämd konfidens, ofta 95 procent.</p>
+</div>
+<div class="fragment fade-in">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in">
+<p>Punktskattningen av medelvärdet är <span class="math inline">\(\bar x = 36\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Det sanna populationsmedelvärdet ligger med 95 procents konfidens i det angivna intervallet</p>
+</div></section><section id="konfidensintervall-med-känd-standardavvikelse" class="slide level2">
+<h2>Konfidensintervall med känd standardavvikelse</h2>
+<p>Om man har en normalfördelad populationsvariabel och känd populationsstandardavvikelse <span class="math inline">\(\sigma\)</span> baseras konfidensintervallet på normalfördelningen</p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-4-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<div class="fragment fade-in">
+<p>För en given svanssannolikhet <span class="math inline">\(\alpha\)</span> använder vi beteckningen <span class="math inline">\(z_{1 - \alpha/2}\)</span> för värdet på x-axeln, t.ex <span class="math inline">\(z_{(1 - 0.05/2)} = z_{0.975} = 1.96\)</span> eftersom sannolikheten i svansarna bortom <span class="math inline">\(1.96\)</span> är <span class="math inline">\(0.05\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi kan föra över det standardiserade intervallet till ett skattat medelvärde genom formeln</p>
+<p><span class="math display">\[\bar x \pm z_{(1- \alpha/2)}\frac{\sigma}{\sqrt n}\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>där <span class="math inline">\(\bar x\)</span> är det skattade medelvärdet, <span class="math inline">\(z_{(1 - \alpha/2)}\)</span> är värdet från den standardiserade normalfördelningen, <span class="math inline">\(\sigma\)</span> är den kända standardavvikelsen, och <span class="math inline">\(n\)</span> är stickprovets storlek</p>
+</div>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>Konfidensintervall, känd standardavvikelsen, exempel</strong></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>I datan ovan är det skattade medelvärdet <span class="math inline">\(\bar x = 36\)</span>, den givna standardavvikelsen <span class="math inline">\(\sigma = 12\)</span>, och stickprovsstorleken <span class="math inline">\(n = 15\)</span></p>
+<div class="fragment fade-in">
+<p>Ett 95-procentigt konfidensintervall ges av</p>
+<p><span class="math display">\[\bar x \pm z_{(1 - 0.05/2)}\frac{\sigma}{\sqrt n} = 36 \pm 1.96 \frac{12}{\sqrt 15} = 36 \pm 6.07\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Intervallet också kan uttryckas <span class="math inline">\((29.93, 42.07)\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Ett 99-procentigt konfidensintervall ges av</p>
+<p><span class="math display">\[\bar x \pm z_{(1 - 0.01/2)}\frac{\sigma}{\sqrt n} = 36 \pm 2.576 \frac{12}{\sqrt 15} = 36 \pm 7.98\]</span></p>
+<p>eller <span class="math inline">\((28.02, 43.98)\)</span></p>
+</div>
+</section><section id="konfidensintervall-med-skattad-standardavvikelse" class="slide level2">
+<h2>Konfidensintervall med skattad standardavvikelse</h2>
+<p>Om standardavvikelsen är okänd kan vi skatta den från stickprovet</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Eftersom skattningen är mindre säker är det intutivt att vi behöver ett bredare konfidensintervall</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="4" style="float:right; width:50%;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p><br></p>
+<p>Den teoretiska konsekvensen är att vi använder en <em>t-fördelning</em> istället för en normalfördelning</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>t-fördelningen är en kontinuerlig fördelning med en ingående parameter - <em>antalet frihetsgrader</em> (eng. degrees of freedom, df)</p>
+</div>
+<div class="fragment fade-in">
+<p>t-fördelningen uppstår när man standardiserar ett medelvärde med en skattad standardavvikelse:</p>
+<p><span class="math display">\[\frac{\bar X - \mu}{s/\sqrt n} \sim t(n - 1)\]</span></p>
+</div>
+</section><section id="frihetsgrader" class="slide level2">
+<h2>Frihetsgrader</h2>
+<p><em>Frihetsgrader</em> är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning</p>
+<div class="fragment fade-in">
+<p>När vi skattar <span class="math inline">\(s\)</span> använder vi serien <span class="math inline">\(x_i - \bar x\)</span></p>
+<p><span class="math display">\[s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Den serien har egenskapen att den alltid summerar till noll (en begränsning)</p>
+</div>
+<div class="fragment fade-in">
+<p>Vid skattningen av <span class="math inline">\(s\)</span> använder vi alltså en serie som innehåller <em>mindre</em> information än våra <span class="math inline">\(n\)</span> observationer</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av <span class="math inline">\(s\)</span> har vi <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+</div>
+<div class="fragment fade-in">
+<p>Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+<p><span class="math display">\[\frac{\bar X - \mu}{s / \sqrt n} \sim t(n-1)\]</span></p>
+</div>
+</section><section id="biometri-tabell-5" class="slide level2">
+<h2>Biometri, tabell 5</h2>
+<p>Vid en skattad standardavvikelse baseras konfidensintervallet på en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-8-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<div class="fragment fade-in">
+<p>Tabellvärden för x-axeln betecknas <span class="math inline">\(t_{(1-\alpha / 2, df)}\)</span> och kan hämtas från en tabell över t-fördelningen, t.ex tabell 5 i <em>Biometri</em></p>
+</div>
+<div class="fragment fade-in">
+<p><img src="Figurer/Biometri_Tabell_5_14.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+</div>
+<div class="fragment fade-in">
+<p>För ett tabellvärde motsvarande fem procent i svansarna och <span class="math inline">\(n = 15\)</span> tittar vi på <span class="math inline">\(t_{(1-0.05 / 2, 15 - 1)} = t_{(0.975, 14)} = 2.145\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Den sista raden i tabell 5 ger värden för en t-fördelning med oändligt antal frihetsgrader, dvs en standardiserad normalfördelning</p>
+</div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><strong>Konfidensintervall, skattad standardavvikelsen, exempel</strong></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Som tidigare är det skattade medelvärdet <span class="math inline">\(\bar x = 36\)</span> och stickprovsstorleken <span class="math inline">\(n = 15\)</span>, men standardavvikelsen är nu skattad <span class="math inline">\(s = 12\)</span></p>
+<div class="fragment fade-in">
+<p>Ett 95-procentigt konfidensintervall ges av</p>
+<p><span class="math display">\[\bar x \pm t_{(1- 0.05/2, 14)}\frac{\sigma}{\sqrt n} = 36 \pm 2.145 \frac{12}{\sqrt 15} = 36 \pm 6.65\]</span></p>
+<p>vilket vi kan beräkna till <span class="math inline">\((29.35, 42.65)\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>På grund av den skattade standardavvikelsen hämtar vi tabellvärdet från en t-fördelning och får ett bredare konfidensintervall</p>
+</div>
+<div class="fragment fade-in">
+<p>Termen <span class="math inline">\(\frac{s}{\sqrt n}\)</span> kallas <em>medelfelet</em> (eng. standard error, SE)</p>
+</div>
+</section><section id="tolkning-av-konfidensintervall" class="slide level2">
+<h2>Tolkning av konfidensintervall</h2>
+<p>Konfidensintervallet brukar presenteras som att det täcker populationsmedelvärdet <span class="math inline">\(\mu\)</span> med en given konfidens (ofta 95 procent)</p>
+<div class="fragment fade-in">
+<p>En ny undersökning kan ge andra skattningar av <span class="math inline">\(\bar x\)</span> och <span class="math inline">\(s\)</span>, och således ett annat konfidensintervall</p>
+</div>
+<div class="fragment fade-in">
+<p>Om vi upprepar försöket ett stort antal gånger kommer ett 95-procentigt konfidensintervall täcka populationsmedelvärdet 95 procent av gångerna</p>
+</div>
+<p><br></p>
+<div class="fragment fade-in">
+<p>Märk särskilt att konfidensintervallet är ett intervall för medelvärdesskattningen</p>
+</div>
+<div class="fragment fade-in">
+<p>Intervallet ska <strong>inte</strong> tolkas som att 95 procent av observationerna ligger i intervallet</p>
+</div>
+</section></section>
+<section><section id="slutsatser-från-data" class="title-slide slide level1"><h1>Slutsatser från data</h1><p>Konfidensintervallet kan användas till att dra slutsatser från sin data</p>
+<div class="fragment fade-in">
+<p>Värden som inte ligger i intervallet är mindre troliga att vara det sanna populationsmedelvärdet</p>
+</div>
+<div class="fragment fade-in">
+<p>En relaterad metod för att dra slutsatser är <em>hypotestestet</em></p>
+</div>
+<div class="fragment fade-in">
+<p>Vid ett hypotestest jämförs en specifik hypotes med observerad data</p>
+</div>
+<div class="fragment fade-in">
+<p>Ett resultat är <em>signifikant</em> om observationerna är osannolika givet hypotesen</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypotestestens steg</strong></p>
+<p>Formell gång för att ställa observation mot hypotes</p>
+<ol type="1">
+<li class="fragment">Hypoteser</li>
+<li class="fragment">Testfunktion</li>
+<li class="fragment">Testfördelning</li>
+<li class="fragment">p-värde (beräkning eller uppskattning)</li>
+<li class="fragment">Slutsats</li>
+</ol>
+<div class="fragment fade-in">
+<p>HTTPS</p>
+</div>
+</div></section><section id="val-av-hypotestest" class="slide level2">
+<h2>Val av hypotestest</h2>
+<p>Typen av variabel påverkar det slumpmässiga beteendet</p>
+<div class="fragment fade-in">
+<p>och man får därför skilda hypotestest för skilda variabeltyper</p>
+</div>
+<div class="fragment fade-in">
+<p>Under kursen tittar vi på</p>
+<ul>
+<li>t-test. Kontinuerlig variabel. En eller två grupper</li>
+<li>Binomialtest och z-test. För binär data (två möjliga utfall)</li>
+<li><span class="math inline">\(\chi^2\)</span>-test. För nominella variabler</li>
+<li>F-test. Kontinuerlig variabel. Två eller fler grupper</li>
+</ul>
+</div>
+</section></section>
+<section><section id="t-test" class="title-slide slide level1"><h1>t-test</h1><p>t-testen är test för <strong>kontinuerliga</strong> variabler som följer en <strong>normalfördelning</strong></p>
+<div class="fragment fade-in">
+<div style="float:right;width:50%;font-size:0.75em;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Är populationsmedelvärdet skilt från 50?</p>
+</div>
+<p><strong>t-test för ett stickprov</strong></p>
+<p>Testar om populationsmedelvärdet är skilt från en specifik nollhypotes</p>
+<p><br><br><br></p>
+</div>
+<div class="fragment fade-in">
+<div style="float:right;width:50%;font-size:0.75em;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Är populationsmedelvärdena skilda från varandra?</p>
+</div>
+<p><strong>t-test för två stickprov</strong></p>
+<p>Testar om det finns någon skillnad i populationsmedelvärde mellan två populationer</p>
+</div></section><section id="t-test-för-ett-stickprov" class="slide level2">
+<h2>t-test för ett stickprov</h2>
+<p>Ett stickprov om <span class="math inline">\(n\)</span> observationer</p>
+<p>Skattar medelvärdet <span class="math inline">\(\bar x\)</span> och standardavvikelsen <span class="math inline">\(s\)</span></p>
+<p>Vill ställa det mot en nollhypotes <span class="math inline">\(H_0\)</span></p>
+<div class="fragment fade-in">
+<div style="width:55%">
+<p><strong>Numeriskt exempel</strong></p>
+<p>Man har identifierat en genotyp av pärlhyacint och vill veta om dess höjd vid blomning är skild från 30 cm</p>
+<p>Man sätter femton exemplar och får <span class="math inline">\(\bar x = 36\)</span> och <span class="math inline">\(s = 12\)</span> <span class="math inline">\((s^2 = 144)\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;left:60%;width:40%;top:200px">
+<p><img src="https://www.odla.nu/sites/odla.nu/files/styles/slide_content/public/muscari_armenicum_saffier-0.jpg"></p>
+</div>
+</div>
+</section><section id="illustration" class="slide level2">
+<h2>Illustration</h2>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="fragment fade-in">
+<p>Vår data kommer från en fördelning med något okänt populationsmedelvärde <span class="math inline">\(\mu\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi har en <em>nollhypotes</em> att <span class="math inline">\(\mu\)</span> är lika med 30, <span class="math inline">\(\mu_0 = 30\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><em>Vad är sannolikheten för det här utfallet om medelvärdet faktiskt är 30?</em></p>
+</div>
+<div class="fragment fade-in">
+<p>Om den sannolikheten är låg, tyder det på att det sanna populationsmedelvärdet är skilt från 30</p>
+</div>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p><strong>Hypoteser</strong></p>
+<p>Nollhypotes och alternativhypotes</p>
+<p><span class="math inline">\(H_0: \mu = 30\)</span></p>
+<p><span class="math inline">\(H_1: \mu \neq 30\)</span></p>
+<div class="fragment fade-in">
+<p><strong>Testfunktion</strong></p>
+<p>t-testets testfunktion ges av att standardisera mot nollhypotesens värde</p>
+<p><span class="math inline">\(t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Sätter in värden i testfunktionen</p>
+<p><span class="math inline">\(t = \frac{36 - 30}{\sqrt{144/15}} = 1.936\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfördelning</strong></p>
+<p>Om nollhypotesen stämmer ska <span class="math inline">\(t\)</span> komma från en <span class="math inline">\(t\)</span>-fördelning med <span class="math inline">\(n-1\)</span> frihetsgrader</p>
+</div>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p><strong>p-värde</strong></p>
+<p>p-värdet beräknas som ytan bortom <span class="math inline">\(t\)</span> i en t-fördelning med <span class="math inline">\(n-1=14\)</span> frihetsgrader</p>
+<div style="float: right;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" /></p>
+</div>
+<p>Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna</p>
+<div class="fragment fade-in">
+<p>Man kan beräkna p-värdet i valfritt datorprogram och få <span class="math inline">\(p = 0.0733\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Eller titta i tabell 5, rad 14. Eftersom <span class="math inline">\(t\)</span> ligger mellan <span class="math inline">\(1.761\)</span> och <span class="math inline">\(2.145\)</span> måste det motsvara ett tvåsidigt p-värde mellan <span class="math inline">\(10\)</span> och <span class="math inline">\(5\)</span> procent</p>
+</div>
+</section><section id="biometri-tabell-5-1" class="slide level2">
+<h2>Biometri, tabell 5</h2>
+<div class="fragment fade-in" data-fragment-index="2" style="float:right; width: 40%;font-size:1em; text-align:center;border: 5px solid; padding:15px; border-radius:10px;background-color:#cceeee">
+<p><img src="Figurer/Biometri_Tabell_5.png" height="300" style="display:block; margin-left:auto; margin-right:auto;"></p>
+<p><img src="Figurer/Biometri_Tabell_5_14.png" width="700"></p>
+<p>Vid 14 frihetsgrader är ytan under kurvan till vänster om 2.145 lika med 0.975</p>
+<p>eller</p>
+<p><span class="math display">\[t_{(0.975, 14)} = 2.145\]</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Tabell 5 i <em>Biometri</em> anger t-fördelningens fördelningsfunktion</p>
+<p>En sannolikhet anges i översta raden och ett antal frihetsgrader anges i vänstra kolumnen</p>
+<p>Tabellens inre värde ger ett t-värde sådant att sannolikheten (<em>ytan under kurvan</em>) till vänster om det värdet ges av sannolikheten</p>
+</div>
+<div class="fragment fade-in">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" /></p>
+</div>
+<div class="fragment fade-in">
+<p>Den gröna arean motsvarar fem procent (2.5 procent i vardera svans)</p>
+<p>Eftersom vårt observerade t-värde 1.936 ligger närmre nollan måste <em>svanssannolikheten</em> (den röda arean) vara minst fem procent</p>
+</div>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p><strong>p-värde</strong></p>
+<p>p-värdet beräknas som ytan bortom <span class="math inline">\(t\)</span> i en t-fördelning med <span class="math inline">\(n-1=14\)</span> frihetsgrader</p>
+<div style="float: right;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" /></p>
+</div>
+<p>Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna</p>
+<p>Man kan beräkna p-värdet i valfritt datorprogram och få <span class="math inline">\(p = 0.0733\)</span></p>
+<p>Eller titta i tabell 5, rad 14. Eftersom <span class="math inline">\(t\)</span> ligger mellan <span class="math inline">\(1.761\)</span> och <span class="math inline">\(2.145\)</span> måste det motsvara ett tvåsidigt p-värde mellan <span class="math inline">\(10\)</span> och <span class="math inline">\(5\)</span> procent</p>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Vid slutsatsen ställs p-värdet mot en <em>signifikansnivå</em></p>
+<p>Signifikansnivån (<span class="math inline">\(\alpha\)</span>) är en förbestämd nivå från vilken man förkastar eller inte förkastar nollhypotesen</p>
+</div>
+<div class="fragment fade-in">
+<p>Oftast används <span class="math inline">\(5\)</span>, <span class="math inline">\(1\)</span> eller <span class="math inline">\(0.1\)</span> procent som <span class="math inline">\(\alpha\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Då vi har ett p-värde över fem procent kan vi <em>ej påvisa någon säkerställd skillnad från höjden <span class="math inline">\(30\)</span> cm</em></p>
+</div>
+</section><section id="illustration-1" class="slide level2">
+<h2>Illustration</h2>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" style="display: block; margin: auto;" /></p>
+<div class="fragment fade-in">
+<p>Det tvåsidiga p-värdet är arean i svansen bortom <span class="math inline">\(\bar x\)</span>, gånger två</p>
+</div>
+<div class="fragment fade-in">
+<p>Arean ger sannoliketen för det observerade medelvärdet om nollhypotesen stämmer</p>
+</div>
+<div class="fragment fade-in">
+<p>Ett lågt p-värde tyder på att nollhypotesen <em>inte</em> stämmer</p>
+</div>
+</section><section id="koppling-mellan-konfidensintervall-och-hypotestest" class="slide level2">
+<h2>Koppling mellan konfidensintervall och hypotestest</h2>
+<p>Ett konfidensintervall täcker de värden som <strong>inte</strong> förkastas om de används som nollhypotes i motsvarande hypotestest</p>
+<div class="fragment fade-in">
+<p>Om ett visst värde ligger i ett <span class="math inline">\(95\)</span>-procentigt konfidensintervall (<em>intervallet täcker värdet</em>) kommer man inte förkasta nollhypotesen att medelvärdet är det värdet på signifikansnivån <span class="math inline">\(5\)</span> procent</p>
+</div>
+<div class="fragment fade-in">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<p>Ett 95-procemtigt Konfidensintervall gavs av <span class="math inline">\(36 \pm 6.65\)</span>, eller <span class="math inline">\((29.35, 42.65)\)</span></p>
+<p>Då intervallet täcker <span class="math inline">\(30\)</span> kommer vi acceptera <span class="math inline">\(H_0: \mu = 30\)</span> på signifikansnivån <span class="math inline">\(5\)</span> procent</p>
+</section><section id="t-test-för-ett-stickprov-schema" class="slide level2">
+<h2>t-test för ett stickprov, schema</h2>
+<div style="position:absolute;height:800px;width:100%;">
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: \mu = \mu_0\)</span></p>
+<p><span class="math inline">\(H_1: \mu \neq \mu_0\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[t = \frac{\bar x - \mu_0}{s/\sqrt n}\]</span></p>
+<p>där <span class="math inline">\(\bar x\)</span> och <span class="math inline">\(s\)</span> skattas från stickprovet, och <span class="math inline">\(\mu_0\)</span> hämtas från nollhypotesen</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(t\)</span> en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av arean bortom <span class="math inline">\(|t|\)</span> i testfördelningen</p>
+<p>Vid handräkning uppskattas p-värdet genom att ställa <span class="math inline">\(|t|\)</span> mot ett tabellvärde</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section></section>
+<section><section id="avslutande-punkter" class="title-slide slide level1"><h1>Avslutande punkter</h1></section><section id="antaganden" class="slide level2">
+<h2>Antaganden</h2>
+<p>t-test för ett stickprov bygger på</p>
+<ul>
+<li>normalfördelning</li>
+<li>oberoende observationer inom stickprovet</li>
+</ul>
+<div class="fragment fade-in">
+<p><strong>Brister i antaganden</strong></p>
+<p>t-testet sägs vara <em>robust</em> och används ofta i fall där normalfördelningsantagandet inte klart gäller t.ex. för heltalsdata</p>
+</div>
+</section><section id="stjärnsystemet-för-signifikans" class="slide level2">
+<h2>Stjärnsystemet för signifikans</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Nivå</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>n.s</td>
+<td>Ej sig</td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td>5%</td>
+</tr>
+<tr class="odd">
+<td>**</td>
+<td>1%</td>
+</tr>
+<tr class="even">
+<td>***</td>
+<td>0.1%</td>
+</tr>
+</tbody>
+</table>
+</section><section id="typ-i-fel-och-typ-ii-fel" class="slide level2">
+<h2>Typ I-fel och Typ II-fel</h2>
+<p>För ett påstående finns två möjliga verkligheter (sant/falskt) och två möjliga slutsater (stämmer/stämmer inte)</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Hypotes sann</th>
+<th>Hypotes falsk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tror sann</td>
+<td>Korrekt</td>
+<td>Typ II-fel</td>
+</tr>
+<tr class="even">
+<td>Tror falsk</td>
+<td>Typ I-fel</td>
+<td>Korrekt</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<p>Sannolikheten för ett Typ I-fel är lika med signifikansnivån <span class="math inline">\(\alpha\)</span></p>
+</div>
+</section></section>
+<section id="section-6" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Slut
+</p>
+</div></section>
+    </div>
+  </div>
+
+  <script src="05_t_test_02_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="05_t_test_02_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 1,
+        maxScale: 1,
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
