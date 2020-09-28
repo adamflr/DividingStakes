@@ -4,6 +4,7 @@ output:
   revealjs::revealjs_presentation:
     css: style1.css
     self_contained: false
+    reveal_plugins: ["zoom"]
     transition: fade
     mathjax: "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG"
     reveal_options:
@@ -37,7 +38,7 @@ theme_set(theme_bw() + theme(plot.background = element_rect(fill = "#ffffe6", co
 
 <div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
 <p style="text-align:center;font-size: 2em;">
-t-test för ett stickprov
+Konfidensintervall och t-test för ett stickprov
 </p>
 
 <p style="text-align:center;">
@@ -131,7 +132,11 @@ Om populationsvariabeln är normalfördelad är vi intresserade av skattade vär
 Eftersom observationerna i stickprovet är slumpmässiga kommer även punktskattningarna bero på slumpen
 
 <div class="fragment fade-in">
-Vi kan använda punktskattningar för att ringa in populationsmedelvärdet $\mu$ med ett *konfidensintervall*
+Det skattade medelvärdet $\bar x$ är i regel inte lika med populationsmedelvärdet
+</div>
+
+<div class="fragment fade-in">
+Men vi kan använda $\bar x$ och standardavvikelse för att ringa in populationsmedelvärdet $\mu$ med ett *konfidensintervall*
 </div>
 
 <div class="fragment fade-in">
@@ -200,17 +205,43 @@ g0.95 | g0.975 | g0.995 | g0.9995
 ```
 
 <div class="fragment fade-in">
-För en given svanssannolikhet $\alpha$ använder vi beteckningen $z_{1 - \alpha/2}$ för värdet på x-axeln, t.ex $z_{(1 - 0.05/2)} = z_{0.975} = 1.96$ eftersom sannolikheten i svansarna bortom $1.96$ är $0.05$
+Beteckningen $z_{0.975}$ anger värdet på x-axeln där sannolikheten till vänster om det värdet är $0.975$
+
+>- Vi har $z_{0.975} = 1.96$ eftersom sannolikheten till vänster om $1.96$ är $0.975$
 </div>
 
 <div class="fragment fade-in">
-Vi kan föra över det standardiserade intervallet till ett skattat medelvärde genom formeln
+För en given svanssannolikhet $\alpha$ kan vi titta på $z_{1 - \alpha/2}$
 
-$$\bar x \pm z_{(1- \alpha/2)}\frac{\sigma}{\sqrt n}$$
+>- Vi har $z_{(1 - 0.01/2)} = z_{0.995} = 2.576$, eftersom sannolikheten i svansarna bortom $2.576$ är $0.01$
+</div>
+
+## Konfidensintervall med känd standardavvikelse
+
+<div class="fragment fade-in">
+Konfidensintervall ges av
+
+$$\bar x \pm z_{(1- \alpha/2)}\sqrt{\frac{\sigma^2}{n}}$$
 </div>
 
 <div class="fragment fade-in">
 där $\bar x$ är det skattade medelvärdet, $z_{(1 - \alpha/2)}$ är värdet från den standardiserade normalfördelningen, $\sigma$ är den kända standardavvikelsen, och $n$ är stickprovets storlek
+</div>
+
+<br>
+
+<div class="fragment fade-in">
+Man kan se konstruktionen som resultatet av att placera en normalfördelning kring $\bar x$
+
+```{r, echo = F, fig.height=4, fig.align='center'}
+g0.975 +
+  ggtitle("Ett 95-procentigt konfidensintervall") +
+  scale_x_continuous(breaks = c(-1.96, 0, 1.96),
+                     labels = c(expression(bar(x) * " - 1.96" %.% sqrt(frac(sigma^2, n))),
+                                expression(bar(x)),
+                                expression(bar(x) * " + 1.96" %.% sqrt(frac(sigma^2, n))))) +
+  theme(axis.text.x = element_text(size = 12))
+```
 </div>
 
 ## 
@@ -221,12 +252,12 @@ där $\bar x$ är det skattade medelvärdet, $z_{(1 - \alpha/2)}$ är värdet fr
 g1
 ```
 
-I datan ovan är det skattade medelvärdet $\bar x = 36$, den givna standardavvikelsen $\sigma = 12$, och stickprovsstorleken $n = 15$
+I datan ovan är det skattade medelvärdet $\bar x = 36$, den givna standardavvikelsen $\sigma = 12$ (och då $\sigma^2 = 144$), och stickprovsstorleken $n = 15$
 
 <div class="fragment fade-in">
 Ett 95-procentigt konfidensintervall ges av
 
-$$\bar x \pm z_{(1 - 0.05/2)}\frac{\sigma}{\sqrt n} = 36 \pm 1.96 \frac{12}{\sqrt 15} = 36 \pm 6.07$$
+$$\bar x \pm z_{(1 - 0.05/2)}\sqrt \frac{\sigma^2}{ n} = 36 \pm 1.96 \sqrt \frac{144}{15} = 36 \pm 6.07$$
 </div>
 
 <div class="fragment fade-in">
@@ -236,7 +267,7 @@ Intervallet också kan uttryckas $(29.93, 42.07)$
 <div class="fragment fade-in">
 Ett 99-procentigt konfidensintervall ges av
 
-$$\bar x \pm z_{(1 - 0.01/2)}\frac{\sigma}{\sqrt n} = 36 \pm 2.576 \frac{12}{\sqrt 15} = 36 \pm 7.98$$
+$$\bar x \pm z_{(1 - 0.01/2)}\sqrt \frac{\sigma^2}{n} = 36 \pm 2.576 \sqrt \frac{144}{15} = 36 \pm 7.98$$
 
 eller $(28.02, 43.98)$
 </div>
@@ -282,35 +313,7 @@ t-fördelningen är en kontinuerlig fördelning med en ingående parameter - *an
 <div class="fragment fade-in">
 t-fördelningen uppstår när man standardiserar ett medelvärde med en skattad standardavvikelse:
 
-$$\frac{\bar X - \mu}{s/\sqrt n} \sim t(n - 1)$$
-</div>
-
-## Frihetsgrader
-
-*Frihetsgrader* är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning
-
-<div class="fragment fade-in">
-När vi skattar $s$ använder vi serien $x_i - \bar x$
-
-$$s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2$$
-</div>
-
-<div class="fragment fade-in">
-Den serien har egenskapen att den alltid summerar till noll (en begränsning)
-</div>
-
-<div class="fragment fade-in">
-Vid skattningen av $s$ använder vi alltså en serie som innehåller *mindre* information än våra $n$ observationer
-</div>
-
-<div class="fragment fade-in">
-Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av $s$ har vi $n - 1$ frihetsgrader
-</div>
-
-<div class="fragment fade-in">
-Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med $n - 1$ frihetsgrader
-
-$$\frac{\bar X - \mu}{s / \sqrt n} \sim t(n-1)$$
+$$\frac{\bar X - \mu}{\sqrt{s^2/ n}} \sim t(n - 1)$$
 </div>
 
 ## Biometri, tabell 5
@@ -372,7 +375,7 @@ Som tidigare är det skattade medelvärdet $\bar x = 36$ och stickprovsstorleken
 <div class="fragment fade-in">
 Ett 95-procentigt konfidensintervall ges av
 
-$$\bar x \pm t_{(1- 0.05/2, 14)}\frac{\sigma}{\sqrt n} = 36 \pm 2.145 \frac{12}{\sqrt 15} = 36 \pm 6.65$$
+$$\bar x \pm t_{(1- 0.05/2, 14)}\sqrt \frac{s^2}{n} = 36 \pm 2.145 \sqrt \frac{144}{15} = 36 \pm 6.65$$
 
 vilket vi kan beräkna till $(29.35, 42.65)$
 </div>
@@ -382,7 +385,11 @@ På grund av den skattade standardavvikelsen hämtar vi tabellvärdet från en t
 </div>
 
 <div class="fragment fade-in">
-Termen $\frac{s}{\sqrt n}$ kallas *medelfelet* (eng. standard error, SE)
+Termen $\sqrt \frac{s^2}{n}$ kallas *medelfelet* (eng. standard error, SE)
+</div>
+
+<div class="fragment fade-in">
+Notera också att $\sqrt \frac{s^2}{n} = \frac{s}{\sqrt n}$
 </div>
 
 ## Tolkning av konfidensintervall
@@ -454,10 +461,10 @@ och man får därför skilda hypotestest för skilda variabeltyper
 <div class="fragment fade-in">
 Under kursen tittar vi på
 
-- t-test. Kontinuerlig variabel. En eller två grupper
-- Binomialtest och z-test. För binär data (två möjliga utfall)
-- $\chi^2$-test. För  nominella variabler
-- F-test. Kontinuerlig variabel. Två eller fler grupper
+>- t-test. Kontinuerlig variabel. En eller två grupper
+>- Binomialtest och z-test. För binär data (två möjliga utfall)
+>- $\chi^2$-test. För  flera variabler på nominalskala
+>- F-test. Kontinuerlig variabel. Två eller fler grupper
 </div>
 
 # t-test
@@ -578,13 +585,13 @@ $H_1: \mu \neq 30$
 
 t-testets testfunktion ges av att standardisera mot nollhypotesens värde
 
-$t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}$
+$$t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}$$
 </div>
 
 <div class="fragment fade-in">
 Sätter in värden i testfunktionen
 
-$t = \frac{36 - 30}{\sqrt{144/15}} = 1.936$
+$$t = \frac{36 - 30}{\sqrt{144/15}} = 1.936$$
 </div>
 
 <div class="fragment fade-in">
@@ -636,9 +643,9 @@ Eller titta i tabell 5, rad 14. Eftersom $t$ ligger mellan $1.761$ och $2.145$ m
 ## Biometri, tabell 5
 
 <div class="fragment fade-in" data-fragment-index="2" style="float:right; width: 40%;font-size:1em; text-align:center;border: 5px solid; padding:15px; border-radius:10px;background-color:#cceeee">
-<img src="Figurer/Biometri_Tabell_5.png" height="300" style="display:block; margin-left:auto; margin-right:auto;">
+<img src="Figurer/Biometri_Tabell_5.png" height="300" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;">
 
-<img src="Figurer/Biometri_Tabell_5_14.png" width="700">
+<img src="Figurer/Biometri_Tabell_5_14.png" width="700" style="border:solid 1px;">
 
 Vid 14 frihetsgrader är ytan under kurvan till vänster om 2.145 lika med 0.975
 
@@ -656,21 +663,23 @@ Tabellens inre värde ger ett t-värde sådant att sannolikheten (*ytan under ku
 </div>
 
 <div class="fragment fade-in">
-```{r, echo = F, fig.height=3, fig.width=10}
+```{r, echo = F, fig.height=2.8, fig.width=10}
 dat <- tibble(t = seq(-5,5,0.01), y = dt(t, n - 1))
 g_tab <- ggplot(dat, aes(t, y)) + 
   geom_ribbon(aes(ymax = y, ymin = 0), data = dat %>% filter(t >= 2.145), fill = "olivedrab1") +
   geom_ribbon(aes(ymax = y, ymin = 0), data = dat %>% filter(t <= -2.145), fill = "olivedrab1") +
   geom_line() +
   geom_hline(yintercept = 0) +
-  ylab("f(t)") +
+  ylab("") +
   labs(title = "t-fördelning, 14 fg") +
-  theme(panel.grid = element_blank(), axis.text.x = element_text(size = 15)) +
+  theme(panel.grid = element_blank(), axis.text.x = element_text(size = 15), axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) +
   scale_x_continuous(breaks = c(-2.145, 0, 2.145), labels = c("-2.145", "0", "2.145"))
 
 g_obs_s <- g_obs + 
   scale_x_continuous(breaks = c(-1.936, 0, 1.936), labels = c("-1.936", "0", "1.936")) +
-  theme(panel.grid = element_blank(), axis.text.x = element_text(size = 15))
+  theme(panel.grid = element_blank(), axis.text.x = element_text(size = 15), axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
 
 g_obs_s + g_tab
 ```
@@ -734,11 +743,11 @@ g2 +
 ```
 
 <div class="fragment fade-in">
-Det tvåsidiga p-värdet är arean i svansen bortom $\bar x$, gånger två
+Det tvåsidiga p-värdet är sannolikheten för en mer extrem skillnad mellan $\mu_0$ och $\bar x$ än den vi observerar
 </div>
 
 <div class="fragment fade-in">
-Arean ger sannoliketen för det observerade medelvärdet om nollhypotesen stämmer
+Vi har en skillnad på $6$ cm mellan $\mu_0$ och $\bar x$. Gränserna för svansarna blir därmed $36$ och $24$
 </div>
 
 <div class="fragment fade-in">
@@ -770,9 +779,13 @@ g2 +
 ```
 </div>
 
-Ett 95-procemtigt Konfidensintervall gavs av $36 \pm 6.65$, eller $(29.35, 42.65)$
+<div class="fragment fade-in">
+Ett 95-procentigt konfidensintervall gavs av $36 \pm 6.65$, eller $(29.35, 42.65)$
+</div>
 
+<div class="fragment fade-in">
 Då intervallet täcker $30$ kommer vi acceptera $H_0: \mu = 30$ på signifikansnivån $5$ procent
+</div>
 
 ## t-test för ett stickprov, schema
 
@@ -788,7 +801,7 @@ $H_1: \mu \neq \mu_0$
 <div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
 **Testfunktion**
 
-$$t = \frac{\bar x - \mu_0}{s/\sqrt n}$$ 
+$$t = \frac{\bar x - \mu_0}{\sqrt{s^2 / n}}$$ 
 
 där $\bar x$ och $s$ skattas från stickprovet, och $\mu_0$ hämtas från nollhypotesen
 </div>
@@ -843,8 +856,8 @@ Vid ett högt p-värde förkastas ej nollhypotesen
 
 t-test för ett stickprov bygger på 
 
-- normalfördelning
-- oberoende observationer inom stickprovet
+- normalfördelning i populationen
+- oberoende observationer i stickprovet
 
 <div class="fragment fade-in">
 **Brister i antaganden**
@@ -861,17 +874,51 @@ t-testet sägs vara *robust* och används ofta i fall där normalfördelningsant
 |**     |1%     |
 |***    |0.1%   |
 
+## Frihetsgrader
+
+*Frihetsgrader* är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning
+
+<div class="fragment fade-in">
+När vi skattar $s$ använder vi serien $x_i - \bar x$
+
+$$s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2$$
+</div>
+
+<div class="fragment fade-in">
+Den serien har egenskapen att den alltid summerar till noll (en begränsning)
+</div>
+
+<div class="fragment fade-in">
+Vid skattningen av $s$ använder vi alltså en serie som innehåller *mindre* information än våra $n$ observationer
+</div>
+
+<div class="fragment fade-in">
+Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av $s$ har vi $n - 1$ frihetsgrader
+</div>
+
+<div class="fragment fade-in">
+Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med $n - 1$ frihetsgrader
+
+$$\frac{\bar X - \mu}{\sqrt{s^2 / n}} \sim t(n-1)$$
+</div>
+
 ## Typ I-fel och Typ II-fel
 
-För ett påstående finns två möjliga verkligheter (sant/falskt) och två möjliga slutsater (stämmer/stämmer inte)
+En given nollhypotes kan antingen vara sann eller falsk
 
-||Hypotes sann|Hypotes falsk|
+Vid ett test finns två möjliga slutsatser (*förkasta nollhypotesen* eller *acceptera nollhypotesen*)
+
+||Nollhypotes sann|Nollhypotes falsk|
 |-|-|-|
-|Tror sann|Korrekt|Typ II-fel|
-|Tror falsk|Typ I-fel|Korrekt|
+|Acceptera|Korrekt|Typ II-fel|
+|Förkasta|Typ I-fel|Korrekt|
 
 <div class="fragment fade-in">
 Sannolikheten för ett Typ I-fel är lika med signifikansnivån $\alpha$
+</div>
+
+<div class="fragment fade-in">
+Sannolikheten att förkasta en falsk nollhypotes kallas ett tests *styrka* 
 </div>
 
 #

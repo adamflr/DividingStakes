@@ -456,7 +456,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2></h2>
 <div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
 <p style="text-align:center;font-size: 2em;">
-t-test för ett stickprov
+Konfidensintervall och t-test för ett stickprov
 </p>
 <p style="text-align:center;">
 Motsvarar <em>Biometri</em>, kap 6
@@ -507,7 +507,10 @@ Motsvarar <em>Biometri</em>, kap 6
 </section></section>
 <section><section id="punktskattningar-är-utfall-av-slumpvariabler" class="title-slide slide level1"><h1>Punktskattningar är utfall av slumpvariabler</h1><p>Eftersom observationerna i stickprovet är slumpmässiga kommer även punktskattningarna bero på slumpen</p>
 <div class="fragment fade-in">
-<p>Vi kan använda punktskattningar för att ringa in populationsmedelvärdet <span class="math inline">\(\mu\)</span> med ett <em>konfidensintervall</em></p>
+<p>Det skattade medelvärdet <span class="math inline">\(\bar x\)</span> är i regel inte lika med populationsmedelvärdet</p>
+</div>
+<div class="fragment fade-in">
+<p>Men vi kan använda <span class="math inline">\(\bar x\)</span> och standardavvikelse för att ringa in populationsmedelvärdet <span class="math inline">\(\mu\)</span> med ett <em>konfidensintervall</em></p>
 </div>
 <div class="fragment fade-in">
 <p>Ett konfidensintervall täcker <span class="math inline">\(\mu\)</span> med en bestämd konfidens, ofta 95 procent.</p>
@@ -525,30 +528,46 @@ Motsvarar <em>Biometri</em>, kap 6
 <p>Om man har en normalfördelad populationsvariabel och känd populationsstandardavvikelse <span class="math inline">\(\sigma\)</span> baseras konfidensintervallet på normalfördelningen</p>
 <p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-4-1.png" width="1536" style="display: block; margin: auto;" /></p>
 <div class="fragment fade-in">
-<p>För en given svanssannolikhet <span class="math inline">\(\alpha\)</span> använder vi beteckningen <span class="math inline">\(z_{1 - \alpha/2}\)</span> för värdet på x-axeln, t.ex <span class="math inline">\(z_{(1 - 0.05/2)} = z_{0.975} = 1.96\)</span> eftersom sannolikheten i svansarna bortom <span class="math inline">\(1.96\)</span> är <span class="math inline">\(0.05\)</span></p>
+<p>Beteckningen <span class="math inline">\(z_{0.975}\)</span> anger värdet på x-axeln där sannolikheten till vänster om det värdet är <span class="math inline">\(0.975\)</span></p>
+<ul>
+<li class="fragment">Vi har <span class="math inline">\(z_{0.975} = 1.96\)</span> eftersom sannolikheten till vänster om <span class="math inline">\(1.96\)</span> är <span class="math inline">\(0.975\)</span></li>
+</ul>
 </div>
 <div class="fragment fade-in">
-<p>Vi kan föra över det standardiserade intervallet till ett skattat medelvärde genom formeln</p>
-<p><span class="math display">\[\bar x \pm z_{(1- \alpha/2)}\frac{\sigma}{\sqrt n}\]</span></p>
+<p>För en given svanssannolikhet <span class="math inline">\(\alpha\)</span> kan vi titta på <span class="math inline">\(z_{1 - \alpha/2}\)</span></p>
+<ul>
+<li class="fragment">Vi har <span class="math inline">\(z_{(1 - 0.01/2)} = z_{0.995} = 2.576\)</span>, eftersom sannolikheten i svansarna bortom <span class="math inline">\(2.576\)</span> är <span class="math inline">\(0.01\)</span></li>
+</ul>
+</div>
+</section><section id="konfidensintervall-med-känd-standardavvikelse-1" class="slide level2">
+<h2>Konfidensintervall med känd standardavvikelse</h2>
+<div class="fragment fade-in">
+<p>Konfidensintervall ges av</p>
+<p><span class="math display">\[\bar x \pm z_{(1- \alpha/2)}\sqrt{\frac{\sigma^2}{n}}\]</span></p>
 </div>
 <div class="fragment fade-in">
 <p>där <span class="math inline">\(\bar x\)</span> är det skattade medelvärdet, <span class="math inline">\(z_{(1 - \alpha/2)}\)</span> är värdet från den standardiserade normalfördelningen, <span class="math inline">\(\sigma\)</span> är den kända standardavvikelsen, och <span class="math inline">\(n\)</span> är stickprovets storlek</p>
 </div>
+<p><br></p>
+<div class="fragment fade-in">
+<p>Man kan se konstruktionen som resultatet av att placera en normalfördelning kring <span class="math inline">\(\bar x\)</span></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
 </section><section id="section-1" class="slide level2">
 <h2></h2>
 <p><strong>Konfidensintervall, känd standardavvikelsen, exempel</strong></p>
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>I datan ovan är det skattade medelvärdet <span class="math inline">\(\bar x = 36\)</span>, den givna standardavvikelsen <span class="math inline">\(\sigma = 12\)</span>, och stickprovsstorleken <span class="math inline">\(n = 15\)</span></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>I datan ovan är det skattade medelvärdet <span class="math inline">\(\bar x = 36\)</span>, den givna standardavvikelsen <span class="math inline">\(\sigma = 12\)</span> (och då <span class="math inline">\(\sigma^2 = 144\)</span>), och stickprovsstorleken <span class="math inline">\(n = 15\)</span></p>
 <div class="fragment fade-in">
 <p>Ett 95-procentigt konfidensintervall ges av</p>
-<p><span class="math display">\[\bar x \pm z_{(1 - 0.05/2)}\frac{\sigma}{\sqrt n} = 36 \pm 1.96 \frac{12}{\sqrt 15} = 36 \pm 6.07\]</span></p>
+<p><span class="math display">\[\bar x \pm z_{(1 - 0.05/2)}\sqrt \frac{\sigma^2}{ n} = 36 \pm 1.96 \sqrt \frac{144}{15} = 36 \pm 6.07\]</span></p>
 </div>
 <div class="fragment fade-in">
 <p>Intervallet också kan uttryckas <span class="math inline">\((29.93, 42.07)\)</span></p>
 </div>
 <div class="fragment fade-in">
 <p>Ett 99-procentigt konfidensintervall ges av</p>
-<p><span class="math display">\[\bar x \pm z_{(1 - 0.01/2)}\frac{\sigma}{\sqrt n} = 36 \pm 2.576 \frac{12}{\sqrt 15} = 36 \pm 7.98\]</span></p>
+<p><span class="math display">\[\bar x \pm z_{(1 - 0.01/2)}\sqrt \frac{\sigma^2}{n} = 36 \pm 2.576 \sqrt \frac{144}{15} = 36 \pm 7.98\]</span></p>
 <p>eller <span class="math inline">\((28.02, 43.98)\)</span></p>
 </div>
 </section><section id="konfidensintervall-med-skattad-standardavvikelse" class="slide level2">
@@ -558,8 +577,8 @@ Motsvarar <em>Biometri</em>, kap 6
 <p>Eftersom skattningen är mindre säker är det intutivt att vi behöver ett bredare konfidensintervall</p>
 </div>
 <div class="fragment fade-in" data-fragment-index="4" style="float:right; width:50%;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div class="fragment fade-in" data-fragment-index="2">
 <p><br></p>
@@ -570,32 +589,12 @@ Motsvarar <em>Biometri</em>, kap 6
 </div>
 <div class="fragment fade-in">
 <p>t-fördelningen uppstår när man standardiserar ett medelvärde med en skattad standardavvikelse:</p>
-<p><span class="math display">\[\frac{\bar X - \mu}{s/\sqrt n} \sim t(n - 1)\]</span></p>
-</div>
-</section><section id="frihetsgrader" class="slide level2">
-<h2>Frihetsgrader</h2>
-<p><em>Frihetsgrader</em> är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning</p>
-<div class="fragment fade-in">
-<p>När vi skattar <span class="math inline">\(s\)</span> använder vi serien <span class="math inline">\(x_i - \bar x\)</span></p>
-<p><span class="math display">\[s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2\]</span></p>
-</div>
-<div class="fragment fade-in">
-<p>Den serien har egenskapen att den alltid summerar till noll (en begränsning)</p>
-</div>
-<div class="fragment fade-in">
-<p>Vid skattningen av <span class="math inline">\(s\)</span> använder vi alltså en serie som innehåller <em>mindre</em> information än våra <span class="math inline">\(n\)</span> observationer</p>
-</div>
-<div class="fragment fade-in">
-<p>Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av <span class="math inline">\(s\)</span> har vi <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
-</div>
-<div class="fragment fade-in">
-<p>Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
-<p><span class="math display">\[\frac{\bar X - \mu}{s / \sqrt n} \sim t(n-1)\]</span></p>
+<p><span class="math display">\[\frac{\bar X - \mu}{\sqrt{s^2/ n}} \sim t(n - 1)\]</span></p>
 </div>
 </section><section id="biometri-tabell-5" class="slide level2">
 <h2>Biometri, tabell 5</h2>
 <p>Vid en skattad standardavvikelse baseras konfidensintervallet på en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-8-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-9-1.png" width="1536" style="display: block; margin: auto;" /></p>
 <div class="fragment fade-in">
 <p>Tabellvärden för x-axeln betecknas <span class="math inline">\(t_{(1-\alpha / 2, df)}\)</span> och kan hämtas från en tabell över t-fördelningen, t.ex tabell 5 i <em>Biometri</em></p>
 </div>
@@ -611,18 +610,21 @@ Motsvarar <em>Biometri</em>, kap 6
 </section><section id="section-2" class="slide level2">
 <h2></h2>
 <p><strong>Konfidensintervall, skattad standardavvikelsen, exempel</strong></p>
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>Som tidigare är det skattade medelvärdet <span class="math inline">\(\bar x = 36\)</span> och stickprovsstorleken <span class="math inline">\(n = 15\)</span>, men standardavvikelsen är nu skattad <span class="math inline">\(s = 12\)</span></p>
 <div class="fragment fade-in">
 <p>Ett 95-procentigt konfidensintervall ges av</p>
-<p><span class="math display">\[\bar x \pm t_{(1- 0.05/2, 14)}\frac{\sigma}{\sqrt n} = 36 \pm 2.145 \frac{12}{\sqrt 15} = 36 \pm 6.65\]</span></p>
+<p><span class="math display">\[\bar x \pm t_{(1- 0.05/2, 14)}\sqrt \frac{s^2}{n} = 36 \pm 2.145 \sqrt \frac{144}{15} = 36 \pm 6.65\]</span></p>
 <p>vilket vi kan beräkna till <span class="math inline">\((29.35, 42.65)\)</span></p>
 </div>
 <div class="fragment fade-in">
 <p>På grund av den skattade standardavvikelsen hämtar vi tabellvärdet från en t-fördelning och får ett bredare konfidensintervall</p>
 </div>
 <div class="fragment fade-in">
-<p>Termen <span class="math inline">\(\frac{s}{\sqrt n}\)</span> kallas <em>medelfelet</em> (eng. standard error, SE)</p>
+<p>Termen <span class="math inline">\(\sqrt \frac{s^2}{n}\)</span> kallas <em>medelfelet</em> (eng. standard error, SE)</p>
+</div>
+<div class="fragment fade-in">
+<p>Notera också att <span class="math inline">\(\sqrt \frac{s^2}{n} = \frac{s}{\sqrt n}\)</span></p>
 </div>
 </section><section id="tolkning-av-konfidensintervall" class="slide level2">
 <h2>Tolkning av konfidensintervall</h2>
@@ -676,17 +678,17 @@ Motsvarar <em>Biometri</em>, kap 6
 <div class="fragment fade-in">
 <p>Under kursen tittar vi på</p>
 <ul>
-<li>t-test. Kontinuerlig variabel. En eller två grupper</li>
-<li>Binomialtest och z-test. För binär data (två möjliga utfall)</li>
-<li><span class="math inline">\(\chi^2\)</span>-test. För nominella variabler</li>
-<li>F-test. Kontinuerlig variabel. Två eller fler grupper</li>
+<li class="fragment">t-test. Kontinuerlig variabel. En eller två grupper</li>
+<li class="fragment">Binomialtest och z-test. För binär data (två möjliga utfall)</li>
+<li class="fragment"><span class="math inline">\(\chi^2\)</span>-test. För flera variabler på nominalskala</li>
+<li class="fragment">F-test. Kontinuerlig variabel. Två eller fler grupper</li>
 </ul>
 </div>
 </section></section>
 <section><section id="t-test" class="title-slide slide level1"><h1>t-test</h1><p>t-testen är test för <strong>kontinuerliga</strong> variabler som följer en <strong>normalfördelning</strong></p>
 <div class="fragment fade-in">
 <div style="float:right;width:50%;font-size:0.75em;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Är populationsmedelvärdet skilt från 50?</p>
 </div>
 <p><strong>t-test för ett stickprov</strong></p>
@@ -695,7 +697,7 @@ Motsvarar <em>Biometri</em>, kap 6
 </div>
 <div class="fragment fade-in">
 <div style="float:right;width:50%;font-size:0.75em;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Är populationsmedelvärdena skilda från varandra?</p>
 </div>
 <p><strong>t-test för två stickprov</strong></p>
@@ -717,7 +719,7 @@ Motsvarar <em>Biometri</em>, kap 6
 </div>
 </section><section id="illustration" class="slide level2">
 <h2>Illustration</h2>
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
 <div class="fragment fade-in">
 <p>Vår data kommer från en fördelning med något okänt populationsmedelvärde <span class="math inline">\(\mu\)</span></p>
 </div>
@@ -739,11 +741,11 @@ Motsvarar <em>Biometri</em>, kap 6
 <div class="fragment fade-in">
 <p><strong>Testfunktion</strong></p>
 <p>t-testets testfunktion ges av att standardisera mot nollhypotesens värde</p>
-<p><span class="math inline">\(t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}\)</span></p>
+<p><span class="math display">\[t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}\]</span></p>
 </div>
 <div class="fragment fade-in">
 <p>Sätter in värden i testfunktionen</p>
-<p><span class="math inline">\(t = \frac{36 - 30}{\sqrt{144/15}} = 1.936\)</span></p>
+<p><span class="math display">\[t = \frac{36 - 30}{\sqrt{144/15}} = 1.936\]</span></p>
 </div>
 <div class="fragment fade-in">
 <p><strong>Testfördelning</strong></p>
@@ -754,7 +756,7 @@ Motsvarar <em>Biometri</em>, kap 6
 <p><strong>p-värde</strong></p>
 <p>p-värdet beräknas som ytan bortom <span class="math inline">\(t\)</span> i en t-fördelning med <span class="math inline">\(n-1=14\)</span> frihetsgrader</p>
 <div style="float: right;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-13-1.png" width="576" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-14-1.png" width="576" /></p>
 </div>
 <p>Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna</p>
 <div class="fragment fade-in">
@@ -766,8 +768,8 @@ Motsvarar <em>Biometri</em>, kap 6
 </section><section id="biometri-tabell-5-1" class="slide level2">
 <h2>Biometri, tabell 5</h2>
 <div class="fragment fade-in" data-fragment-index="2" style="float:right; width: 40%;font-size:1em; text-align:center;border: 5px solid; padding:15px; border-radius:10px;background-color:#cceeee">
-<p><img src="Figurer/Biometri_Tabell_5.png" height="300" style="display:block; margin-left:auto; margin-right:auto;"></p>
-<p><img src="Figurer/Biometri_Tabell_5_14.png" width="700"></p>
+<p><img src="Figurer/Biometri_Tabell_5.png" height="300" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+<p><img src="Figurer/Biometri_Tabell_5_14.png" width="700" style="border:solid 1px;"></p>
 <p>Vid 14 frihetsgrader är ytan under kurvan till vänster om 2.145 lika med 0.975</p>
 <p>eller</p>
 <p><span class="math display">\[t_{(0.975, 14)} = 2.145\]</span></p>
@@ -778,7 +780,7 @@ Motsvarar <em>Biometri</em>, kap 6
 <p>Tabellens inre värde ger ett t-värde sådant att sannolikheten (<em>ytan under kurvan</em>) till vänster om det värdet ges av sannolikheten</p>
 </div>
 <div class="fragment fade-in">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" /></p>
 </div>
 <div class="fragment fade-in">
 <p>Den gröna arean motsvarar fem procent (2.5 procent i vardera svans)</p>
@@ -789,7 +791,7 @@ Motsvarar <em>Biometri</em>, kap 6
 <p><strong>p-värde</strong></p>
 <p>p-värdet beräknas som ytan bortom <span class="math inline">\(t\)</span> i en t-fördelning med <span class="math inline">\(n-1=14\)</span> frihetsgrader</p>
 <div style="float: right;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-15-1.png" width="576" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-16-1.png" width="576" /></p>
 </div>
 <p>Eftersom alternativhypotesen är tvåsidig medtas bägge svansarna</p>
 <p>Man kan beräkna p-värdet i valfritt datorprogram och få <span class="math inline">\(p = 0.0733\)</span></p>
@@ -807,12 +809,12 @@ Motsvarar <em>Biometri</em>, kap 6
 </div>
 </section><section id="illustration-1" class="slide level2">
 <h2>Illustration</h2>
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
 <div class="fragment fade-in">
-<p>Det tvåsidiga p-värdet är arean i svansen bortom <span class="math inline">\(\bar x\)</span>, gånger två</p>
+<p>Det tvåsidiga p-värdet är sannolikheten för en mer extrem skillnad mellan <span class="math inline">\(\mu_0\)</span> och <span class="math inline">\(\bar x\)</span> än den vi observerar</p>
 </div>
 <div class="fragment fade-in">
-<p>Arean ger sannoliketen för det observerade medelvärdet om nollhypotesen stämmer</p>
+<p>Vi har en skillnad på <span class="math inline">\(6\)</span> cm mellan <span class="math inline">\(\mu_0\)</span> och <span class="math inline">\(\bar x\)</span>. Gränserna för svansarna blir därmed <span class="math inline">\(36\)</span> och <span class="math inline">\(24\)</span></p>
 </div>
 <div class="fragment fade-in">
 <p>Ett lågt p-värde tyder på att nollhypotesen <em>inte</em> stämmer</p>
@@ -824,10 +826,14 @@ Motsvarar <em>Biometri</em>, kap 6
 <p>Om ett visst värde ligger i ett <span class="math inline">\(95\)</span>-procentigt konfidensintervall (<em>intervallet täcker värdet</em>) kommer man inte förkasta nollhypotesen att medelvärdet är det värdet på signifikansnivån <span class="math inline">\(5\)</span> procent</p>
 </div>
 <div class="fragment fade-in">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
-<p>Ett 95-procemtigt Konfidensintervall gavs av <span class="math inline">\(36 \pm 6.65\)</span>, eller <span class="math inline">\((29.35, 42.65)\)</span></p>
+<div class="fragment fade-in">
+<p>Ett 95-procentigt konfidensintervall gavs av <span class="math inline">\(36 \pm 6.65\)</span>, eller <span class="math inline">\((29.35, 42.65)\)</span></p>
+</div>
+<div class="fragment fade-in">
 <p>Då intervallet täcker <span class="math inline">\(30\)</span> kommer vi acceptera <span class="math inline">\(H_0: \mu = 30\)</span> på signifikansnivån <span class="math inline">\(5\)</span> procent</p>
+</div>
 </section><section id="t-test-för-ett-stickprov-schema" class="slide level2">
 <h2>t-test för ett stickprov, schema</h2>
 <div style="position:absolute;height:800px;width:100%;">
@@ -838,7 +844,7 @@ Motsvarar <em>Biometri</em>, kap 6
 </div>
 <div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
 <p><strong>Testfunktion</strong></p>
-<p><span class="math display">\[t = \frac{\bar x - \mu_0}{s/\sqrt n}\]</span></p>
+<p><span class="math display">\[t = \frac{\bar x - \mu_0}{\sqrt{s^2 / n}}\]</span></p>
 <p>där <span class="math inline">\(\bar x\)</span> och <span class="math inline">\(s\)</span> skattas från stickprovet, och <span class="math inline">\(\mu_0\)</span> hämtas från nollhypotesen</p>
 </div>
 <div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
@@ -848,7 +854,7 @@ Motsvarar <em>Biometri</em>, kap 6
 <div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
 <p><strong>P-värde</strong></p>
 <div style="float:right;">
-<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-18-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p><img src="05_t_test_02_files/figure-revealjs/unnamed-chunk-19-1.png" width="384" style="display: block; margin: auto;" /></p>
 </div>
 <p>P-värdet ges av arean bortom <span class="math inline">\(|t|\)</span> i testfördelningen</p>
 <p>Vid handräkning uppskattas p-värdet genom att ställa <span class="math inline">\(|t|\)</span> mot ett tabellvärde</p>
@@ -865,8 +871,8 @@ Motsvarar <em>Biometri</em>, kap 6
 <h2>Antaganden</h2>
 <p>t-test för ett stickprov bygger på</p>
 <ul>
-<li>normalfördelning</li>
-<li>oberoende observationer inom stickprovet</li>
+<li>normalfördelning i populationen</li>
+<li>oberoende observationer i stickprovet</li>
 </ul>
 <div class="fragment fade-in">
 <p><strong>Brister i antaganden</strong></p>
@@ -900,25 +906,46 @@ Motsvarar <em>Biometri</em>, kap 6
 </tr>
 </tbody>
 </table>
+</section><section id="frihetsgrader" class="slide level2">
+<h2>Frihetsgrader</h2>
+<p><em>Frihetsgrader</em> är ett statistiskt begrepp för en datamängds storlek efter påförd begränsning</p>
+<div class="fragment fade-in">
+<p>När vi skattar <span class="math inline">\(s\)</span> använder vi serien <span class="math inline">\(x_i - \bar x\)</span></p>
+<p><span class="math display">\[s^2 =\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar x)^2\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Den serien har egenskapen att den alltid summerar till noll (en begränsning)</p>
+</div>
+<div class="fragment fade-in">
+<p>Vid skattningen av <span class="math inline">\(s\)</span> använder vi alltså en serie som innehåller <em>mindre</em> information än våra <span class="math inline">\(n\)</span> observationer</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet frihetsgrader ges av antalet observationer minus antalet begränsningar, så vid skattningen av <span class="math inline">\(s\)</span> har vi <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+</div>
+<div class="fragment fade-in">
+<p>Om vi standardiserar med en skattad standardavvikelse får vi en t-fördelning med <span class="math inline">\(n - 1\)</span> frihetsgrader</p>
+<p><span class="math display">\[\frac{\bar X - \mu}{\sqrt{s^2 / n}} \sim t(n-1)\]</span></p>
+</div>
 </section><section id="typ-i-fel-och-typ-ii-fel" class="slide level2">
 <h2>Typ I-fel och Typ II-fel</h2>
-<p>För ett påstående finns två möjliga verkligheter (sant/falskt) och två möjliga slutsater (stämmer/stämmer inte)</p>
+<p>En given nollhypotes kan antingen vara sann eller falsk</p>
+<p>Vid ett test finns två möjliga slutsatser (<em>förkasta nollhypotesen</em> eller <em>acceptera nollhypotesen</em>)</p>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th>Hypotes sann</th>
-<th>Hypotes falsk</th>
+<th>Nollhypotes sann</th>
+<th>Nollhypotes falsk</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Tror sann</td>
+<td>Acceptera</td>
 <td>Korrekt</td>
 <td>Typ II-fel</td>
 </tr>
 <tr class="even">
-<td>Tror falsk</td>
+<td>Förkasta</td>
 <td>Typ I-fel</td>
 <td>Korrekt</td>
 </tr>
@@ -926,6 +953,9 @@ Motsvarar <em>Biometri</em>, kap 6
 </table>
 <div class="fragment fade-in">
 <p>Sannolikheten för ett Typ I-fel är lika med signifikansnivån <span class="math inline">\(\alpha\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Sannolikheten att förkasta en falsk nollhypotes kallas ett tests <em>styrka</em></p>
 </div>
 </section></section>
 <section id="section-6" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
@@ -971,6 +1001,7 @@ Slut
 
         // Optional reveal.js plugins
         dependencies: [
+          { src: '05_t_test_02_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
         ]
       });
     </script>
