@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>BI1363 HT 2020 Test av proportioner Oktober 2020 Adam Flöhr, BT, SLU</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="06_Prop_test_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="06_Prop_test_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style1.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">BI1363 HT 2020<br>Test av proportioner<br>Oktober 2020<br>Adam Flöhr, BT, SLU</h1>
+</section>
+
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Binomial- och z-test för proportioner
+</p>
+<p style="text-align:center;">
+Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
+</p>
+</div>
+</section>
+<section id="i-korthet" class="slide level2">
+<h2>I korthet</h2>
+<p>Vi vill undersöka en variabel (en egenskap) som är <strong>binär</strong></p>
+<div class="fragment fade-in">
+<p>Den intressanta populationsparametern är <strong>proportionen</strong> individer med egenskapen (<span class="math inline">\(p\)</span>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Med den skattade proportionen <span class="math inline">\(\hat p\)</span> kan vi genomföra hypotestest för <span class="math inline">\(p\)</span>, antingen genom ett <strong>binomialtest</strong> eller genom ett <strong>z-test</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi kan konstruera ett <strong>konfidensintervall</strong> för proportionen <span class="math inline">\(p\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Om vi vill jämföra två grupper kan vi använda ett <strong>z-test (eller ett konfidensintervall) för två stickprov</strong></p>
+</div>
+</section>
+<section><section id="binära-variabler" class="title-slide slide level1"><h1>Binära variabler</h1><div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-2-1.png" width="384" /></p>
+</div>
+<div style="width:50%;">
+<p>Förekomsten av egenskapen hos en individ är en binär variabel</p>
+<p>Vi vill veta hur vanlig en viss egenskap är i en population (dess proportion <span class="math inline">\(p\)</span>)</p>
+<div class="fragment fade-in">
+<p>Drar ett stickprov av storlek <span class="math inline">\(n\)</span> och tittar på antalet i stickprovet som har egenskapen (<em>positiva utfall</em>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Den naturliga skattningen av <span class="math inline">\(p\)</span> är</p>
+<p><span class="math display">\[\hat p = \frac{x}{n}\]</span></p>
+<p>där <span class="math inline">\(x\)</span> är antalet <em>positiva utfall</em> och <span class="math inline">\(n\)</span> är stickprovets storlek</p>
+</div>
+</div></section><section id="fördelningen-för-x-och-hat-p" class="slide level2">
+<h2>Fördelningen för <span class="math inline">\(x\)</span> och <span class="math inline">\(\hat p\)</span></h2>
+<p>En observation ur populationen är positiv med sannolikheten <span class="math inline">\(p\)</span> och negativ med sannolikheten <span class="math inline">\(1 - p\)</span></p>
+<div class="fragment fade-in">
+<p>Antalet positiva utfall (<span class="math inline">\(x\)</span>) bland <span class="math inline">\(n\)</span> oberoende observationer är summan av <span class="math inline">\(n\)</span> binära variabler</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet positiva utfall följer därmed en binomialfördelning med storlek <span class="math inline">\(n\)</span> och sannolikhet <span class="math inline">\(p\)</span></p>
+<p><span class="math display">\[X \sim Bin(n, p)\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Eftersom <em>antalet positiva utfall</em> är binomialfördelat ges fördelningen för <span class="math inline">\(\hat p\)</span> av en binomialfördelning skalad med n</p>
+</div>
+<div class="fragment fade-in">
+<div style="float:right; width:50%;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" /></p>
+</div>
+</div>
+<div style="font-size:0.75em;">
+<br><br>
+<div class="fragment fade-in">
+<p>Vi drar tio observationer ur en population där 40 procent har antikroppar mot en viss sjukdom</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet positiva följer en binomalfördelning med <span class="math inline">\(n=10\)</span> och <span class="math inline">\(p = 0.4\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Fördelningen för vår skattning av proportionen är en skalning av den binomialfördelningen</p>
+</div>
+</div>
+</section><section id="normalapproximation-av-binomialfördelning" class="slide level2">
+<h2>Normalapproximation av binomialfördelning</h2>
+<p>En binomialfördelning kan approximeras med en normalfördelning om <span class="math inline">\(n\)</span> är <em>stort</em> och <span class="math inline">\(p\)</span> <em>nära</em> <span class="math inline">\(0.5\)</span></p>
+<div class="fragment fade-in">
+<p>Boken <em>Biometri</em> ger tumregeln att <span class="math inline">\(np\)</span> och <span class="math inline">\(n(1-p)\)</span> bägge ska vara större än 10</p>
+</div>
+<div class="fragment fade-in">
+<p>Den skalade binomialfördelningen för <span class="math inline">\(\hat p\)</span> kan approximeras med en normal med <span class="math inline">\(\mu = p\)</span> och <span class="math inline">\(\sigma^2 = \frac{p(1-p)}{n}\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-4-1.png" width="1440" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" style="font-size:0.75em;">
+<p>Fallet med <span class="math inline">\(n = 100\)</span> och <span class="math inline">\(p = 0.4\)</span></p>
+<div class="fragment fade-in">
+<p>Vi kan antingen basera vårt test på binomialfördelningen för <span class="math inline">\(x\)</span> (<span class="math inline">\(Bin(100, 0.4)\)</span>) eller på normalfördelningen för <span class="math inline">\(\hat p\)</span> (<span class="math inline">\(N(0.4, 0.0024)\)</span>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Variansen i normalfördelningen ges av <span class="math inline">\(\sigma^2 = \frac{p(1-p)}{n} = \frac{0.4 \cdot 0.6}{100} = 0.0024\)</span></p>
+</div>
+</div>
+</section></section>
+<section><section id="z-test-för-proportioner-ett-stickprov" class="title-slide slide level1"><h1>z-test för proportioner, ett stickprov</h1><p>Ett hypotestest för att jämföra den observerade andelen <span class="math inline">\(\hat p\)</span> med en nollhypotes <span class="math inline">\(p_0\)</span></p>
+<p>Bygger på normalapproximationen av binomialfördelningen</p>
+<div class="fragment fade-in">
+<p><strong>Standardgången för hypotestest</strong></p>
+<ol type="1">
+<li class="fragment">Hypoteser</li>
+<li class="fragment">Testfunktion</li>
+<li class="fragment">Testfördelning</li>
+<li class="fragment">p-värde (beräkning eller uppskattning)</li>
+<li class="fragment">Slutsats</li>
+</ol>
+</div></section><section id="z-test-för-proportion-ett-stickprov-schema" class="slide level2">
+<h2>z-test för proportion, ett stickprov, schema</h2>
+<div style="position:absolute;height:800px;width:100%;">
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: p = p_0\)</span></p>
+<p><span class="math inline">\(H_1: p \neq p_0\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p \cdot (1-p)}{n}}}\]</span></p>
+<p>där <span class="math inline">\(\hat p\)</span> skattas från stickprovet, och <span class="math inline">\(p_0\)</span> hämtas från nollhypotesen</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(z\)</span> (approximativt) en standardiserad normalfördelning <span class="math inline">\(N(0,1)\)</span></p>
+<p>Approximationen är <em>giltig</em> om <span class="math inline">\(np_0 &gt; 10\)</span> och <span class="math inline">\(n(1 - p_0) &gt; 10\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av arean bortom <span class="math inline">\(|z|\)</span> i testfördelningen</p>
+<p>Detta kan hämtas ur en normalfördelningstabell (<em>Biometri</em>, tabell 4)</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section><section id="z-test.-exempel" class="slide level2">
+<h2>z-test. Exempel</h2>
+<p>Vi undersöker mögelförekomst hos potatis och vill testa om proportionen är skild från <span class="math inline">\(0.3\)</span></p>
+<p>Vi drar ett stickprov om <span class="math inline">\(60\)</span> observationer och finner <span class="math inline">\(15\)</span> skadade plantor, så <span class="math inline">\(\hat p = \frac{15}{60} = 0.25\)</span></p>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math display">\[H_0: p = 0.3 \qquad H_1: p \neq 0.3\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p \cdot (1-p)}{n}}} = \frac{0.25 - 0.3}{\sqrt{\frac{0.3 \cdot 0.7}{60}}} = -0.8452\]</span></p>
+</div>
+</section><section id="illustration-av-p-värdet" class="slide level2">
+<h2>Illustration av p-värdet</h2>
+<div class="fragment fade-in" style="float:right;width:50%;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="Figurer/Biometri_tabell4_1.png" style="display:block; margin-left:auto; margin-right:auto;"></p>
+</div>
+<p>Testfunktionens värde <span class="math inline">\(z = -0.8452\)</span> är på den standardiserade skalan</p>
+<div class="fragment fade-in" style="width:50%;">
+<p>Svanssannolikheten kan beräknas genom att slå i en normalfördelningstabell</p>
+<p>Tabellen ger sannolikheten <span class="math inline">\(0.8023\)</span> (för <span class="math inline">\(z = 0.85\)</span>)</p>
+<p><em>En</em> svans motsvarar därmed <span class="math inline">\(1 - 0.8023 = 0.1977\)</span></p>
+<p>Det tvåsidiga p-värdet ges av <span class="math inline">\(2 \cdot 0.1977 = 0.3954\)</span></p>
+</div>
+</section><section id="konfidensintervall-för-proportioner-ett-stickprov" class="slide level2">
+<h2>Konfidensintervall för proportioner, ett stickprov</h2>
+<p>Konfidensintervallet baseras på tabellvärden från den standardiserade normalfördelningen</p>
+<p>I z-testet baseras standardfelet på nollhypotesen <span class="math inline">\(p_0\)</span></p>
+<p>I konfidensintervallet är medelfelet baserat på den observerade proportionen <span class="math inline">\(\hat p\)</span></p>
+<div class="fragment fade-in">
+<p><strong>Formel</strong></p>
+<p>Det tvåsidiga konfidensintervallet ges av</p>
+<p><span class="math display">\[\hat p \pm z_{(1-\alpha/2)} \sqrt{\frac{\hat p (1 - \hat p)}{n}}\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Fortsättning från tidigare exempel</p>
+<p><span class="math display">\[0.25 \pm 1.96 \sqrt{\frac{0.25 \cdot 0.75}{60}}\]</span></p>
+<p>Detta ger intervallet <span class="math inline">\((0.140, 0.360\)</span>)</p>
+</div>
+</section></section>
+<section><section id="binomialtestet" class="title-slide slide level1"><h1>Binomialtestet</h1><div class="fragment fade-in" style="float:right;width:50%;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<p>Proportioner kan också testas genom binomialfördelningen</p>
+<div class="fragment fade-in" style="width:50%;">
+<p>Antalet skadade växter är <span class="math inline">\(Bin(60, 0,3)\)</span></p>
+<p>Vi observerar 15 skadade växter</p>
+</div>
+<div class="fragment fade-in" style="width:50%;">
+<p>Det ensidiga p-värdet (vid <span class="math inline">\(H_1: p &lt; 0.3\)</span>) är sannolikheten att få 15 eller färre skadade växter</p>
+</div>
+<div class="fragment fade-in" style="width:50%;">
+<p>Det tvåsidiga p-värdet (vid <span class="math inline">\(H_1: p \neq 0.3\)</span>) är den summerade sannolikheten för utfall som är mindre sannolika än det observerade resultatet</p>
+<p>Detta motsvarar alla staplar som är lägre än stapeln vid 15</p>
+</div>
+<div class="fragment fade-in" style="width:50%;">
+<p>Sannolikheterna kan beräknas i valfritt datorprogram, vilket ger <span class="math inline">\(0.2438\)</span> respektive <span class="math inline">\(0.4816\)</span></p>
+</div></section><section id="binomialtestet-schema" class="slide level2">
+<h2>Binomialtestet, schema</h2>
+<div style="position:absolute;height:800px;width:100%;">
+<div class="fragment fade-in" style="position:absolute;height:35%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: p = p_0\)</span></p>
+<p><span class="math inline">\(H_1: p &gt; p_0\)</span> eller <span class="math inline">\(H_1: p &lt; p_0\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:35%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[x = \text{ antalet positiva utfall}\]</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:35%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(x\)</span> en binomialfördelning med parameterar <span class="math inline">\(n\)</span> och <span class="math inline">\(p_0\)</span>: <span class="math inline">\(Bin(n, p_0)\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:45%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av summan av staplarna över eller lika med <span class="math inline">\(x\)</span> i testfördelningen</p>
+<p>Detta kan hämtas ur en binomialfördelningstabell (<em>Biometri</em>, tabell 2, för <span class="math inline">\(n \leq 20\)</span>)</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:45%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section><section id="binomialtest-exempel" class="slide level2">
+<h2>Binomialtest, exempel</h2>
+<p>Vid straffavgöranden i fotboll slår lagen varannan straff</p>
+<div class="fragment fade-in">
+<p>Eftersom de flesta straffar blir mål är den psykologiska bördan större på det lag som går som tvåa</p>
+</div>
+<div class="fragment fade-in">
+<p>I herr-VM (1998 till 2014) vann det första laget 12 av 15 straffavgöranden (<span class="math inline">\(\hat p = 12 / 15 = 0.8\)</span>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Kan vi säga att vinstsannolikheten för det lag som går först är större än 0.5?</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: p_0 = 0.5\)</span></p>
+<p><span class="math inline">\(H_1: p_0 &gt; 0.5\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfunktion</strong></p>
+<p>Antalet positiva utfall är <span class="math inline">\(x = 12\)</span> av <span class="math inline">\(n = 15\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen kommer vår observation från en binomialfördelning med <span class="math inline">\(n = 15\)</span> och <span class="math inline">\(p = 0.5\)</span></p>
+</div>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>p-värde</strong></p>
+<div class="fragment fade-in" style="width:50%; float:right;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="Figurer/Biometri_tabell2_1.png" style="display:block; margin-left:auto; margin-right:auto;"></p>
+</div>
+<div class="fragment fade-in" style="width:50%;">
+<p>p-värdet beräknas som sannolikheten för det observerade utfallet eller något mer extremt</p>
+<div class="fragment fade-in">
+<p>I det här fallet sannolikheten att få <span class="math inline">\(12\)</span> eller fler positiva utfall</p>
+</div>
+<div class="fragment fade-in">
+<p>Tabell 2 ger sannolikheten för värden mindre eller lika med värdet i vänstra kolumnen</p>
+</div>
+<div class="fragment fade-in">
+<p>Sannolikheten att få mindre än eller lika med 11 är <span class="math inline">\(0.9824\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Sannolikheten att få mer eller lika med 12 är därmed <span class="math inline">\(1 - 0.9824 = 0.0176\)</span></p>
+</div>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Det finns en statistiskt säkerställd skillnad från <span class="math inline">\(0.5\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Detta tyder på att sannolikheten att vinna är större om man går först</p>
+</div>
+<div class="fragment fade-in">
+<p><em>Bonusuppgift. Vid VM 2018 förlorade förstalaget samtliga av fyra straffläggningar. Är resultatet fortfarande signifikant om den datan tas med?</em></p>
+</div>
+</section></section>
+<section><section id="z-test-för-två-proportioner" class="title-slide slide level1"><h1>z-test för två proportioner</h1><p>Liknande generalisering som t-testet med två prov</p>
+<div class="fragment fade-in">
+<p>Vi har två prover av binära data och kan uppskatta tre proportioner</p>
+</div>
+<div class="fragment fade-in">
+<p><span class="math inline">\(\hat p_1\)</span> och <span class="math inline">\(\hat p_2\)</span> är proportionerna från respektive stickprov</p>
+<p><span class="math inline">\(\hat p_0\)</span> är proportionen från det sammanslagna stickprovet</p>
+</div></section><section id="z-test-för-proportioner-två-stickprov-schema" class="slide level2">
+<h2>z-test för proportioner, två stickprov, schema</h2>
+<div style="position:absolute;height:800px;width:100%;">
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: p_1 = p_2\)</span></p>
+<p><span class="math inline">\(H_1: p_1 \neq p_2\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math inline">\(z = \frac{\hat p_1 - \hat p_2}{\sqrt {\hat p_0 (1-\hat p_0) (\frac{1}{n_1} + \frac{1}{n_2})}}\)</span></p>
+<p>där <span class="math inline">\(\hat p_0 = \frac{n_1 \hat p_1 + n_2 \hat p_2}{n_1 + n_2}\)</span></p>
+<p>och <span class="math inline">\(\hat p_1\)</span> och <span class="math inline">\(\hat p_2\)</span> skattas</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(z\)</span> en standardiserad normalfördelning</p>
+<p>Tumregel: <span class="math inline">\(n_1 \hat p_0, n_2 \hat p_0, n_1(1-\hat p_0)\)</span> och <span class="math inline">\(n_2(1-\hat p_0)\)</span> bör alla vara större än <span class="math inline">\(10\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av arean bortom <span class="math inline">\(|z|\)</span> i testfördelningen</p>
+<p>Detta kan hämtas ur en normalfördelningstabell (<em>Biometri</em>, tabell 4)</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section><section id="två-stickprov-exempel" class="slide level2">
+<h2>Två stickprov, exempel</h2>
+<p>Träd i södra och norra Sverige kontrolleras för en viss sjukdom</p>
+<p><span class="math inline">\(50\)</span> av <span class="math inline">\(100\)</span> är sjuka i söder och <span class="math inline">\(52\)</span> av <span class="math inline">\(200\)</span> är sjuka i norr</p>
+<div class="fragment fade-in">
+<p><span class="math display">\[\hat p_1 = \frac{50}{100} = 0.50 \qquad \hat p_2 = \frac{52}{200} = 0.26\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi vill testa om regionerna har skilda proportioner sjuka träd</p>
+</div>
+<div class="fragment fade-in">
+<p>Den sammanslagna proportionen är <span class="math inline">\(\hat p_0 = \frac{50+52}{100+200} = 0.34\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math display">\[H_0: p_1 = p_2 \qquad H_1: p_1 \neq p_2\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[z = \frac{\hat p_1 - \hat p_2}{\sqrt {\hat p_0 (1- \hat p_0) (\frac{1}{n_1} + \frac{1}{n_2})}} = \frac{0.50 - 0.26}{\sqrt{0.34 (1 - 0.34)\left( \frac{1}{100} + \frac{1}{200}  \right)}} = 4.137\]</span></p>
+</div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><strong>Testfördelning</strong></p>
+<div class="fragment fade-in">
+<p>Under nollhypotesen följer <span class="math inline">\(z\)</span> en standardiserad normalfördelning <span class="math inline">\(N(0,1)\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>P-värde</strong></p>
+</div>
+<div class="fragment fade-in" style="float:right;width:50%;">
+<p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" style="width:50%;">
+<p>p-värdet ges av arean under kruvan bortom <span class="math inline">\(z = 4.137\)</span></p>
+<div class="fragment fade-in">
+<p>I det här fallet är den arean mycket liten</p>
+</div>
+<div class="fragment fade-in">
+<p>Normalfördelningstabellen (<em>Biometri</em>, tabell 4) ger att p-värdet i alla fall är mindre än <span class="math inline">\(0.001\)</span></p>
+</div>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Ett lågt p-värde ger att vi förkastar nollhypotesen</p>
+<p>Det finns en statistiskt säkerställd skillnad mellan proportionerna sjuka träd</p>
+</div>
+</section><section id="två-stickprov-konfidensintervall" class="slide level2">
+<h2>Två stickprov, konfidensintervall</h2>
+<p>Konfidensintervallet för skillnaden mellan proportioner ges av</p>
+<p><span class="math display">\[\hat p_1 - \hat p_2 \pm z_{(1-\alpha/2)} \sqrt{\hat p_0 (1 - \hat p_0)\left( \frac{1}{n_1} + \frac{1}{n_2}  \right)}\]</span></p>
+<p>Ett 95-procentigt konfidensintervall för exemplet</p>
+<p><span class="math display">\[0.5-0.26 \pm 1.96 \sqrt{0.34 \cdot 0.66 (0.01 + 0.005)} = 0.24 \pm 0.11\]</span></p>
+<p>eller <span class="math inline">\((0.13,0.35)\)</span></p>
+</section></section>
+<section id="antagandet" class="title-slide slide level1"><h1>Antagandet</h1><p>Binomaltestet och z-testerna bygger på oberoende observationer</p>
+<p>z-testerna bygger dessutom på en giltig normalapproximation</p></section>
+<section id="section-3" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Slut
+</p>
+</div></section>
+    </div>
+  </div>
+
+  <script src="06_Prop_test_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="06_Prop_test_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 1,
+        maxScale: 1,
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '06_Prop_test_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
