@@ -1,5 +1,5 @@
 ---
-title: "BI1363 HT 2020<br>t-test för två oberoende stickprov<br>Oktober 2020<br>Adam Flöhr, BT, SLU"
+title: "BI1363 HT 2020<br>t-test för två stickprov<br>Oktober 2020<br>Adam Flöhr, BT, SLU"
 output: 
   revealjs::revealjs_presentation:
     css: style1.css
@@ -38,7 +38,7 @@ theme_set(theme_bw() + theme(plot.background = element_rect(fill = "#ffffe6", co
 
 <div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
 <p style="text-align:center;font-size: 2em;">
-t-test för två oberoende stickprov
+t-test för två stickprov
 </p>
 
 <p style="text-align:center;">
@@ -53,11 +53,15 @@ Motsvarar *Biometri*, kap 7
 </div>
 
 <div class="fragment fade-in">
-Vid **matchade** stickprov beräknar man differensen mellan två observationer och tillämpar ett t-test på differensserien
+Motsvarande konfidensintervall ringar in **skillnaden i medelvärden** med en given konfidensgrad
 </div>
 
 <div class="fragment fade-in">
-Vid **oberoende** stickprov baseras testet på skillnaden i skattade medelvärden
+Vid **matchade** stickprov beräknar man differensen mellan två observationer och tillämpar ett t-test (eller konfidensintervall) på differensserien
+</div>
+
+<div class="fragment fade-in">
+Vid **oberoende** stickprov baseras testet (eller intervallet) på skillnaden i skattade medelvärden
 </div>
 
 ## Bakgrunden till hypotestest
@@ -173,6 +177,7 @@ Vid två matchade stickprov kan man ta differensen och genomföra ett t-test fö
 
 <div class="fragment fade-in" data-fragment-index="2" style="float:right;width:50%;">
 ```{r, echo = F}
+set.seed(200928)
 dat_match <- tibble(Plats = 1:10, Ny = round(rnorm(10, 20, 4), 1),
                     Differens = round(as.vector(scale(rnorm(10))) * 0.945 + 0.808, 1),
                     Standard = Ny - Differens) %>% 
@@ -193,10 +198,10 @@ knitr::kable(dat_match)
 ```{r, echo = F, fig.align='center', fig.width=12, fig.height=6}
 g_match <- dat_match %>%
   pivot_longer(-Plats, names_to = "Behandling", values_to = "Höjd") %>% 
-  filter(Behandling != "Differens") %>% 
+  filter(Behandling != "Differens") %>%
+  mutate(Plats = factor(Plats, levels = 10:1, ordered = T)) %>% 
   ggplot(aes(Höjd, Plats, fill = Behandling)) +
   geom_point(shape = 21, size = 4) +
-  scale_y_continuous(breaks = 1:10) +
   ggtitle("Höjder per plats och behandling")
 
 g_diff <- dat_match %>%
@@ -204,8 +209,10 @@ g_diff <- dat_match %>%
   filter(Behandling == "Differens") %>% 
   ggplot(aes(Differens, 0)) +
   geom_point(shape = 21, size = 4, fill = "#e6ffff") +
-  scale_y_continuous(breaks = 1:10) +
   ylab("") +
+  xlim(-2.5, 2.5) +
+  scale_y_continuous(breaks = c(-10,10)) +
+  geom_vline(xintercept = 0, col = "red") +
   ggtitle("Differenser (ny - standard)")
 
 g_match + g_diff
@@ -239,7 +246,7 @@ $H_1: \mu > 0 \text{ (ensidig mothypotes)}$
 
 Vanligt t-test, så samma testfunktion som innan
 
-$$t = \frac{\bar x - \mu_0}{s/\sqrt{n}}$$
+$$t = \frac{\bar x - \mu_0}{\sqrt{s^2/n}}$$
 
 Notera att $n$ är antalet matchade par
 </div>
@@ -247,7 +254,7 @@ Notera att $n$ är antalet matchade par
 <div class="fragment fade-in">
 Sätter in värden i testfunktionen
 
-$$t = \frac{0.808 - 0}{0.945/\sqrt{10}} = 2.704$$
+$$t = \frac{0.808 - 0}{\sqrt{0.945^2/10}} = \frac{0.808 - 0}{0.945/\sqrt{10}} = 2.704$$
 </div>
 
 ##
@@ -533,9 +540,7 @@ $$\qquad = 3 \pm 2.145 \sqrt 4 = 3 \pm 4.29$$
 eller $[-1.29, 7.29]$
 </div>
 
-# Avslutande punkter
-
-## Antaganden
+# Antaganden
 
 t-testerna för ett stickprov eller matchade stickprov bygger på 
 
