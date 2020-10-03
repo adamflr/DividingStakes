@@ -476,15 +476,17 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <p>Vi kan konstruera ett <strong>konfidensintervall</strong> för proportionen <span class="math inline">\(p\)</span></p>
 </div>
 <div class="fragment fade-in">
-<p>Om vi vill jämföra två grupper kan vi använda ett <strong>z-test (eller ett konfidensintervall) för två stickprov</strong></p>
+<p>Om vi vill jämföra två grupper kan vi använda ett <strong>z-test (eller ett konfidensintervall) för två proportioner</strong></p>
 </div>
 </section>
 <section><section id="binära-variabler" class="title-slide slide level1"><h1>Binära variabler</h1><div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
 <p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-2-1.png" width="384" /></p>
 </div>
 <div style="width:50%;">
-<p>Förekomsten av egenskapen hos en individ är en binär variabel</p>
+<p>Förekomsten av en egenskap hos en individ är en binär variabel</p>
+<div class="fragment fade-in">
 <p>Vi vill veta hur vanlig en viss egenskap är i en population (dess proportion <span class="math inline">\(p\)</span>)</p>
+</div>
 <div class="fragment fade-in">
 <p>Drar ett stickprov av storlek <span class="math inline">\(n\)</span> och tittar på antalet i stickprovet som har egenskapen (<em>positiva utfall</em>)</p>
 </div>
@@ -546,7 +548,12 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </div>
 </section></section>
 <section><section id="z-test-för-proportioner-ett-stickprov" class="title-slide slide level1"><h1>z-test för proportioner, ett stickprov</h1><p>Ett hypotestest för att jämföra den observerade andelen <span class="math inline">\(\hat p\)</span> med en nollhypotes <span class="math inline">\(p_0\)</span></p>
-<p>Bygger på normalapproximationen av binomialfördelningen</p>
+<div class="fragment fade-in">
+<p>Baseras på normalapproximationen av binomialfördelningen</p>
+</div>
+<div class="fragment fade-in">
+<p>Samma tanke som i tidigare test: vi utvärderar en nollhypotes genom att beräkna sannolikheten för datautfallet givet att nollhypotesen stämmer</p>
+</div>
 <div class="fragment fade-in">
 <p><strong>Standardgången för hypotestest</strong></p>
 <ol type="1">
@@ -566,7 +573,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </div>
 <div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
 <p><strong>Testfunktion</strong></p>
-<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p \cdot (1-p)}{n}}}\]</span></p>
+<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p_o (1-p_o)}{n}}}\]</span></p>
 <p>där <span class="math inline">\(\hat p\)</span> skattas från stickprovet, och <span class="math inline">\(p_0\)</span> hämtas från nollhypotesen</p>
 </div>
 <div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
@@ -589,8 +596,8 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
 </div>
 </div>
-</section><section id="z-test.-exempel" class="slide level2">
-<h2>z-test. Exempel</h2>
+</section><section id="z-test-för-proportioner-exempel" class="slide level2">
+<h2>z-test för proportioner, exempel</h2>
 <p>Vi undersöker mögelförekomst hos potatis och vill testa om proportionen är skild från <span class="math inline">\(0.3\)</span></p>
 <p>Vi drar ett stickprov om <span class="math inline">\(60\)</span> observationer och finner <span class="math inline">\(15\)</span> skadade plantor, så <span class="math inline">\(\hat p = \frac{15}{60} = 0.25\)</span></p>
 <div class="fragment fade-in">
@@ -599,26 +606,42 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </div>
 <div class="fragment fade-in">
 <p><strong>Testfunktion</strong></p>
-<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p \cdot (1-p)}{n}}} = \frac{0.25 - 0.3}{\sqrt{\frac{0.3 \cdot 0.7}{60}}} = -0.8452\]</span></p>
+<p><span class="math display">\[z = \frac{\hat p - p_0}{\sqrt {\frac{p_0 (1-p_0)}{n}}} = \frac{0.25 - 0.3}{\sqrt{\frac{0.3 \cdot 0.7}{60}}} = -0.8452\]</span></p>
 </div>
-</section><section id="illustration-av-p-värdet" class="slide level2">
-<h2>Illustration av p-värdet</h2>
+<div class="fragment fade-in">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(z\)</span> en standardiserad normalfördelning, <span class="math inline">\(N(0,1)\)</span></p>
+</div>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>P-värde</strong></p>
 <div class="fragment fade-in" style="float:right;width:50%;">
 <p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p><img src="Figurer/Biometri_tabell4_1.png" style="display:block; margin-left:auto; margin-right:auto;"></p>
 </div>
-<p>Testfunktionens värde <span class="math inline">\(z = -0.8452\)</span> är på den standardiserade skalan</p>
+<p>Testfunktionens värde <span class="math inline">\(z = -0.8452\)</span></p>
 <div class="fragment fade-in" style="width:50%;">
 <p>Svanssannolikheten kan beräknas genom att slå i en normalfördelningstabell</p>
+<div class="fragment fade-in">
 <p>Tabellen ger sannolikheten <span class="math inline">\(0.8023\)</span> (för <span class="math inline">\(z = 0.85\)</span>)</p>
+</div>
+<div class="fragment fade-in">
 <p><em>En</em> svans motsvarar därmed <span class="math inline">\(1 - 0.8023 = 0.1977\)</span></p>
+</div>
+<div class="fragment fade-in">
 <p>Det tvåsidiga p-värdet ges av <span class="math inline">\(2 \cdot 0.1977 = 0.3954\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Det höga p-värdet ger att vi inte förkastar nollhypotesen</p>
+<div class="fragment fade-in">
+<p>Det finns ingen säkerställd skillnad mot nollhypotesens värde <span class="math inline">\(0.3\)</span></p>
+</div>
+</div>
 </div>
 </section><section id="konfidensintervall-för-proportioner-ett-stickprov" class="slide level2">
 <h2>Konfidensintervall för proportioner, ett stickprov</h2>
 <p>Konfidensintervallet baseras på tabellvärden från den standardiserade normalfördelningen</p>
-<p>I z-testet baseras standardfelet på nollhypotesen <span class="math inline">\(p_0\)</span></p>
-<p>I konfidensintervallet är medelfelet baserat på den observerade proportionen <span class="math inline">\(\hat p\)</span></p>
 <div class="fragment fade-in">
 <p><strong>Formel</strong></p>
 <p>Det tvåsidiga konfidensintervallet ges av</p>
@@ -635,7 +658,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </div>
 <p>Proportioner kan också testas genom binomialfördelningen</p>
 <div class="fragment fade-in" style="width:50%;">
-<p>Antalet skadade växter är <span class="math inline">\(Bin(60, 0,3)\)</span></p>
+<p>Under nollhypotesen följer antalet skadade växter en binomialfördelning <span class="math inline">\(Bin(60, 0.3)\)</span></p>
 <p>Vi observerar 15 skadade växter</p>
 </div>
 <div class="fragment fade-in" style="width:50%;">
@@ -653,7 +676,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <div class="fragment fade-in" style="position:absolute;height:35%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
 <p><strong>Hypoteser</strong></p>
 <p><span class="math inline">\(H_0: p = p_0\)</span></p>
-<p><span class="math inline">\(H_1: p &gt; p_0\)</span> eller <span class="math inline">\(H_1: p &lt; p_0\)</span></p>
+<p><span class="math inline">\(H_1: p \neq p_0\)</span></p>
 </div>
 <div class="fragment fade-in" style="position:absolute;height:35%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
 <p><strong>Testfunktion</strong></p>
@@ -668,7 +691,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <div style="float:right;">
 <p><img src="06_Prop_test_files/figure-revealjs/unnamed-chunk-8-1.png" width="384" style="display: block; margin: auto;" /></p>
 </div>
-<p>P-värdet ges av summan av staplarna över eller lika med <span class="math inline">\(x\)</span> i testfördelningen</p>
+<p>P-värdet ges av summan av de utfall som är mindre sannolika än <span class="math inline">\(x\)</span></p>
 <p>Detta kan hämtas ur en binomialfördelningstabell (<em>Biometri</em>, tabell 2, för <span class="math inline">\(n \leq 20\)</span>)</p>
 </div>
 <div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:45%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
@@ -692,8 +715,8 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </div>
 <div class="fragment fade-in">
 <p><strong>Hypoteser</strong></p>
-<p><span class="math inline">\(H_0: p_0 = 0.5\)</span></p>
-<p><span class="math inline">\(H_1: p_0 &gt; 0.5\)</span></p>
+<p><span class="math inline">\(H_0: p = 0.5\)</span></p>
+<p><span class="math inline">\(H_1: p &gt; 0.5\)</span></p>
 </div>
 <div class="fragment fade-in">
 <p><strong>Testfunktion</strong></p>
@@ -703,7 +726,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <p><strong>Testfördelning</strong></p>
 <p>Under nollhypotesen kommer vår observation från en binomialfördelning med <span class="math inline">\(n = 15\)</span> och <span class="math inline">\(p = 0.5\)</span></p>
 </div>
-</section><section id="section-1" class="slide level2">
+</section><section id="section-2" class="slide level2">
 <h2></h2>
 <p><strong>p-värde</strong></p>
 <div class="fragment fade-in" style="width:50%; float:right;">
@@ -798,7 +821,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 <p><strong>Testfunktion</strong></p>
 <p><span class="math display">\[z = \frac{\hat p_1 - \hat p_2}{\sqrt {\hat p_0 (1- \hat p_0) (\frac{1}{n_1} + \frac{1}{n_2})}} = \frac{0.50 - 0.26}{\sqrt{0.34 (1 - 0.34)\left( \frac{1}{100} + \frac{1}{200}  \right)}} = 4.137\]</span></p>
 </div>
-</section><section id="section-2" class="slide level2">
+</section><section id="section-3" class="slide level2">
 <h2></h2>
 <p><strong>Testfördelning</strong></p>
 <div class="fragment fade-in">
@@ -834,7 +857,7 @@ Motsvarar <em>Biometri</em>, kap 8 (exkl. 8.6, 8.8)
 </section></section>
 <section id="antagandet" class="title-slide slide level1"><h1>Antagandet</h1><p>Binomaltestet och z-testerna bygger på oberoende observationer</p>
 <p>z-testerna bygger dessutom på en giltig normalapproximation</p></section>
-<section id="section-3" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<section id="section-4" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
 <p style="text-align:center;font-size: 2em;">
 Slut
 </p>
