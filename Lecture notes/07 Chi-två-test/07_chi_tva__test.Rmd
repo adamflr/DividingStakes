@@ -4,6 +4,7 @@ output:
   revealjs::revealjs_presentation:
     css: style1.css
     self_contained: false
+    reveal_plugins: ["zoom"]
     transition: fade
     mathjax: "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG"
     reveal_options:
@@ -146,7 +147,7 @@ Två variabel kan beskrivas med en korstabell
 
 Tester av frekvenser baseras på en testfördelning som kallas en $\chi^2$-fördelning
 
-<div class="fragment fade-in" style="float:right;width:50%;">
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;width:50%;">
 ```{r, echo = F, fig.height=5, fig.align='center'}
 dat <- expand.grid(x = seq(0, 10, 0.01), df = c(1,2,3,4))
 dat$y <- dchisq(dat$x, dat$df)
@@ -159,11 +160,13 @@ ggplot(dat, aes(x, y, col = df)) +
 ```
 </div>
 
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="2">
 <br>
 En $\chi^2$-fördelning uppstår som summan av kvadrerade standardiserade normalfördelningar
 
+<div class="fragment fade-in" data-fragment-index="3">
 Den defineras av en parameter, antalet *frihetsgrader*, som ges av antalet termer i summan
+</div>
 </div>
 
 ## Biometri, tabell 6
@@ -223,7 +226,7 @@ Exempel kan vara
 
 >- om alla färger är lika vanliga i en M&M-förpackning
 >- om en art förekommer lika ofta i flera habitat
->- om delar av befolkning förekommer proportionellt i företagsstyrelser
+>- om delar av befolkningen förekommer proportionellt i företagsstyrelser
 </div>
 
 <div class="fragment fade-in">
@@ -265,7 +268,7 @@ Under nollhypotesen följer $\chi^2$ en $\chi^2$-fördelning med $k - 1$ frihets
 Förväntade värden $E$ ska vara större än $5$
 </div>
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
 **P-värde**
 
 <div style="float:right;">
@@ -276,7 +279,7 @@ ggplot(dat, aes(x, y)) +
   geom_line() +
   geom_hline(yintercept = 0) +
   ylab("f(x)") +
-  labs(title = expression(chi^2*"-fördelning, k - m - 1 fg")) +
+  labs(title = expression(chi^2*"-fördelning, k - 1 fg")) +
   theme(panel.grid = element_blank(),
         plot.background = element_rect(fill = "#ace7ff", color = "#ace7ff")) +
   scale_x_continuous(breaks = c(0,7), labels = c(0, expression(chi^2)))
@@ -288,7 +291,7 @@ P-värdet ges av arean bortom $\chi^2$ i testfördelningen
 Vid handräkning uppskattas p-värdet genom att ställa $\chi^2$ mot ett tabellvärde
 </div>
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
 **Svar**
 
 P-värdet ställs mot en förbestämd *signifikansnivå* (ofta 5 procent)
@@ -519,7 +522,7 @@ Som tidigare gäller tumregeln $E>5$ för att $\chi^2$-testet ska vara lämpligt
 <div class="fragment fade-in">
 Testfunktionen är densamma som tidigare. Summan går nu över samtliga celler i korstabellen
 
-$$\chi^2 = \sum_{\text{alla celler}} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = \frac{(9 - 11.5)^2}{11.5} + \cdot \cdot \cdot + \frac{(77 - 81)^2}{77} = 6.381$$
+$$\chi^2 = \sum_{\text{alla celler}} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = \frac{(9 - 11.5)^2}{11.5} + \cdot \cdot \cdot + \frac{(81 - 77)^2}{77} = 6.381$$
 </div>
 
 <div class="fragment fade-in">

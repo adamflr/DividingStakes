@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>BI1363 HT 2020 Analys av kategoridata Oktober 2020 Adam Flöhr, BT, SLU</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="07_chi_tva__test_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="07_chi_tva__test_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style1.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">BI1363 HT 2020<br>Analys av kategoridata<br>Oktober 2020<br>Adam Flöhr, BT, SLU</h1>
+</section>
+
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Analys av kategoridata
+</p>
+<p style="text-align:center;">
+Motsvarar <em>Biometri</em>, kap 9
+</p>
+</div>
+</section>
+<section id="i-korthet" class="title-slide slide level1"><h1>I korthet</h1><p>Vi undersöker en variabel som ger en indelning i <strong>kategorier</strong></p>
+<div class="fragment fade-in">
+<p>Observerad data kan sammanfattas i en <strong>frekvenstabell</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Från någon hypotes kan vi beräkna <strong>förväntade värden</strong> för tabellen</p>
+</div>
+<div class="fragment fade-in">
+<p>Observerade och förväntade värden kan jämföras med ett <strong><span class="math inline">\(\chi^2\)</span>-test</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Testet kan användas för att testa om data följer en viss fördelning (<strong>modellanpassning</strong>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Och för att testa för samband mellan två kategorivariabler (<strong>homogenitets- och oberoendetest</strong>)</p>
+</div></section>
+<section><section id="kategoridata" class="title-slide slide level1"><h1>Kategoridata</h1><div style="width:50%;float:right;left:1200px;top:100px;position:absolute;">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-2-1.png" width="384" /></p>
+</div>
+<div style="width:50%;">
+<p>Undersöker en egenskap där de möjliga utfallen ger en kategori-indelning</p>
+<div class="fragment fade-in">
+<p>Typiskt en variabel på nominalskala (t.ex art eller nationalitet) eller ordinalskala (t.ex kundnöjdhet)</p>
+</div>
+<div class="fragment fade-in">
+<p>Vi har <span class="math inline">\(k\)</span> klasser och en klass relativa storlek i populationen ges av <span class="math inline">\(p_i\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Drar ett stickprov av storlek <span class="math inline">\(n\)</span> och tittar på antalet i stickprovet i respektive klass</p>
+</div>
+<div class="fragment fade-in">
+<p>Kan skatta <span class="math inline">\(p\)</span> för respektive klass med <span class="math inline">\(\hat p = \frac{\text{antal i klassen}}{n}\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Fallet med binär data är ett särfall där <span class="math inline">\(k = 2\)</span></p>
+</div>
+</div></section><section id="frekvenstabeller" class="slide level2">
+<h2>Frekvenstabeller</h2>
+<div class="fragment fade-in">
+<p>En enskild kategorivariabel kan beskrivas med en enkel frekvenstabell</p>
+<table>
+<thead>
+<tr class="header">
+<th>Status</th>
+<th>Antal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frisk</td>
+<td>102</td>
+</tr>
+<tr class="even">
+<td>Sjuk</td>
+<td>198</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>Två variabel kan beskrivas med en korstabell</p>
+<table>
+<thead>
+<tr class="header">
+<th>Status \ Läge</th>
+<th>Norr</th>
+<th>Syd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frisk</td>
+<td>148</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Sjuk</td>
+<td>52</td>
+<td>50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></section>
+<section><section id="chi2-fördelning" class="title-slide slide level1"><h1><span class="math inline">\(\chi^2\)</span>-fördelning</h1><p>Tester av frekvenser baseras på en testfördelning som kallas en <span class="math inline">\(\chi^2\)</span>-fördelning</p>
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;width:50%;">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p><br> En <span class="math inline">\(\chi^2\)</span>-fördelning uppstår som summan av kvadrerade standardiserade normalfördelningar</p>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>Den defineras av en parameter, antalet <em>frihetsgrader</em>, som ges av antalet termer i summan</p>
+</div>
+</div></section><section id="biometri-tabell-6" class="slide level2">
+<h2>Biometri, tabell 6</h2>
+<p>Som tidigare (med normalfördelningen och t-fördelningen) kommer vi vilja uppskatta svanssannolikheten</p>
+<div class="fragment fade-in">
+<p>Eftersom <span class="math inline">\(\chi^2\)</span>-fördelningen bygger på kvadrerade värden är vi bara intresserade av den högra svansen</p>
+</div>
+<div class="fragment fade-in">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-4-1.png" width="1536" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in">
+<p>Tabellvärden för x-axeln betecknas <span class="math inline">\(\chi^2_{(1-\alpha, df)}\)</span> och kan hämtas från en tabell över <span class="math inline">\(\chi^2\)</span>-fördelningen, t.ex tabell 6 i <em>Biometri</em></p>
+</div>
+<div class="fragment fade-in">
+<p><img src="Figurer/Biometri_tabell6_5.png" width=700 style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+</div>
+<div class="fragment fade-in">
+<p>För ett tabellvärde motsvarande fem procent i svansen och <span class="math inline">\(df = 5\)</span> tittar vi på <span class="math inline">\(\chi^2_{(0.95, 5)} = 11.070\)</span></p>
+</div>
+</section></section>
+<section><section id="test-av-modellanpassning" class="title-slide slide level1"><h1>Test av modellanpassning</h1><p><span class="math inline">\(\chi^2\)</span>-testet för modelanpassning används för att testa om observerade frekvenser kommer från en given fördelning</p>
+<div class="fragment fade-in">
+<p>Exempel kan vara</p>
+<ul>
+<li class="fragment">om alla färger är lika vanliga i en M&amp;M-förpackning</li>
+<li class="fragment">om en art förekommer lika ofta i flera habitat</li>
+<li class="fragment">om delar av befolkningen förekommer proportionellt i företagsstyrelser</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<p>Testet genomförs genom att beräkna <em>förväntade värden</em> för varje klass</p>
+</div>
+<div class="fragment fade-in">
+<p>Förväntade och observerade värden vägs samman med en testfunktion och p-värdet beräknas från en <span class="math inline">\(\chi^2\)</span>-fördelning</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet frihetsgrader ges av <span class="math inline">\(k - 1\)</span> där <span class="math inline">\(k\)</span> är antalet klasser</p>
+</div></section><section id="test-av-modellanpassning-schema" class="slide level2">
+<h2>Test av modellanpassning, schema</h2>
+<div style="position:absolute;height:800px;width:100%;font-size:0.9em;">
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0:\)</span> data kommer från den antagna fördelning</p>
+<p><span class="math inline">\(H_1:\)</span> data kommer inte från den antagna fördelningen</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[\chi^2 = \sum_{\text{alla klasser}} \frac{(O_i - E_i)^2}{E_i}\]</span></p>
+<p>där <span class="math inline">\(O_i\)</span> och <span class="math inline">\(E_i\)</span> är observerat respektive förväntat antal i klass <span class="math inline">\(i\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(\chi^2\)</span> en <span class="math inline">\(\chi^2\)</span>-fördelning med <span class="math inline">\(k - 1\)</span> frihetsgrader, där <span class="math inline">\(k\)</span> är antalet klasser</p>
+<p>Förväntade värden <span class="math inline">\(E\)</span> ska vara större än <span class="math inline">\(5\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av arean bortom <span class="math inline">\(\chi^2\)</span> i testfördelningen</p>
+<p>Vid handräkning uppskattas p-värdet genom att ställa <span class="math inline">\(\chi^2\)</span> mot ett tabellvärde</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section><section id="test-av-modelanpassning-exempel" class="slide level2">
+<h2>Test av modelanpassning, exempel</h2>
+<p>I en studie av dagfjärilar fångas hundra fjärilar och sorteras efter familj</p>
+<p>Antalen ges av följande</p>
+<table>
+<thead>
+<tr class="header">
+<th>Familj</th>
+<th>Tjockhuvuden</th>
+<th>Riddarfjärilar</th>
+<th>Vitfjärilar</th>
+<th>Juvelvingar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O (observerade)</td>
+<td>40</td>
+<td>23</td>
+<td>27</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<p>Från tidigare studier tror man att fördelningen i området är 40 procent tjockhuvuden och 20 procent var för övriga</p>
+<table>
+<thead>
+<tr class="header">
+<th>Familj</th>
+<th>Tjockhuvuden</th>
+<th>Riddarfjärilar</th>
+<th>Vitfjärilar</th>
+<th>Juvelvingar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O (observerade)</td>
+<td>40</td>
+<td>23</td>
+<td>27</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>p (sannolikheter)</td>
+<td>0.4</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>Vi genomför ett test för att se om våra observationer kommer från den etablerade fördelningen</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0:\)</span> observerade antal kommer från den tidigare fördelningen</p>
+<p><span class="math inline">\(H_1:\)</span> observerade antal kommer inte från den tidigare fördelning</p>
+</div>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>Testfunktion</strong></p>
+<p><em>Förväntade värden</em></p>
+<p>Vi beräknar förväntade värden genom att multiplicera vårt totala antal med sannolikheterna från fördelningen</p>
+<div class="fragment fade-in">
+<table>
+<thead>
+<tr class="header">
+<th>Familj</th>
+<th>Tjockhuvuden</th>
+<th>Riddarfjärilar</th>
+<th>Vitfjärilar</th>
+<th>Juvelvingar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>O (observerade)</td>
+<td>40</td>
+<td>23</td>
+<td>27</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>p (sannolikheter)</td>
+<td>0.4</td>
+<td>0.2</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td>E (förväntade)</td>
+<td>40</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>Notera särskilt att <span class="math inline">\(\chi^2\)</span>-testet alltid beräknas på <em>antalen</em></p>
+</div>
+<div class="fragment fade-in">
+<p>Kontrollera så att kravet att <span class="math inline">\(E&gt;5\)</span> är uppfyllt för samtliga klasser</p>
+</div>
+<div class="fragment fade-in">
+<p>Testfunktionen beräknas med</p>
+<p><span class="math display">\[\chi^2 = \sum_{\text{alla klasser}}\frac{(O_i - E_i)^2}{E_i} = \frac{(40-40)^2}{40}+\frac{(23-20)^2}{20} + \frac{(27-20)^2}{20}+\frac{(10-20)^2}{20} = 0 + \frac{9}{20} + \frac{49}{20} + \frac{100}{20} = 7.9\]</span></p>
+</div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(\chi^2\)</span> en <span class="math inline">\(\chi^2\)</span>-fördelning</p>
+<div class="fragment fade-in">
+<p>Antalet frihetsgrader ges av <span class="math inline">\(k - 1 = 4 - 1 = 3\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>P-värde</strong></p>
+<div style="float: right;">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av ytan till höger om vårt observerade <span class="math inline">\(\chi^2\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi kan uppskatta p-värdet från <em>Biometri</em> tabell 6</p>
+<p><img src="Figurer/Biometri_tabell6_3.png" width=700 style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+<p>Vårt observerade värde ligger precis över <span class="math inline">\(\chi^2_{(0.95, 3)} = 7.815\)</span>. P-värdet måste alltså vara strax under fem procent</p>
+</div>
+<div class="fragment fade-in">
+<p>En datorberäkning ger det exakta värdet <span class="math inline">\(0.04812\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Det finns en statistiskt signifikant skillnad mellan våra observerade värden och den tidigare fördelningen</p>
+</div>
+</section></section>
+<section><section id="test-av-samband-i-en-korstabell" class="title-slide slide level1"><h1>Test av samband i en korstabell</h1><p><span class="math inline">\(\chi^2\)</span>-test kan också användas för att testa om det finns något samband mellan två kategorivariabler</p>
+<div class="fragment fade-in">
+<p>Observerade värden presenteras i en korstabell</p>
+</div>
+<div class="fragment fade-in">
+<p>Marginalsummor hålls konstanta och förväntade värden beräknas som om variablerna vore oberoende</p>
+</div>
+<div class="fragment fade-in">
+<p>Testfunktionen är densamma som tidigare</p>
+</div>
+<div class="fragment fade-in">
+<p>Antalet frihetsgrader ges av <span class="math inline">\((r - 1)(k - 1)\)</span> där <span class="math inline">\(r\)</span> är antalet rader och <span class="math inline">\(k\)</span> antalet kolumner i korstabellen</p>
+</div></section><section id="test-av-korstabell-exempel" class="slide level2">
+<h2>Test av korstabell, exempel</h2>
+<p>I en fortsättning på vår fjärilstudie besöker vi tre olika områden och samlar in populationsdata</p>
+<div class="fragment fade-in">
+<p>Vi vill undersöka om andelen vitfjärilar är densamma oberoende av område</p>
+<table>
+<thead>
+<tr class="header">
+<th>Art \ Område</th>
+<th>Område A</th>
+<th>Område B</th>
+<th>Område C</th>
+<th>Summa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vitfjäril</td>
+<td>9</td>
+<td>18</td>
+<td>19</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td>Annan art</td>
+<td>41</td>
+<td>32</td>
+<td>81</td>
+<td>154</td>
+</tr>
+<tr class="odd">
+<td>Summa</td>
+<td>50</td>
+<td>50</td>
+<td>100</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0:\)</span> andelen vitfjärilar är densamma</p>
+<p><span class="math inline">\(H_1:\)</span> andelen vitfjärilar skiljer sig mellan områden</p>
+</div>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p><strong>Testfunktion</strong></p>
+<p><em>Förväntade antal</em></p>
+<div class="fragment fade-in">
+<p>Förväntade värden beräknas genom att hålla marginalsummor konstanta och beräkna <em>inre celler</em> enligt formeln</p>
+<p><span class="math display">\[E_{ij} =\frac{\text{Radsumma i} \cdot \text{Kolumnsumma j}}{\text{Totalsumma}}\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Det första förväntade värdet ges av</p>
+<p><span class="math display">\[E_{11} = \frac{50 \cdot 46}{200} = \frac{2300}{200} = 11.5\]</span></p>
+</div>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p><strong>Observerade värden och förväntade värden</strong></p>
+<p>Om vi gör beräkningen för förväntade värden för varje cell får vi följande tabeller</p>
+<div class="fragment fade-in">
+<p><em>Observerade värden (O)</em></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art \ Område</th>
+<th>Område A</th>
+<th>Område B</th>
+<th>Område C</th>
+<th>Summa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vitfjäril</td>
+<td>9</td>
+<td>18</td>
+<td>19</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td>Annan art</td>
+<td>41</td>
+<td>32</td>
+<td>81</td>
+<td>154</td>
+</tr>
+<tr class="odd">
+<td>Summa</td>
+<td>50</td>
+<td>50</td>
+<td>100</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p><em>Förväntade värden (E)</em></p>
+<table>
+<thead>
+<tr class="header">
+<th>Art \ Område</th>
+<th>Område A</th>
+<th>Område B</th>
+<th>Område C</th>
+<th>Summa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vitfjäril</td>
+<td>11.5</td>
+<td>11.5</td>
+<td>23</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td>Annan art</td>
+<td>38.5</td>
+<td>38.5</td>
+<td>77</td>
+<td>154</td>
+</tr>
+<tr class="odd">
+<td>Summa</td>
+<td>50</td>
+<td>50</td>
+<td>100</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>Marginalsummorna ska vara desamma</p>
+</div>
+<div class="fragment fade-in">
+<p>Förväntade värden <span class="math inline">\(E\)</span> behöver inte vara heltal</p>
+</div>
+<div class="fragment fade-in">
+<p>Som tidigare gäller tumregeln <span class="math inline">\(E&gt;5\)</span> för att <span class="math inline">\(\chi^2\)</span>-testet ska vara lämpligt</p>
+</div>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p><strong>Testfunktion, beräkning</strong></p>
+<div class="fragment fade-in">
+<p>Testfunktionen är densamma som tidigare. Summan går nu över samtliga celler i korstabellen</p>
+<p><span class="math display">\[\chi^2 = \sum_{\text{alla celler}} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = \frac{(9 - 11.5)^2}{11.5} + \cdot \cdot \cdot + \frac{(81 - 77)^2}{77} = 6.381\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(\chi^2\)</span> en <span class="math inline">\(\chi^2\)</span>-fördelning med <span class="math inline">\((r-1)(k-1)\)</span> frihetsgrader, där <span class="math inline">\(r\)</span> är antalet rader och <span class="math inline">\(k\)</span> antalet kolumner i korstabellen</p>
+</div>
+<div class="fragment fade-in">
+<p>I vårt exempel har vi <span class="math inline">\(df = (3-1)(2-1) = 2\)</span></p>
+</div>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p><strong>P-värde</strong></p>
+<div class="fragment fade-in">
+<div style="float: right;">
+<p><img src="07_chi_tva__test_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<p>p-värdet ges av ytan till höger om vårt observerade <span class="math inline">\(\chi^2\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi kan uppskatta p-värdet från <em>Biometri</em> tabell 6</p>
+<p><img src="Figurer/Biometri_tabell6_2.png" width=700 style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+<p>Vårt observerade värde ligger över <span class="math inline">\(\chi^2_{(0.95, 2)} = 5.991\)</span>. P-värdet måste alltså vara strax under fem procent</p>
+</div>
+<div class="fragment fade-in">
+<p>En datorberäkning ger det exakta värdet <span class="math inline">\(0.04116\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>Vi förkastar nollhypotesen</p>
+</div>
+<div class="fragment fade-in">
+<p>Det finns en signifikant skillnad i andelen vitfjärilar mellan områden</p>
+</div>
+</section></section>
+<section id="homogenitetstest-eller-oberoendetest" class="title-slide slide level1"><h1>Homogenitetstest eller oberoendetest</h1><p>Boken <em>Biometri</em> delar upp tester på korstabeller i två typer</p>
+<div class="fragment fade-in">
+<p>Indelningen har ingen påverkan på hur testet genomförs</p>
+<div class="fragment fade-in">
+<p><strong>Homogenitetstest</strong></p>
+<p>Vid ett <em>homogenitetstest</em> är antalen i en av variablerna fixerad och man är intresserad av skillnader inom den andra variabeln</p>
+<ul>
+<li class="fragment">Exemplet med fjärilar i tre områden är ett homogenitetstest, eftersom vi valt att samla in femtio, femtio och hundra fjärilar per område</li>
+<li class="fragment">Man kan redan innan man samlar in sin data säga vad kolumnsummorna blev</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<p><strong>Oberoendetest</strong></p>
+<p>Vid ett <em>oberoendetest</em> är bägge variablerna slumpmässiga</p>
+<p>Vi testar om det finns något samband mellan variablerna</p>
+</div>
+<ul>
+<li class="fragment">Till exempel att man samlar in 500 ekorrar och noterar kön och ålder</li>
+<li class="fragment">Marginalsummor kan ej uppskattas innan data samlats in</li>
+</ul></section>
+<section id="section-7" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Slut
+</p>
+</div></section>
+    </div>
+  </div>
+
+  <script src="07_chi_tva__test_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="07_chi_tva__test_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 1,
+        maxScale: 1,
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '07_chi_tva__test_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
