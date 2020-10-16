@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>BI1363 HT 2020 Variansanalys Oktober 2020 Adam Flöhr, BT, SLU</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="08-Variansanalys_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="08-Variansanalys_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style1.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">BI1363 HT 2020<br>Variansanalys<br>Oktober 2020<br>Adam Flöhr, BT, SLU</h1>
+</section>
+
+<section id="section" class="slide level2">
+<h2></h2>
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Variansanalys
+</p>
+<p style="text-align:center;">
+Motsvarar <em>Biometri</em>, kap 10
+</p>
+</div>
+</section>
+<section><section id="i-korthet" class="title-slide slide level1"><h1>I korthet</h1><div class="fragment fade-in">
+<p>t-testet kan testa om två stickprov av kontinuerlig data har samma medelvärde</p>
+</div>
+<div class="fragment fade-in">
+<p>Naturlig utveckling att vilja testa <strong>fler än två</strong> stickprov</p>
+</div>
+<div class="fragment fade-in">
+<p>Möjligt genom <strong>variansanalys</strong> (eller ANalysis Of VAriance, <em>Anova</em>)</p>
+</div>
+<div class="fragment fade-in">
+<p>Genom variansanalys kan man testa om det finns <em>någon</em> skillnad mellan grupper genom ett <strong>F-test</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Man kan även testa om <em>två</em> valda grupper är skilda med hjälp av <strong>LSD</strong> <span class="fragment fade-in"><strong>(Least Significant Difference)</strong></span></p>
+</div></section><section id="exempeldata" class="slide level2">
+<h2>Exempeldata</h2>
+<p>Testar en ärtgrödas reaktion på planteringstäthet.</p>
+<div class="fragment fade-in">
+<p>Tre behandlingar: tät, mellan och gles</p>
+</div>
+<div class="fragment fade-in">
+<p>Utfallsvariabeln <span class="math inline">\(y\)</span> är torrvikt i kilo per skörderuta</p>
+</div>
+<div class="fragment fade-in">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Behandling</th>
+<th style="text-align: right;">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">13</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="illustration" class="slide level2">
+<h2>Illustration</h2>
+<div style="position:absolute;width:50%;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" /></p>
+</div>
+<div style="position:absolute;width:50%;left:50%">
+<p><br><br> Varje behandling innefattar tre observationer</p>
+</div>
+</section><section id="illustration-1" class="slide level2">
+<h2>Illustration</h2>
+<div style="position:absolute;width:50%;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
+</div>
+<div style="position:absolute;width:50%;left:50%">
+<p><br><br> I en anova-modell är observationerna normalfördelade kring ett gruppspecifikt medelvärde</p>
+<div class="fragment fade-in">
+<p>Det gruppspecifika medelvärdet skattas med det observerade medelvärdet för gruppen</p>
+</div>
+</div>
+</section><section id="modellekvation" class="slide level2">
+<h2>Modellekvation</h2>
+<p>En observation är summan av</p>
+<ul>
+<li class="fragment">ett övergripande medelvärde <span class="math inline">\(\mu\)</span></li>
+<li class="fragment">en behandlingseffekt <span class="math inline">\(\alpha\)</span></li>
+<li class="fragment">en slumpmässig felterm <span class="math inline">\(e\)</span></li>
+</ul>
+<div class="fragment fade-in">
+<p>Detta kan uttryckas</p>
+<p><span class="math display">\[y_{ij} = \mu + \alpha_i + e_{ij} \qquad e_{ij} \sim N(0,\sigma_e^2)\]</span></p>
+<p><span class="math display">\[i=1,...,a \qquad j=1,...,n\]</span></p>
+</div>
+</section></section>
+<section><section id="anova-tabell" class="title-slide slide level1"><h1>Anova-tabell</h1><p>Egenskaper hos en skattad anova-modell sammanfattas ofta i en anova-tabell</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Anova-tabellen ger en uppdelning av variationen i en del <em>mellan</em> grupper och en del <em>inom</em> grupper</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p><strong>Kvadratsummor</strong></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="3" style="float:right; width: 50%;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>Variansanalys bygger på beräknade kvadratsummor</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="4">
+<p>Datan ger skattningar för ett övergripande medelvärde och ett gruppmedelvärde</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="5">
+<p>Summan av kvadrerade avstånd mellan observationen och det övergripande medelvärdet ger en kvadratsumma för totalen <span class="math inline">\(SS_T\)</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="6">
+<p>Summan av kvadrerade avstånd mellan observationen och gruppmedelvärdet ger en kvadratsumma för slumpfelet <span class="math inline">\(SS_e\)</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="7">
+<p>Differensen mellan <span class="math inline">\(SS_T\)</span> och <span class="math inline">\(SS_e\)</span> betecknas <span class="math inline">\(SS_A\)</span> <span class="math display">\[SS_A = SS_T - SS_e\]</span></p>
+</div></section><section id="kvadratsummor-exempel-ss_t" class="slide level2">
+<h2>Kvadratsummor, exempel, <span class="math inline">\(SS_T\)</span></h2>
+<div style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Behandling</th>
+<th style="text-align: right;">Utfall</th>
+<th style="text-align: right;">Övergripande medel</th>
+<th style="text-align: right;">Residual</th>
+<th style="text-align: right;">Kvadrerad residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-8</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(SS_T\)</span> är summan av kvadrerade residualer <span class="math inline">\(SS_T = 138\)</span></p>
+</section><section id="kvadratsummor-exempel-ss_e" class="slide level2">
+<h2>Kvadratsummor, exempel, <span class="math inline">\(SS_e\)</span></h2>
+<div style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Behandling</th>
+<th style="text-align: right;">Utfall</th>
+<th style="text-align: right;">Gruppmedel</th>
+<th style="text-align: right;">Residual</th>
+<th style="text-align: right;">Kvadrerad residual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math inline">\(SS_T\)</span> är summan av kvadrerade residualer <span class="math inline">\(SS_e = 24\)</span></p>
+</section><section id="frihetsgrader" class="slide level2">
+<h2>Frihetsgrader</h2>
+<p>Antalet frihetsgrader för en kvadratsumma ges av antalet observationer minus antalet skattade parametrar</p>
+<div class="fragment fade-in">
+<p>Vid beräkningen av den totala kvadratsumman <span class="math inline">\(SS_T\)</span> används en skattad parameter. antalet frihetsgrader är alltså <span class="math inline">\(N - 1\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vid beräkningen av kvadratsumman för slumpfelet skattas en parameter per grupp. För <span class="math inline">\(a\)</span> stycken grupper ges antalet frihetsgrader därmed av <span class="math inline">\(N - a\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Skillnaden i antalet frihetsgrader är antalet frihetsgrader som tillskrivs <span class="math inline">\(SS_A\)</span>: <span class="math inline">\((N - 1) - (N - a) = a - 1\)</span>, det vill säga antalet grupper minus ett</p>
+</div>
+</section><section id="anova-tabell-1" class="slide level2">
+<h2>Anova-tabell</h2>
+<p>Modellens resultat sammanfattas i en <em>Anova-tabell</em></p>
+<div class="fragment fade-in">
+<p>Anova-tabellen innehåller information om kvadratsummor (SS) och frihetsgrader (fg), utifrån dessa beräknas medelkvadratsummor (MS), F-värden, och p-värden</p>
+</div>
+<div class="fragment fade-in">
+<p>Generellt schema</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(a-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A/(a-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(N-a\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e/(N-a)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(N-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T/(N-1)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section id="anova-tabell-exempel" class="slide level2">
+<h2>Anova-tabell, exempel</h2>
+<div style="width:1500px">
+<div class="fragment fade-in" style="height:250px">
+<div style="float:right; width:750px;font-size:0.8em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(3-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A/(a-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(9-3\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e/(N-a)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(9-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T/(N-1)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I vårt exempel har vi tre behandlingar och nio observationer (<span class="math inline">\(N = 9\)</span> och <span class="math inline">\(a = 3\)</span>)</p>
+</div>
+<div class="fragment fade-in" style="height:250px">
+<div style="float:right; width:750px;font-size:0.8em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(114\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A/(a-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_E\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(24\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e/(N-a)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(138\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T/(N-1)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Vi har tidigare beräknat kvadratsummorna <span class="math inline">\(SS_T = 138\)</span> och <span class="math inline">\(SS_e = 24\)</span>.</p>
+<p><span class="math inline">\(SS_A\)</span> ges av differensen <span class="math inline">\(138-24 = 114\)</span>.</p>
+</div>
+<div class="fragment fade-in" style="height:250px">
+<div style="float:right; width:750px;font-size:0.8em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(114\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(57\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(24\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(138\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(17.25\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Medelkvadratsummorna MS ges av kvadratsumman delat på antalet frihetsgrader</p>
+</div>
+</div>
+</section></section>
+<section><section id="f-test" class="title-slide slide level1"><h1>F-test</h1><p><em>Har alla grupper samma populationsmedelvärde?</em></p>
+<p>Testas med ett F-test</p>
+<div class="fragment fade-in">
+<p>Samma gång som tidigare hypotestest (HTTPS)</p>
+</div>
+<div class="fragment fade-in">
+<p>Testfunktionen hämtas från anova-tabellen</p>
+</div>
+<div class="fragment fade-in">
+<p>Testfördelningen är en F-fördelning</p>
+</div></section><section id="f-fördelning" class="slide level2">
+<h2>F-fördelning</h2>
+<p>Tester av kvadratsummor baseras på en testfördelning som kallas en F-fördelning</p>
+<div class="fragment fade-in" style="float:right;width:50%;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in">
+<p><br><br> En F-fördelning uppstår som kvoten av två <span class="math inline">\(\chi^2\)</span>-fördelade slumpvariabler</p>
+<p>Den defineras av två parametrar, antalet <em>frihetsgrader i täljaren</em> <span class="math inline">\(\nu_1\)</span>, och antalet <em>frihetsgrader i nämnaren</em> <span class="math inline">\(\nu_2\)</span></p>
+</div>
+</section><section id="biometri-tabell-8-och-7-9-10" class="slide level2">
+<h2>Biometri, tabell 8 (och 7, 9, 10)</h2>
+<p>Som tidigare kommer vi vilja uppskatta svanssannolikheten</p>
+<div class="fragment fade-in">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-11-1.png" width="1536" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in">
+<p>Tabellvärden för x-axeln betecknas <span class="math inline">\(F_{(1-\alpha, \nu_1, \nu_2)}\)</span> och kan hämtas från en tabell över F-fördelningen</p>
+</div>
+<div class="fragment fade-in">
+<p>F-fördelningen delas i flera tabeller, beroende på värdet för <span class="math inline">\(\alpha\)</span></p>
+</div>
+<div class="fragment fade-in" style="float:left; width: 40%;">
+<p><img src="Figurer/Biometri_Tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+</div>
+<div class="fragment fade-in">
+<p>Kolumnen ges av <span class="math inline">\(\nu_1\)</span> och raden av <span class="math inline">\(\nu_2\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>För ett tabellvärde motsvarande fem procent i svansen och frihetsgrader 2 och 6, tittar vi i tabell 8 för <span class="math inline">\(F_{(0.95, 2, 6)} = 5.143\)</span></p>
+</div>
+</section><section id="f-test-schema" class="slide level2">
+<h2>F-test, schema</h2>
+<div style="position:absolute;height:800px;width:100%;font-size:0.9em;">
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%; background-color:#ffabab;padding:15px;border-radius:15px;">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2 = ... = \mu_a\)</span> alla grupper har samma medelvärde</p>
+<p><span class="math inline">\(H_1:\)</span> det finns skillnad i medelvärde mellan några grupper</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:35%;background-color:#fff5ba;padding:15px;border-radius:15px;">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[F = \frac{MS_A}{MS_e}\]</span></p>
+<p>där <span class="math inline">\(MS_A\)</span> och <span class="math inline">\(MS_e\)</span> hämtas från anova-tabellen</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:40%;width:30%;left:70%;background-color:#bffcc6;padding:15px;border-radius:15px;">
+<p><strong>Testfördelning</strong></p>
+<p>Under nollhypotesen följer <span class="math inline">\(F\)</span> en F-fördelning med <span class="math inline">\(\nu_1\)</span> och <span class="math inline">\(\nu_2\)</span> frihetsgrader</p>
+<p>I den enkla anova-modellen gäller <span class="math inline">\(\nu_1 = a - 1\)</span> och <span class="math inline">\(\nu_2 = N - a\)</span></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<p>P-värdet ges av arean bortom F i testfördelningen</p>
+<p>Vid handräkning uppskattas p-värdet genom att ställa F mot ett tabellvärde</p>
+</div>
+<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<p><strong>Svar</strong></p>
+<p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
+<p>Vid ett lågt p-värde förkastas nollhypotesen</p>
+<p>Vid ett högt p-värde förkastas ej nollhypotesen</p>
+</div>
+</div>
+</section><section id="f-test-exempel" class="slide level2">
+<h2>F-test, exempel</h2>
+<p>Vi beräknade tidigare följande anova-tabell</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(114\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(57\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(24\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(138\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(17.25\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<p><strong>Hypoteser</strong></p>
+<p><span class="math inline">\(H_0:\)</span> ingen skillnad mellan behandlingar</p>
+<p><span class="math inline">\(H_1:\)</span> någon skillnad mellan behandlingar</p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Testfunktion</strong></p>
+<p><span class="math display">\[F_{obs} = \frac{MS_A}{MS_e} = \frac{57}{4} = 14.25\]</span></p>
+<p><span class="math inline">\(MS_A\)</span> och <span class="math inline">\(MS_e\)</span> kan hämtas från anova-tabellen</p>
+</div>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><strong>Testfördelning</strong></p>
+<div class="fragment fade-in">
+<p>Under nollhypotesen följer <span class="math inline">\(F\)</span> en F-fördelning med <span class="math inline">\(\nu_1 = 2\)</span> och <span class="math inline">\(\nu_2 = 6\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>P-värde</strong></p>
+<div style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="Figurer/Biometri_tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+</div>
+<p>P-värdet ges av ytan till höger om vårt observerade <span class="math inline">\(F = 14.25\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Vi kan uppskatta p-värdet från <em>Biometri</em> tabell 6</p>
+</div>
+<div class="fragment fade-in">
+<p>Vårt observerade värde ligger över <span class="math inline">\(F_{(0.99, 2, 6)} = 10.925\)</span>. P-värdet måste alltså vara under <span class="math inline">\(1\)</span> procent</p>
+</div>
+<div class="fragment fade-in">
+<p>En datorberäkning ger det exakta värdet <span class="math inline">\(0.00526\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Slutsats</strong></p>
+<p>P-värdet är under <span class="math inline">\(5\)</span> procent, vilket ger att vi förkastar nollhypotesen</p>
+<p>Det finns någon statistiskt säkerställd skillnad i populationsmedelvärde mellan behandlingarna</p>
+</div>
+</section></section>
+<section><section id="parvisa-jämförelser" class="title-slide slide level1"><h1>Parvisa jämförelser</h1><p>Signifikans i F-testet ger att det finns <em>någon</em> skillnad mellan behandlingar</p>
+<div class="fragment fade-in">
+<p>Vari ligger skillnaden?</p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div></section><section id="minsta-signifikanta-skillnad" class="slide level2">
+<h2>Minsta signifikanta skillnad</h2>
+<p>Ett konfidensintervall för skillnaden mellan två gruppmedelvärden ges av</p>
+<p><span class="math display">\[\bar{x_1} - \bar{x_2} \pm t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}\]</span> <br></p>
+<div class="fragment fade-in">
+<p>Den sista termen kallas minsta signifikanta skillnad (<em>(Fisher’s) Least Significant Difference, LSD</em>)</p>
+<p><span class="math display">\[LSD = t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}\]</span></p>
+</div>
+<p><br></p>
+<div class="fragment fade-in">
+<p>Om skillnaden mellan två gruppers medelvärden överstiger LSD är grupperna signifikant skilda på fem-procentsnivån</p>
+</div>
+</section><section id="minsta-signifikanta-skillnad-exempel" class="slide level2">
+<h2>Minsta signifikanta skillnad, exempel</h2>
+<div style="float:right; width:750px">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Behandling</td>
+<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(114\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(57\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(14.25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(0.005\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: right;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(24\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(138\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(17.25\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I vårt exempel är <span class="math inline">\(n = 3\)</span> och medelvärden ges av</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Behandling</th>
+<th style="text-align: right;">Mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Gles</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mellan</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tät</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in">
+<p>Vi beräknar LSD genom</p>
+<p><span class="math display">\[LSD = t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})} = 2.447 \sqrt{4 (\frac{1}{3} + \frac{1}{3})} = 3.996\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Behandling <em>Tät</em> är signifikant skild från <em>Mellan</em> och <em>Gles</em>, eftersom skillnaden i medelvärde överstiger 4</p>
+</div>
+<div class="fragment fade-in">
+<p>Behandlingarna <em>Mellan</em> och <em>Gles</em> är inte signifikant skilda, eftersom medelvärdesskillnaden är mindre än 4</p>
+</div>
+</section><section id="signifikansbokstäver" class="slide level2">
+<h2>Signifikansbokstäver</h2>
+<p>Parvisa jämförelser presenteras ofta med signifikansbokstäver</p>
+<div class="fragment fade-in">
+<p>Behandlingar som <em>inte</em> är signifikant åtskilda delar någon bokstav</p>
+</div>
+<div class="fragment fade-in">
+<p>I vårt enkla fall får vi</p>
+<table>
+<thead>
+<tr class="header">
+<th>Behandling</th>
+<th>Medel</th>
+<th>Sig-bokstäver</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gles</td>
+<td>13</td>
+<td>a</td>
+</tr>
+<tr class="even">
+<td>Mellan</td>
+<td>12</td>
+<td>a</td>
+</tr>
+<tr class="odd">
+<td>Tät</td>
+<td>5</td>
+<td>b</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>C och B är inte signifikant åtskilda och delar därmed en bokstav <em>a</em></p>
+</div>
+<div class="fragment fade-in">
+<p>A är signifikant skild från B och C och delar därmed ingen bokstav</p>
+</div>
+</section><section id="mass-signifikans" class="slide level2">
+<h2>Mass-signifikans</h2>
+<p>Ett tests signifikansnivå anger sannolikheten att förkasta nollhypotesen även om den stämmer</p>
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;width:50%;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Om vi jämför två behandlingar på fem-procentsnivån finns alltså en fem-procentig risk att få ett signifikant resultat även om behandlingarna är exakt lika</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Vid parvisa jämförelser utför man ett test per par. Risken att få <em>något</em> signifikant resultat kan därmed bli väldigt stor även om alla behandlingar är lika</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>Fenomenet kallas för <em>mass-signifikans</em></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="5">
+<p><strong>Protected LSD.</strong> Gör bara parvisa jämförelser om F-testet visar på någon signifikant skillnad</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="5">
+<p><strong>Honest significant difference.</strong> Justera LSD-beräkningen</p>
+</div>
+</section><section id="honest-significant-difference-hsd" class="slide level2">
+<h2>Honest Significant Difference (HSD)</h2>
+<p>För att kompensera för mass-signifikans används ofta <em>Honest Significant Difference (HSD)</em> istället för LSD</p>
+<div class="fragment fade-in">
+<p>Även kallat Tukey-test eller Tukey-metoden</p>
+</div>
+<div class="fragment fade-in">
+<p>HSD har samma tolkning som LSD: en medelvärdesskillnad större än HSD innebär att grupperna är statistiskt skilda</p>
+</div>
+<div class="fragment fade-in">
+<p>HSD är i regel större än LSD och leder därmed till färre signifikanta skillnader</p>
+</div>
+</section></section>
+<section><section id="blockförsök" class="title-slide slide level1"><h1>Blockförsök</h1><p>I ett försök har man objekt som man mäter (<em>försöksenheter</em>) och <em>behandlingar</em> man utsätter dem för</p>
+<div class="fragment fade-in">
+<p>Varje försöksenhet tilldelas en behandling</p>
+</div>
+<div class="fragment fade-in" style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Fullständigt randomiserad design</strong></p>
+<ul>
+<li class="fragment">Varje behandling förekommer ett givet antal gånger</li>
+</ul>
+<ul>
+<li class="fragment">I övrigt tilldelas enheter behandling slumpmässigt</li>
+</ul>
+<ul>
+<li class="fragment">Alla mönster är möjliga</li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<p><strong>Blockdesign</strong></p>
+<ul>
+<li class="fragment">Försöksenheterna delas in i undergrupper (<em>block</em>)</li>
+</ul>
+<ul>
+<li class="fragment">Varje behandling förekommer en gång i varje block</li>
+</ul>
+</div></section><section id="tanken-med-block" class="slide level2">
+<h2>Tanken med block</h2>
+<p>Målet med en blockdesign är att gruppera <em>lika</em> försöksenheter</p>
+<div class="fragment fade-in">
+<p>Eftersom varje behandling förekommer i varje block, får man en rättvis jämförelse mellan lika enheter</p>
+</div>
+<div style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in">
+<p><strong>Växthus</strong></p>
+<p>Fem näringsbehandlingar, tre plan i en hylla</p>
+<div class="fragment fade-in">
+<p>Eftersom nivå kan påverka resultatet sätter man varje behandling på varje hyllplan i en blockdesign</p>
+</div>
+</div>
+<div class="fragment fade-in">
+<p><strong>Restaurang</strong></p>
+<p>Fem restauranger, tre måltidsdelar (förrätt, huvudrätt, efterrätt)</p>
+<div class="fragment fade-in">
+<p>För en rättvis jämförelse beställer man en förrätt, en huvudrätt och en efterrätt från varje restaurang</p>
+</div>
+</div>
+</section><section id="anova-med-block" class="slide level2">
+<h2>Anova med block</h2>
+<p>Ett blockförsök analyseras med <em>variansanalys med block</em></p>
+<div class="fragment fade-in">
+<p><strong>Modellekvation</strong></p>
+<p>En observation är summan av</p>
+<ul>
+<li class="fragment">ett övergripande medelvärde <span class="math inline">\(\mu\)</span></li>
+<li class="fragment">en behandlingseffekt <span class="math inline">\(\alpha\)</span></li>
+<li class="fragment">en blockeffekt <span class="math inline">\(\beta\)</span></li>
+<li class="fragment">en slumpmässig felterm <span class="math inline">\(e\)</span></li>
+</ul>
+</div>
+<div class="fragment fade-in">
+<p>Detta kan uttryckas</p>
+<p><span class="math display">\[y_{ij} = \mu + \alpha_i + \beta_j + e_{ij} \qquad e_{ij} \sim N(0,\sigma_e^2)\]</span></p>
+<p><span class="math display">\[i=1,...,a \qquad j=1,...,n\]</span></p>
+</div>
+</section><section id="anovatabell-med-block" class="slide level2">
+<h2>Anovatabell med block</h2>
+<p>Eftersom vi har en tillagd term får vi en ny rad i anova-tabellen</p>
+<div class="fragment fade-in">
+<p>Det generella schemat blir</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Block (Bl)</td>
+<td style="text-align: right;"><span class="math inline">\(b-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_Bl\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_{Bl}/(b-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_{Bl}/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(a-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A/(a-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(N-a-b+1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e/(N-a)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(N-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T/(N-1)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment fade-in">
+<p>I ett balanserat försök är <span class="math inline">\(N = a \cdot b\)</span>, vilket ger de alternativa uttrycken <span class="math inline">\(df_T = ab-1\)</span> och <span class="math inline">\(df_e = (a-1)(b-1)\)</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Under nollhypotesen att det inte finns någon behandlingseffekt kommer <span class="math inline">\(MS_A/MS_E\)</span> från en F-fördelning med <span class="math inline">\(a-1\)</span> och <span class="math inline">\(N-a-b+1\)</span> frihetsgrader</p>
+</div>
+<div class="fragment fade-in">
+<p>Under nollhypotesen att det inte finns någon blockeffekt kommer <span class="math inline">\(MS_{Bl}/MS_E\)</span> från en F-fördelning med <span class="math inline">\(b-1\)</span> och <span class="math inline">\(N-a-b+1\)</span> frihetsgrader</p>
+</div>
+</section><section id="anova-med-block-exempel" class="slide level2">
+<h2>Anova med block, exempel</h2>
+<div class="fragment fade-in" data-fragment-index="3" style="float:right; width: 50%; font-size:0.9em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Lokal</th>
+<th style="text-align: left;">Naturtyp</th>
+<th style="text-align: right;">Antal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lokal 1</td>
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 1</td>
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">69</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 1</td>
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">71</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 2</td>
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 2</td>
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 2</td>
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 3</td>
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 3</td>
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 3</td>
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 4</td>
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 4</td>
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 4</td>
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 5</td>
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lokal 5</td>
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lokal 5</td>
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">44</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Vi vill undersöka populationsstorleken på smalbandad ekbarrbock (<em>Plagianotus Arcuatus</em>)</p>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Sätter upp fällor i tre typer av områden (bruksskog, äldre skog, och naturreservat)</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>För en rättvis jämförelse väljer vi ut fem lokaler där vi kan hitta alla tre naturtyper nära varandra</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="4">
+<p>Det här ger en blockdesign med naturtypen som behandling och lokalen som block</p>
+</div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<div style="position:absolute;width:50%;left:0px;top:0px">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;width:50%;left:0px;top:0px">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;width:50%;left:50%;top:0px">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
+</div>
+<div class="fragment fade-in" style="position:absolute;top:650px">
+<p>Om man inte tar med blockdesignen överlappar observationer från olika naturtyper varandra</p>
+<p>Med blocken frånräknade finns en klarare separation av behandlingar</p>
+</div>
+</section><section id="anova-tabell-med-block" class="slide level2">
+<h2>Anova-tabell med block</h2>
+<div style="float:right; font-size:0.6em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: right;">F</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Block (Bl)</td>
+<td style="text-align: right;"><span class="math inline">\(b-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_Bl\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_{Bl}/(b-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_{Bl}/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Behandling (A)</td>
+<td style="text-align: right;"><span class="math inline">\(a-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_A/(a-1)\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(MS_A/MS_e\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residual (e)</td>
+<td style="text-align: right;"><span class="math inline">\(N-a-b+1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_e/(N-a)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total (T)</td>
+<td style="text-align: right;"><span class="math inline">\(N-1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_T/(N-1)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Vi skattar en modell med block och får följande anovatabell</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Typ</th>
+<th style="text-align: left;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: left;">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lokal</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">4854.3</td>
+<td style="text-align: right;">1213.6</td>
+<td style="text-align: left;">232.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Naturtyp</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">214.9</td>
+<td style="text-align: right;">107.5</td>
+<td style="text-align: left;">20.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">41.7</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: right;">5110.9</td>
+<td style="text-align: right;">365.1</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment fade-in" data-fragment-index="1">
+<p>Vi kan testa nollhypotesen att det inte finns någon skillnad mellan naturtyper</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Under nollhypotesen kommer F-värdet för naturtyp (<span class="math inline">\(F = 20.6\)</span>) från en F-fördelning med <span class="math inline">\(\nu_1 = 2\)</span> och <span class="math inline">\(\nu_2 = 8\)</span></p>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p>Tabell 10 ger <span class="math inline">\(F_{(0.999, 2, 8)} = 18.494\)</span>. Vårt p-värde är alltså mindre än 0.001</p>
+</div>
+<div class="fragment fade-in" data-fragment-index="5">
+<p>Vi förkastar nollhypotesen och säger att det finns en statistiskt signifikant skillnad mellan naturtyper</p>
+</div>
+</section><section id="lsd-vid-block" class="slide level2">
+<h2>LSD vid block</h2>
+<p>Behandlingar kan jämföras parvis på samma sätt som vid enkel variansanalys</p>
+<div class="fragment fade-in">
+<p>Formeln för Fishers LSD ges av</p>
+<p><span class="math display">\[LSD_{bl} = t_{(0.975, df_e)} \sqrt{MS_e \left( \frac{1}{n_1} + \frac{1}{n_2} \right) } = t_{(0.975, (a-1)(b-1))} \sqrt{MS_e \cdot \frac{2}{b}}\]</span></p>
+</div>
+<div class="fragment fade-in">
+<div style="float:right; font-size:0.6em;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Typ</th>
+<th style="text-align: left;">Df</th>
+<th style="text-align: right;">Sum Sq (SS)</th>
+<th style="text-align: right;">Mean Sq (MS)</th>
+<th style="text-align: left;">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lokal</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">4854.3</td>
+<td style="text-align: right;">1213.6</td>
+<td style="text-align: left;">232.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Naturtyp</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">214.9</td>
+<td style="text-align: right;">107.5</td>
+<td style="text-align: left;">20.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residual</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">41.7</td>
+<td style="text-align: right;">5.2</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: right;">5110.9</td>
+<td style="text-align: right;">365.1</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="fragment fade-in">
+<p>I vårt exempelfall får vi</p>
+<p><span class="math display">\[LSD_{bl} = t_{(0.975, 8)} \sqrt{5.2 \cdot \frac{2}{5} } = 2.306 \cdot 1.442 = 3.325\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p>Naturtyperna har medelvärdena</p>
+<div style="float:left; width:35%;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Naturtyp</th>
+<th style="text-align: right;">Medel</th>
+<th style="text-align: left;">Sig</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Bruksskog</td>
+<td style="text-align: right;">32.8</td>
+<td style="text-align: left;">a</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Äldre skog</td>
+<td style="text-align: right;">36.4</td>
+<td style="text-align: left;">b</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Naturreservat</td>
+<td style="text-align: right;">42.0</td>
+<td style="text-align: left;">c</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="fragment fade-in">
+<p>Eftersom varje differens är större än LSD är alla typer signifikant skilda från de övriga</p>
+<p>Det ger att varje typ har en egen signifikansbokstav</p>
+</div>
+</section></section>
+<section id="section-3" class="title-slide slide level1"><h1></h1><div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Slut
+</p>
+</div></section>
+    </div>
+  </div>
+
+  <script src="08-Variansanalys_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="08-Variansanalys_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display a presentation progress bar
+        progress: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: '100%',
+        height: '100%',
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 1,
+        maxScale: 1,
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '08-Variansanalys_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

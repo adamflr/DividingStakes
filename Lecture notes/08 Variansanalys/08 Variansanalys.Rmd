@@ -4,6 +4,7 @@ output:
   revealjs::revealjs_presentation:
     css: style1.css
     self_contained: false
+    reveal_plugins: ["zoom"]
     transition: fade
     mathjax: "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG"
     reveal_options:

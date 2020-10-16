@@ -414,14 +414,6 @@ Märk särskilt att konfidensintervallet är ett intervall för medelvärdesskat
 Intervallet ska **inte** tolkas som att 95 procent av observationerna ligger i intervallet
 </div>
 
-#
-
-<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
-<p style="text-align:center;font-size: 2em;">
-Paus
-</p>
-</div>
-
 # Slutsatser från data
 
 Konfidensintervallet kan användas till att dra slutsatser från sin data
