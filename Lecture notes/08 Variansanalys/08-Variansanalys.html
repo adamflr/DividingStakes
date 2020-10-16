@@ -473,10 +473,16 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>Möjligt genom <strong>variansanalys</strong> (eller ANalysis Of VAriance, <em>Anova</em>)</p>
 </div>
 <div class="fragment fade-in">
-<p>Genom variansanalys kan man testa om det finns <em>någon</em> skillnad mellan grupper genom ett <strong>F-test</strong></p>
+<p>En <strong>anova-modell</strong> är en statistisk modell där observationer antas vara normalfördelade kring ett <strong>gruppspecifikt medelvärde</strong></p>
 </div>
 <div class="fragment fade-in">
-<p>Man kan även testa om <em>två</em> valda grupper är skilda med hjälp av <strong>LSD</strong> <span class="fragment fade-in"><strong>(Least Significant Difference)</strong></span></p>
+<p>Resultatet av en anova-modell kan sammanfattas i en <strong>anova-tabell</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Man kan testa om det finns <em>någon</em> skillnad mellan grupper genom ett <strong>F-test</strong></p>
+</div>
+<div class="fragment fade-in">
+<p>Man kan testa om <em>två</em> valda grupper är skilda med hjälp av <strong>LSD</strong> eller <strong>HSD</strong> (<em>least significant difference</em> eller <em>honest significant difference</em>)</p>
 </div></section><section id="exempeldata" class="slide level2">
 <h2>Exempeldata</h2>
 <p>Testar en ärtgrödas reaktion på planteringstäthet.</p>
@@ -548,12 +554,10 @@ Motsvarar <em>Biometri</em>, kap 10
 <p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
 </div>
 <div style="position:absolute;width:50%;left:50%">
-<<<<<<< HEAD
-<p><br><br> I en anova-modell är observationerna normalfördelade kring ett gruppspecifikt medelvärde</p>
-=======
 <p><br><br> Varje behandling innefattar tre observationer</p>
+<div class="fragment fade-in">
 <p>I en anova-modell är observationerna normalfördelade kring ett gruppspecifikt medelvärde</p>
->>>>>>> ea19b82a896b9615695513dd9abf4ebb716767b1
+</div>
 <div class="fragment fade-in">
 <p>Det gruppspecifika medelvärdet skattas med det observerade medelvärdet för gruppen</p>
 </div>
@@ -987,11 +991,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>F-fördelningen delas i flera tabeller, beroende på värdet för <span class="math inline">\(\alpha\)</span></p>
 </div>
 <div class="fragment fade-in" style="float:left; width: 40%;">
-<<<<<<< HEAD
 <p><img src="Figurer/Biometri_Tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
-=======
-<p><img src="Figurer/Biometri_tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
->>>>>>> ea19b82a896b9615695513dd9abf4ebb716767b1
 </div>
 <div class="fragment fade-in">
 <p>Kolumnen ges av <span class="math inline">\(\nu_1\)</span> och raden av <span class="math inline">\(\nu_2\)</span></p>
@@ -1017,11 +1017,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>Under nollhypotesen följer <span class="math inline">\(F\)</span> en F-fördelning med <span class="math inline">\(\nu_1\)</span> och <span class="math inline">\(\nu_2\)</span> frihetsgrader</p>
 <p>I den enkla anova-modellen gäller <span class="math inline">\(\nu_1 = a - 1\)</span> och <span class="math inline">\(\nu_2 = N - a\)</span></p>
 </div>
-<<<<<<< HEAD
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
-=======
 <div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
->>>>>>> ea19b82a896b9615695513dd9abf4ebb716767b1
 <p><strong>P-värde</strong></p>
 <div style="float:right;">
 <p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-12-1.png" width="384" style="display: block; margin: auto;" /></p>
@@ -1029,11 +1025,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>P-värdet ges av arean bortom F i testfördelningen</p>
 <p>Vid handräkning uppskattas p-värdet genom att ställa F mot ett tabellvärde</p>
 </div>
-<<<<<<< HEAD
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
-=======
 <div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
->>>>>>> ea19b82a896b9615695513dd9abf4ebb716767b1
 <p><strong>Svar</strong></p>
 <p>P-värdet ställs mot en förbestämd <em>signifikansnivå</em> (ofta 5 procent)</p>
 <p>Vid ett lågt p-värde förkastas nollhypotesen</p>
@@ -1127,7 +1119,7 @@ Motsvarar <em>Biometri</em>, kap 10
 </div></section><section id="minsta-signifikanta-skillnad" class="slide level2">
 <h2>Minsta signifikanta skillnad</h2>
 <p>Ett konfidensintervall för skillnaden mellan två gruppmedelvärden ges av</p>
-<p><span class="math display">\[\bar{x_1} - \bar{x_2} \pm t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}\]</span> <br></p>
+<p><span class="math display">\[\bar{x}_1 - \bar{x}_2 \pm t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}\]</span> <br></p>
 <div class="fragment fade-in">
 <p>Den sista termen kallas minsta signifikanta skillnad (<em>(Fisher’s) Least Significant Difference, LSD</em>)</p>
 <p><span class="math display">\[LSD = t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}\]</span></p>
@@ -1138,7 +1130,8 @@ Motsvarar <em>Biometri</em>, kap 10
 </div>
 </section><section id="minsta-signifikanta-skillnad-exempel" class="slide level2">
 <h2>Minsta signifikanta skillnad, exempel</h2>
-<div style="float:right; width:750px">
+<div style="float:right; width:750px; font-size: 0.75em;">
+<p><br><br></p>
 <table>
 <thead>
 <tr class="header">
@@ -1772,10 +1765,7 @@ Slut
 
         // Optional reveal.js plugins
         dependencies: [
-<<<<<<< HEAD
           { src: '08-Variansanalys_files/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
-=======
->>>>>>> ea19b82a896b9615695513dd9abf4ebb716767b1
         ]
       });
     </script>

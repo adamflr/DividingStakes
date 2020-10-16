@@ -64,11 +64,19 @@ Möjligt genom **variansanalys** (eller ANalysis Of VAriance, *Anova*)
 </div>
 
 <div class="fragment fade-in">
-Genom variansanalys kan man testa om det finns *någon* skillnad mellan grupper genom ett **F-test**
+En **anova-modell** är en statistisk modell där observationer antas vara normalfördelade kring ett **gruppspecifikt medelvärde**
 </div>
 
 <div class="fragment fade-in">
-Man kan även testa om *två* valda grupper är skilda med hjälp av **LSD** <span class="fragment fade-in">**(Least Significant Difference)**</span>
+Resultatet av en anova-modell kan sammanfattas i en **anova-tabell**
+</div>
+
+<div class="fragment fade-in">
+Man kan testa om det finns *någon* skillnad mellan grupper genom ett **F-test**
+</div>
+
+<div class="fragment fade-in">
+Man kan testa om *två* valda grupper är skilda med hjälp av **LSD** eller **HSD** (*least significant difference* eller *honest significant difference*)
 </div>
 
 ## Exempeldata
@@ -141,7 +149,11 @@ g_m +
 
 <div style="position:absolute;width:50%;left:50%">
 <br><br>
+Varje behandling innefattar tre observationer
+
+<div class="fragment fade-in">
 I en anova-modell är observationerna normalfördelade kring ett gruppspecifikt medelvärde
+</div>
 
 <div class="fragment fade-in">
 Det gruppspecifika medelvärdet skattas med det observerade medelvärdet för gruppen
@@ -455,7 +467,7 @@ Under nollhypotesen följer $F$ en F-fördelning med $\nu_1$ och $\nu_2$ frihets
 I den enkla anova-modellen gäller $\nu_1 = a - 1$ och $\nu_2 = N - a$
 </div>
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:0%;top:50%;background-color:#ace7ff;padding:15px;border-radius:15px;">
 **P-värde**
 
 <div style="float:right;">
@@ -481,7 +493,7 @@ P-värdet ges av arean bortom F i testfördelningen
 Vid handräkning uppskattas p-värdet genom att ställa F mot ett tabellvärde
 </div>
 
-<div class="fragment fade-in" style="position:absolute;height:50%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
+<div class="fragment fade-in" style="position:absolute;height:45%;width:47.5%;left:52.5%;top:50%;background-color:#c5a3ff;padding:15px;border-radius:15px;">
 **Svar**
 
 P-värdet ställs mot en förbestämd *signifikansnivå* (ofta 5 procent)
@@ -582,7 +594,7 @@ g_g
 
 Ett konfidensintervall för skillnaden mellan två gruppmedelvärden ges av
 
-$$\bar{x_1} - \bar{x_2} \pm t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}$$
+$$\bar{x}_1 - \bar{x}_2 \pm t_{(0.975, df_e)} \sqrt{MS_e (\frac{1}{n_1} + \frac{1}{n_2})}$$
 <br>
 
 <div class="fragment fade-in">
@@ -599,7 +611,8 @@ Om skillnaden mellan två gruppers medelvärden överstiger LSD är grupperna si
 
 ## Minsta signifikanta skillnad, exempel
 
-<div style="float:right; width:750px">
+<div style="float:right; width:750px; font-size: 0.75em;">
+<br><br>
 
 |          |    Df|Sum Sq (SS)|Mean Sq (MS)|           F|  p-value|
 |:---------|-----:|----------:|-----------:|-----------:|--------:|
