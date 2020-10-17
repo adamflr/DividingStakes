@@ -763,7 +763,7 @@ Motsvarar <em>Biometri</em>, kap 10
 </tr>
 </tbody>
 </table>
-<p><span class="math inline">\(SS_T\)</span> är summan av kvadrerade residualer <span class="math inline">\(SS_e = 24\)</span></p>
+<p><span class="math inline">\(SS_e\)</span> är summan av kvadrerade residualer <span class="math inline">\(SS_e = 24\)</span></p>
 </section><section id="frihetsgrader" class="slide level2">
 <h2>Frihetsgrader</h2>
 <p>Antalet frihetsgrader för en kvadratsumma ges av antalet observationer minus antalet skattade parametrar</p>
@@ -991,7 +991,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>F-fördelningen delas i flera tabeller, beroende på värdet för <span class="math inline">\(\alpha\)</span></p>
 </div>
 <div class="fragment fade-in" style="float:left; width: 40%;">
-<p><img src="Figurer/Biometri_Tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
+<p><img src="Figurer/Biometri_tabell789.png" style="display:block; margin-left:auto; margin-right:auto; border:solid 1px;"></p>
 </div>
 <div class="fragment fade-in">
 <p>Kolumnen ges av <span class="math inline">\(\nu_1\)</span> och raden av <span class="math inline">\(\nu_2\)</span></p>
@@ -1080,7 +1080,7 @@ Motsvarar <em>Biometri</em>, kap 10
 </div>
 <div class="fragment fade-in">
 <p><strong>Testfunktion</strong></p>
-<p><span class="math display">\[F_{obs} = \frac{MS_A}{MS_e} = \frac{57}{4} = 14.25\]</span></p>
+<p><span class="math display">\[F = \frac{MS_A}{MS_e} = \frac{57}{4} = 14.25\]</span></p>
 <p><span class="math inline">\(MS_A\)</span> och <span class="math inline">\(MS_e\)</span> kan hämtas från anova-tabellen</p>
 </div>
 </section><section id="section-1" class="slide level2">
@@ -1098,10 +1098,10 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>P-värdet ges av ytan till höger om vårt observerade <span class="math inline">\(F = 14.25\)</span></p>
 </div>
 <div class="fragment fade-in">
-<p>Vi kan uppskatta p-värdet från <em>Biometri</em> tabell 6</p>
+<p>Vi kan uppskatta p-värdet från <em>Biometri</em> tabell 7, 8, 9, och 10</p>
 </div>
 <div class="fragment fade-in">
-<p>Vårt observerade värde ligger över <span class="math inline">\(F_{(0.99, 2, 6)} = 10.925\)</span>. P-värdet måste alltså vara under <span class="math inline">\(1\)</span> procent</p>
+<p>Vårt observerade värde ligger över <span class="math inline">\(F_{(0.95, 2, 6)} = 5.143\)</span>. P-värdet måste alltså vara under <span class="math inline">\(5\)</span> procent</p>
 </div>
 <div class="fragment fade-in">
 <p>En datorberäkning ger det exakta värdet <span class="math inline">\(0.00526\)</span></p>
@@ -1240,17 +1240,14 @@ Motsvarar <em>Biometri</em>, kap 10
 </table>
 </div>
 <div class="fragment fade-in">
-<p>C och B är inte signifikant åtskilda och delar därmed en bokstav <em>a</em></p>
+<p><em>Gles</em> och <em>Mellan</em> är inte signifikant åtskilda och delar därmed en bokstav <em>a</em></p>
 </div>
 <div class="fragment fade-in">
-<p>A är signifikant skild från B och C och delar därmed ingen bokstav</p>
+<p><em>Tät</em> är signifikant skild från <em>Gles</em> och <em>Mellan</em> och delar därmed ingen bokstav</p>
 </div>
 </section><section id="mass-signifikans" class="slide level2">
 <h2>Mass-signifikans</h2>
 <p>Ett tests signifikansnivå anger sannolikheten att förkasta nollhypotesen även om den stämmer</p>
-<div class="fragment fade-in" data-fragment-index="4" style="float:right;width:50%;">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
-</div>
 <div class="fragment fade-in" data-fragment-index="1">
 <p>Om vi jämför två behandlingar på fem-procentsnivån finns alltså en fem-procentig risk att få ett signifikant resultat även om behandlingarna är exakt lika</p>
 </div>
@@ -1280,32 +1277,22 @@ Motsvarar <em>Biometri</em>, kap 10
 </div>
 </section></section>
 <section><section id="blockförsök" class="title-slide slide level1"><h1>Blockförsök</h1><p>I ett försök har man objekt som man mäter (<em>försöksenheter</em>) och <em>behandlingar</em> man utsätter dem för</p>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="1">
 <p>Varje försöksenhet tilldelas en behandling</p>
 </div>
-<div class="fragment fade-in" style="float:right;">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;">
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
 </div>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="2">
 <p><strong>Fullständigt randomiserad design</strong></p>
-<ul>
-<li class="fragment">Varje behandling förekommer ett givet antal gånger</li>
-</ul>
-<ul>
-<li class="fragment">I övrigt tilldelas enheter behandling slumpmässigt</li>
-</ul>
-<ul>
-<li class="fragment">Alla mönster är möjliga</li>
-</ul>
+<p>Varje behandling förekommer ett givet antal gånger</p>
+<p>I övrigt tilldelas enheter behandling slumpmässigt</p>
+<p>Alla mönster är möjliga</p>
 </div>
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="3">
 <p><strong>Blockdesign</strong></p>
-<ul>
-<li class="fragment">Försöksenheterna delas in i undergrupper (<em>block</em>)</li>
-</ul>
-<ul>
-<li class="fragment">Varje behandling förekommer en gång i varje block</li>
-</ul>
+<p>Försöksenheterna delas in i undergrupper (<em>block</em>)</p>
+<p>Varje behandling förekommer en gång i varje block</p>
 </div></section><section id="tanken-med-block" class="slide level2">
 <h2>Tanken med block</h2>
 <p>Målet med en blockdesign är att gruppera <em>lika</em> försöksenheter</p>
@@ -1313,7 +1300,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>Eftersom varje behandling förekommer i varje block, får man en rättvis jämförelse mellan lika enheter</p>
 </div>
 <div style="float:right;">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
 </div>
 <div class="fragment fade-in">
 <p><strong>Växthus</strong></p>
@@ -1367,7 +1354,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <tr class="odd">
 <td style="text-align: left;">Block (Bl)</td>
 <td style="text-align: right;"><span class="math inline">\(b-1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(SS_Bl\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(SS_{Bl}\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(SS_{Bl}/(b-1)\)</span></td>
 <td style="text-align: right;"><span class="math inline">\(MS_{Bl}/MS_e\)</span></td>
 <td style="text-align: right;"></td>
@@ -1511,13 +1498,13 @@ Motsvarar <em>Biometri</em>, kap 10
 </section><section id="section-2" class="slide level2">
 <h2></h2>
 <div style="position:absolute;width:50%;left:0px;top:0px">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-20-1.png" width="768" /></p>
 </div>
 <div class="fragment fade-in" style="position:absolute;width:50%;left:0px;top:0px">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-21-1.png" width="768" /></p>
 </div>
 <div class="fragment fade-in" style="position:absolute;width:50%;left:50%;top:0px">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-23-1.png" width="768" /></p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-22-1.png" width="768" /></p>
 </div>
 <div class="fragment fade-in" style="position:absolute;top:650px">
 <p>Om man inte tar med blockdesignen överlappar observationer från olika naturtyper varandra</p>
@@ -1619,7 +1606,7 @@ Motsvarar <em>Biometri</em>, kap 10
 <p>Vi kan testa nollhypotesen att det inte finns någon skillnad mellan naturtyper</p>
 </div>
 <div class="fragment fade-in" data-fragment-index="4" style="float:right;">
-<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-25-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="08-Variansanalys_files/figure-revealjs/unnamed-chunk-24-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 <div class="fragment fade-in" data-fragment-index="2">
 <p>Under nollhypotesen kommer F-värdet för naturtyp (<span class="math inline">\(F = 20.6\)</span>) från en F-fördelning med <span class="math inline">\(\nu_1 = 2\)</span> och <span class="math inline">\(\nu_2 = 8\)</span></p>

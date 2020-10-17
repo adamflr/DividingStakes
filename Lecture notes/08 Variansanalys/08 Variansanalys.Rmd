@@ -263,7 +263,7 @@ dat %>%
   knitr::kable()
 ```
 
-$SS_T$ är summan av kvadrerade residualer $SS_e = 24$
+$SS_e$ är summan av kvadrerade residualer $SS_e = 24$
 
 ## Frihetsgrader
 
@@ -525,7 +525,7 @@ $H_1:$ någon skillnad mellan behandlingar
 <div class="fragment fade-in">
 **Testfunktion**
 
-$$F_{obs} = \frac{MS_A}{MS_e} = \frac{57}{4} = 14.25$$
+$$F = \frac{MS_A}{MS_e} = \frac{57}{4} = 14.25$$
 
 $MS_A$ och $MS_e$ kan hämtas från anova-tabellen
 </div>
@@ -559,11 +559,11 @@ P-värdet ges av ytan till höger om vårt observerade $F = 14.25$
 </div>
 
 <div class="fragment fade-in">
-Vi kan uppskatta p-värdet från *Biometri* tabell 6
+Vi kan uppskatta p-värdet från *Biometri* tabell 7, 8, 9, och 10
 </div>
 
 <div class="fragment fade-in">
-Vårt observerade värde ligger över $F_{(0.99, 2, 6)} = 10.925$. P-värdet måste alltså vara under $1$ procent
+Vårt observerade värde ligger över $F_{(0.95, 2, 6)} = 5.143$. P-värdet måste alltså vara under $5$ procent
 </div>
 
 <div class="fragment fade-in">
@@ -664,38 +664,16 @@ I vårt enkla fall får vi
 </div>
 
 <div class="fragment fade-in">
-C och B är inte signifikant åtskilda och delar därmed en bokstav *a*
+*Gles* och *Mellan* är inte signifikant åtskilda och delar därmed en bokstav *a*
 </div>
 
 <div class="fragment fade-in">
-A är signifikant skild från B och C och delar därmed ingen bokstav
+*Tät* är signifikant skild från *Gles* och *Mellan* och delar därmed ingen bokstav
 </div>
 
 ## Mass-signifikans
 
 Ett tests signifikansnivå anger sannolikheten att förkasta nollhypotesen även om den stämmer
-
-<div class="fragment fade-in" data-fragment-index="4" style="float:right;width:50%;">
-```{r, echo = F, warning=F, comment=F}
-set.seed(200425)
-dat_d <- tibble(Behandling = rep(LETTERS[1:10], each = 100), y = sample(1:6, 1000, replace = T))
-
-ggplot(dat_d, aes(y)) +
-  geom_bar() +
-  geom_vline(aes(xintercept = y), data = dat_d %>% group_by(Behandling) %>% summarise(y = mean(y))) +
-  facet_wrap(~ fct_reorder(Behandling, y, mean, .desc = T), ncol = 2) +
-  scale_x_continuous(breaks = 1:6) +
-  theme() +
-  xlab("Utfall") + ylab("Antal")
-
-mod <- lm(y ~ Behandling, dat_d)
-
-# multcomp::cld(emmeans(mod,  ~ Behandling), adjust = "none", Letters = letters) %>% 
-#   data.frame() %>% 
-#   select(Behandling, emmean, .group) %>% 
-#   `names<-`(c("Behandling", "Medel", "Sig-bokstav"))
-```
-</div>
 
 <div class="fragment fade-in" data-fragment-index="1">
 Om vi jämför två behandlingar på fem-procentsnivån finns alltså en fem-procentig risk att få ett signifikant resultat även om behandlingarna är exakt lika
@@ -737,11 +715,11 @@ HSD är i regel större än LSD och leder därmed till färre signifikanta skill
 
 I ett försök har man objekt som man mäter (*försöksenheter*) och *behandlingar* man utsätter dem för
 
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="1" >
 Varje försöksenhet tilldelas en behandling
 </div>
 
-<div class="fragment fade-in" style="float:right;">
+<div class="fragment fade-in" data-fragment-index="4" style="float:right;">
 ```{r, echo = F}
 set.seed(564590)
 dat_bl <- tibble(Position = rep(1:5, 3), Rad = rep(1:3, each = 5), 
@@ -766,22 +744,22 @@ g_bl
 ```
 </div>
 
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="2" >
 **Fullständigt randomiserad design**
 
->- Varje behandling förekommer ett givet antal gånger
+Varje behandling förekommer ett givet antal gånger
 
->- I övrigt tilldelas enheter behandling slumpmässigt
+I övrigt tilldelas enheter behandling slumpmässigt
 
->- Alla mönster är möjliga
+Alla mönster är möjliga
 </div>
 
-<div class="fragment fade-in">
+<div class="fragment fade-in" data-fragment-index="3" >
 **Blockdesign**
 
->- Försöksenheterna delas in i undergrupper (*block*)
+Försöksenheterna delas in i undergrupper (*block*)
 
->- Varje behandling förekommer en gång i varje block
+Varje behandling förekommer en gång i varje block
 </div>
 
 ## Tanken med block
@@ -850,7 +828,7 @@ Det generella schemat blir
 
 |               |    Df|Sum Sq (SS)|Mean Sq (MS)|           F|  p-value|
 |:--------------|-----:|----------:|-----------:|-----------:|--------:|
-|Block       (Bl)| $b-1$|$SS_Bl$   |$SS_{Bl}/(b-1)$| $MS_{Bl}/MS_e$|     |
+|Block       (Bl)| $b-1$|$SS_{Bl}$   |$SS_{Bl}/(b-1)$| $MS_{Bl}/MS_e$|     |
 |Behandling  (A)| $a-1$|     $SS_A$|$SS_A/(a-1)$| $MS_A/MS_e$|         |
 |Residual    (e)| $N-a-b+1$|     $SS_e$|$SS_e/(N-a)$|            |         |
 |Total       (T)| $N-1$|     $SS_T$|$SS_T/(N-1)$|            |         |
