@@ -1,0 +1,210 @@
+---
+title: "BI1363 HT 2020<br>Signifikansbokstäver<br>Oktober 2020<br>Adam Flöhr, BT, SLU"
+output: 
+  revealjs::revealjs_presentation:
+    css: style1.css
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    transition: fade
+    mathjax: "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG"
+    reveal_options:
+      width: "100%"
+      height: "100%"
+      minScale: 1
+      maxScale: 1
+      slideNumber: false
+      controls: false
+      progress: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, error = F)
+```
+
+```{r, echo = F}
+library(ggplot2)
+library(dplyr)
+library(cowplot)
+library(extrafont)
+library(patchwork)
+
+theme_set(theme_bw() + theme(plot.background = element_rect(fill = "#ffffe6", color = "#ffffe6"),
+                             legend.box.background = element_rect(color = "black")))
+```
+
+#
+
+<div style="position:absolute;width:80%;height:400px;border: 10px double;padding: 150px 10px; left:10%; top:100px;">
+<p style="text-align:center;font-size: 2em;">
+Signifikansbokstäver från *LSD* eller *HSD*
+</p>
+</div>
+
+# 
+
+En anova-modell kan användas till att jämföra behandlingsgrupper (parvisa jämförelser)
+
+Jämförelsen kan göras genom att beräkna LSD (Least significant difference) eller HSD (Honest significant difference)
+
+Om två gruppers medelvärden skiljer sig åt med mer än LSD (HSD) är grupperna signifikant skilda
+
+Resultaten kan sammanfattas i en tabell med medelvärden per behandlingsgrupp
+
+Signifikanta skillnader kan anges med *signifikansbokstäver*
+
+## Exempel på signifikansbokstäver
+
+Grupper som delar någon signifikansbokstav är *ej* signifikant åtskilda
+
+Ett exempel med sex behandlingar:
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|ab  |
+|Ganska hög |        8.0|ab  |
+|Låg        |        7.6|bc  |
+|Ganska låg |        5.5|cd  |
+|Mycket låg |        4.3|d   |
+
+Behandlingen *Mycket hög* är inte signifikant skild från *Ganska hög* (delar bokstaven a)
+
+Behandlingen *Låg* är signifikant skild från *Mycket låg* (delar ingen bokstav)
+
+Och så vidare
+
+## Konstruktion av signifikansbokstäver
+
+För att konstruera signifikansbokstäver behöver vi gruppmedelvärden och ett LSD (eller HSD) värde.
+
+I exemplet har vi följande gruppmedelvärden
+
+|Behandling | Medelvärde|
+|:----------|----------:|
+|Mycket hög |        9.4|
+|Hög        |       10.3|
+|Ganska hög |        8.0|
+|Ganska låg |        5.5|
+|Låg        |        7.6|
+|Mycket låg |        4.3|
+
+och $LSD = 2.4$
+
+##
+
+Börja med att ordna grupper efter medelvärde
+
+|Behandling | Medelvärde|
+|:----------|----------:|
+|Hög        |       10.3|
+|Mycket hög |        9.4|
+|Ganska hög |        8.0|
+|Låg        |        7.6|
+|Ganska låg |        5.5|
+|Mycket låg |        4.3|
+
+##
+
+Sätt ut ett *a* för den första behandlinggruppen
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|  |
+|Ganska hög |        8.0|  |
+|Låg        |        7.6|  |
+|Ganska låg |        5.5|  |
+|Mycket låg |        4.3|   |
+
+Beräkna gruppmedelvärdet för första grupppen minus LSD: $10.3 - 2.4 = 7.9$
+
+Detta innebär att alla grupper med medelvärde över $7.9$ ska ha en bokstav *a*
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|a  |
+|Ganska hög |        8.0|a  |
+|Låg        |        7.6|  |
+|Ganska låg |        5.5|  |
+|Mycket låg |        4.3|   |
+
+##
+
+Gå nu till den andra raden i ordningen
+
+Beräkna dess medelvärde minus LSD: $9.4 - 2.4 = 7.0$
+
+Detta innebär att all rader med medelvärde över $7.0$ ska dela en bokstav med den aktuella raden
+
+Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *b*)
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|ab  |
+|Ganska hög |        8.0|ab  |
+|Låg        |        7.6|b  |
+|Ganska låg |        5.5|  |
+|Mycket låg |        4.3|   |
+
+##
+
+Gå nu till nästa rad i ordningen, med medelvärde $8.0$
+
+Beräkna dess medelvärde minus LSD: $8.0 - 2.4 = 5.6$
+
+Detta innebär att all grupper med medelvärde över $5.6$ ska dela en bokstav med den aktuella raden
+
+Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *c*)
+
+Här delar alla rader med värden över $5.6$ redan någon bokstav med den aktuella raden, så vi behöver inte göra någonting
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|ab  |
+|Ganska hög |        8.0|ab  |
+|Låg        |        7.6|b  |
+|Ganska låg |        5.5|  |
+|Mycket låg |        4.3|   |
+
+##
+
+Gå nu till nästa rad i ordningen, med medelvärde $7.6$
+
+Beräkna dess medelvärde minus LSD: $7.6 - 2.4 = 5.2$
+
+Detta innebär att all grupper med medelvärde över $5.2$ ska dela en bokstav med den aktuella raden
+
+Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *c*)
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|ab  |
+|Ganska hög |        8.0|ab  |
+|Låg        |        7.6|bc  |
+|Ganska låg |        5.5|c  |
+|Mycket låg |        4.3|   |
+
+##
+
+Gå nu till nästa rad i ordningen, med medelvärde $5.5$
+
+Beräkna dess medelvärde minus LSD: $5.5 - 2.4 = 3.1$
+
+Detta innebär att all grupper med medelvärde över $3.1$ ska dela en bokstav med den aktuella raden
+
+Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *d*)
+
+|Behandling | Medelvärde|Sig |
+|:----------|----------:|:---|
+|Hög        |       10.3|a   |
+|Mycket hög |        9.4|ab  |
+|Ganska hög |        8.0|ab  |
+|Låg        |        7.6|bc  |
+|Ganska låg |        5.5|cd  |
+|Mycket låg |        4.3|d   |
