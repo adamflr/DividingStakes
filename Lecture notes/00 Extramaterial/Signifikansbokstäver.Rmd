@@ -3,8 +3,7 @@ title: "BI1363 HT 2020<br>Signifikansbokstäver<br>Oktober 2020<br>Adam Flöhr, 
 output: 
   revealjs::revealjs_presentation:
     css: style1.css
-    self_contained: false
-    reveal_plugins: ["zoom"]
+    self_contained: true
     transition: fade
     mathjax: "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS_SVG"
     reveal_options:
