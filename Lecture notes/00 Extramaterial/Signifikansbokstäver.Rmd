@@ -41,17 +41,19 @@ Signifikansbokstäver från *LSD* eller *HSD*
 </p>
 </div>
 
-# 
+# Introduktion
 
-En anova-modell kan användas till att jämföra behandlingsgrupper (parvisa jämförelser)
+>- En anova-modell kan användas till att jämföra behandlingsgrupper (parvisa jämförelser)
 
-Jämförelsen kan göras genom att beräkna LSD (Least significant difference) eller HSD (Honest significant difference)
+>- Jämförelsen kan göras genom att beräkna LSD (Least significant difference) eller HSD (Honest significant difference)
 
-Om två gruppers medelvärden skiljer sig åt med mer än LSD (HSD) är grupperna signifikant skilda
+>- Om två gruppers medelvärden skiljer sig åt med mer än LSD (HSD) är grupperna signifikant skilda
 
-Resultaten kan sammanfattas i en tabell med medelvärden per behandlingsgrupp
+>- Resultaten kan sammanfattas i en tabell med medelvärden per behandlingsgrupp
 
-Signifikanta skillnader kan anges med *signifikansbokstäver*
+>- Signifikanta skillnader kan anges med *signifikansbokstäver*
+
+>- Den metod för att konstruera signifikansmetoder som används här bygger att datan är balanserad - att varje grupp har lika många replikat
 
 ## Exempel på signifikansbokstäver
 
@@ -68,11 +70,15 @@ Ett exempel med sex behandlingar:
 |Ganska låg |        5.5|cd  |
 |Mycket låg |        4.3|d   |
 
+<div class="fragment fade-in">
 Behandlingen *Mycket hög* är inte signifikant skild från *Ganska hög* (delar bokstaven a)
+</div>
 
+<div class="fragment fade-in">
 Behandlingen *Låg* är signifikant skild från *Mycket låg* (delar ingen bokstav)
 
 Och så vidare
+</div>
 
 ## Konstruktion av signifikansbokstäver
 
@@ -106,18 +112,7 @@ Börja med att ordna grupper efter medelvärde
 
 ##
 
-Sätt ut ett *a* för den första behandlinggruppen
-
-|Behandling | Medelvärde|Sig |
-|:----------|----------:|:---|
-|Hög        |       10.3|a   |
-|Mycket hög |        9.4|  |
-|Ganska hög |        8.0|  |
-|Låg        |        7.6|  |
-|Ganska låg |        5.5|  |
-|Mycket låg |        4.3|   |
-
-Beräkna gruppmedelvärdet för första grupppen minus LSD: $10.3 - 2.4 = 7.9$
+Beräkna gruppmedelvärdet för första raden minus LSD: $10.3 - 2.4 = 7.9$
 
 Detta innebär att alla grupper med medelvärde över $7.9$ ska ha en bokstav *a*
 
@@ -138,6 +133,8 @@ Beräkna dess medelvärde minus LSD: $9.4 - 2.4 = 7.0$
 
 Detta innebär att all rader med medelvärde över $7.0$ ska dela en bokstav med den aktuella raden
 
+<div class="fragment fade-in">
+
 Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *b*)
 
 |Behandling | Medelvärde|Sig |
@@ -149,6 +146,8 @@ Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** me
 |Ganska låg |        5.5|  |
 |Mycket låg |        4.3|   |
 
+</div>
+
 ##
 
 Gå nu till nästa rad i ordningen, med medelvärde $8.0$
@@ -156,6 +155,8 @@ Gå nu till nästa rad i ordningen, med medelvärde $8.0$
 Beräkna dess medelvärde minus LSD: $8.0 - 2.4 = 5.6$
 
 Detta innebär att all grupper med medelvärde över $5.6$ ska dela en bokstav med den aktuella raden
+
+<div class="fragment fade-in">
 
 Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *c*)
 
@@ -170,6 +171,8 @@ Här delar alla rader med värden över $5.6$ redan någon bokstav med den aktue
 |Ganska låg |        5.5|  |
 |Mycket låg |        4.3|   |
 
+</div>
+
 ##
 
 Gå nu till nästa rad i ordningen, med medelvärde $7.6$
@@ -177,6 +180,8 @@ Gå nu till nästa rad i ordningen, med medelvärde $7.6$
 Beräkna dess medelvärde minus LSD: $7.6 - 2.4 = 5.2$
 
 Detta innebär att all grupper med medelvärde över $5.2$ ska dela en bokstav med den aktuella raden
+
+<div class="fragment fade-in">
 
 Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *c*)
 
@@ -189,6 +194,8 @@ Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** me
 |Ganska låg |        5.5|c  |
 |Mycket låg |        4.3|   |
 
+</div>
+
 ##
 
 Gå nu till nästa rad i ordningen, med medelvärde $5.5$
@@ -196,6 +203,8 @@ Gå nu till nästa rad i ordningen, med medelvärde $5.5$
 Beräkna dess medelvärde minus LSD: $5.5 - 2.4 = 3.1$
 
 Detta innebär att all grupper med medelvärde över $3.1$ ska dela en bokstav med den aktuella raden
+
+<div class="fragment fade-in">
 
 Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** med nästa bokstav i alfabetet (här *d*)
 
@@ -207,3 +216,7 @@ Om de redan gör det - gör ingenting. Om de inte gör det, fyll i **nedåt** me
 |Låg        |        7.6|bc  |
 |Ganska låg |        5.5|cd  |
 |Mycket låg |        4.3|d   |
+
+När du nått sista raden med en bokstav är du färdig
+</div>
+

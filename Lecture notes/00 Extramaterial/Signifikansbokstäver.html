@@ -1775,11 +1775,24 @@ document.getElementsByTagName('head')[0].appendChild(style);
 Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </p>
 </div></section>
-<section><section id="section-1" class="title-slide slide level1"><h1></h1><p>En anova-modell kan användas till att jämföra behandlingsgrupper (parvisa jämförelser)</p>
-<p>Jämförelsen kan göras genom att beräkna LSD (Least significant difference) eller HSD (Honest significant difference)</p>
-<p>Om två gruppers medelvärden skiljer sig åt med mer än LSD (HSD) är grupperna signifikant skilda</p>
-<p>Resultaten kan sammanfattas i en tabell med medelvärden per behandlingsgrupp</p>
-<p>Signifikanta skillnader kan anges med <em>signifikansbokstäver</em></p></section><section id="exempel-på-signifikansbokstäver" class="slide level2">
+<section><section id="introduktion" class="title-slide slide level1"><h1>Introduktion</h1><ul>
+<li class="fragment">En anova-modell kan användas till att jämföra behandlingsgrupper (parvisa jämförelser)</li>
+</ul>
+<ul>
+<li class="fragment">Jämförelsen kan göras genom att beräkna LSD (Least significant difference) eller HSD (Honest significant difference)</li>
+</ul>
+<ul>
+<li class="fragment">Om två gruppers medelvärden skiljer sig åt med mer än LSD (HSD) är grupperna signifikant skilda</li>
+</ul>
+<ul>
+<li class="fragment">Resultaten kan sammanfattas i en tabell med medelvärden per behandlingsgrupp</li>
+</ul>
+<ul>
+<li class="fragment">Signifikanta skillnader kan anges med <em>signifikansbokstäver</em></li>
+</ul>
+<ul>
+<li class="fragment">Den metod för att konstruera signifikansmetoder som används här bygger att datan är balanserad - att varje grupp har lika många replikat</li>
+</ul></section><section id="exempel-på-signifikansbokstäver" class="slide level2">
 <h2>Exempel på signifikansbokstäver</h2>
 <p>Grupper som delar någon signifikansbokstav är <em>ej</em> signifikant åtskilda</p>
 <p>Ett exempel med sex behandlingar:</p>
@@ -1824,9 +1837,13 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
+<div class="fragment fade-in">
 <p>Behandlingen <em>Mycket hög</em> är inte signifikant skild från <em>Ganska hög</em> (delar bokstaven a)</p>
+</div>
+<div class="fragment fade-in">
 <p>Behandlingen <em>Låg</em> är signifikant skild från <em>Mycket låg</em> (delar ingen bokstav)</p>
 <p>Och så vidare</p>
+</div>
 </section><section id="konstruktion-av-signifikansbokstäver" class="slide level2">
 <h2>Konstruktion av signifikansbokstäver</h2>
 <p>För att konstruera signifikansbokstäver behöver vi gruppmedelvärden och ett LSD (eller HSD) värde.</p>
@@ -1866,7 +1883,7 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tbody>
 </table>
 <p>och <span class="math inline">\(LSD = 2.4\)</span></p>
-</section><section id="section-2" class="slide level2">
+</section><section id="section-1" class="slide level2">
 <h2></h2>
 <p>Börja med att ordna grupper efter medelvärde</p>
 <table>
@@ -1903,51 +1920,9 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
-</section><section id="section-3" class="slide level2">
+</section><section id="section-2" class="slide level2">
 <h2></h2>
-<p>Sätt ut ett <em>a</em> för den första behandlinggruppen</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Behandling</th>
-<th style="text-align: right;">Medelvärde</th>
-<th style="text-align: left;">Sig</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Hög</td>
-<td style="text-align: right;">10.3</td>
-<td style="text-align: left;">a</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mycket hög</td>
-<td style="text-align: right;">9.4</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Ganska hög</td>
-<td style="text-align: right;">8.0</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Låg</td>
-<td style="text-align: right;">7.6</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Ganska låg</td>
-<td style="text-align: right;">5.5</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mycket låg</td>
-<td style="text-align: right;">4.3</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-<p>Beräkna gruppmedelvärdet för första grupppen minus LSD: <span class="math inline">\(10.3 - 2.4 = 7.9\)</span></p>
+<p>Beräkna gruppmedelvärdet för första raden minus LSD: <span class="math inline">\(10.3 - 2.4 = 7.9\)</span></p>
 <p>Detta innebär att alla grupper med medelvärde över <span class="math inline">\(7.9\)</span> ska ha en bokstav <em>a</em></p>
 <table>
 <thead>
@@ -1990,11 +1965,12 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
-</section><section id="section-4" class="slide level2">
+</section><section id="section-3" class="slide level2">
 <h2></h2>
 <p>Gå nu till den andra raden i ordningen</p>
 <p>Beräkna dess medelvärde minus LSD: <span class="math inline">\(9.4 - 2.4 = 7.0\)</span></p>
 <p>Detta innebär att all rader med medelvärde över <span class="math inline">\(7.0\)</span> ska dela en bokstav med den aktuella raden</p>
+<div class="fragment fade-in">
 <p>Om de redan gör det - gör ingenting. Om de inte gör det, fyll i <strong>nedåt</strong> med nästa bokstav i alfabetet (här <em>b</em>)</p>
 <table>
 <thead>
@@ -2037,11 +2013,13 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
-</section><section id="section-5" class="slide level2">
+</div>
+</section><section id="section-4" class="slide level2">
 <h2></h2>
 <p>Gå nu till nästa rad i ordningen, med medelvärde <span class="math inline">\(8.0\)</span></p>
 <p>Beräkna dess medelvärde minus LSD: <span class="math inline">\(8.0 - 2.4 = 5.6\)</span></p>
 <p>Detta innebär att all grupper med medelvärde över <span class="math inline">\(5.6\)</span> ska dela en bokstav med den aktuella raden</p>
+<div class="fragment fade-in">
 <p>Om de redan gör det - gör ingenting. Om de inte gör det, fyll i <strong>nedåt</strong> med nästa bokstav i alfabetet (här <em>c</em>)</p>
 <p>Här delar alla rader med värden över <span class="math inline">\(5.6\)</span> redan någon bokstav med den aktuella raden, så vi behöver inte göra någonting</p>
 <table>
@@ -2085,11 +2063,13 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
-</section><section id="section-6" class="slide level2">
+</div>
+</section><section id="section-5" class="slide level2">
 <h2></h2>
 <p>Gå nu till nästa rad i ordningen, med medelvärde <span class="math inline">\(7.6\)</span></p>
 <p>Beräkna dess medelvärde minus LSD: <span class="math inline">\(7.6 - 2.4 = 5.2\)</span></p>
 <p>Detta innebär att all grupper med medelvärde över <span class="math inline">\(5.2\)</span> ska dela en bokstav med den aktuella raden</p>
+<div class="fragment fade-in">
 <p>Om de redan gör det - gör ingenting. Om de inte gör det, fyll i <strong>nedåt</strong> med nästa bokstav i alfabetet (här <em>c</em>)</p>
 <table>
 <thead>
@@ -2132,11 +2112,13 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
-</section><section id="section-7" class="slide level2">
+</div>
+</section><section id="section-6" class="slide level2">
 <h2></h2>
 <p>Gå nu till nästa rad i ordningen, med medelvärde <span class="math inline">\(5.5\)</span></p>
 <p>Beräkna dess medelvärde minus LSD: <span class="math inline">\(5.5 - 2.4 = 3.1\)</span></p>
 <p>Detta innebär att all grupper med medelvärde över <span class="math inline">\(3.1\)</span> ska dela en bokstav med den aktuella raden</p>
+<div class="fragment fade-in">
 <p>Om de redan gör det - gör ingenting. Om de inte gör det, fyll i <strong>nedåt</strong> med nästa bokstav i alfabetet (här <em>d</em>)</p>
 <table>
 <thead>
@@ -2179,6 +2161,8 @@ Signifikansbokstäver från <em>LSD</em> eller <em>HSD</em>
 </tr>
 </tbody>
 </table>
+<p>När du nått sista raden med en bokstav är du färdig</p>
+</div>
 </section></section>
     </div>
   </div>
